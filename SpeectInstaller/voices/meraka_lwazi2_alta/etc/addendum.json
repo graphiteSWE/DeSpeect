@@ -1,0 +1,47 @@
+  {
+    "addendum-definition" :
+      {
+	"name" : "Afrikaans Lwazi",
+	"language" : "Afrikaans",
+	"lang-code" : "afr",
+	"description" : "An Afrikaans addendum for the Lwazi project.",
+	"phoneset" : "phoneset.json",
+	"version" :
+	  {
+	    "major" : 1,
+	    "minor" : 0
+	  }
+      },
+    "addendum-entries" :
+      {
+            "speect": [{"phones": ["s", "p", "i", "k", "t"]}],
+            "'n": [{"phones": ["_"]}],
+            "n": [{"phones": ["_"]}],
+            "a_letter": [{"phones": ["a_l"]}],
+            "b_letter": [{"phones": ["b", "e_l"]}],
+            "c_letter": [{"phones": ["s", "e_l"]}],
+            "d_letter": [{"phones": ["d", "e_l"]}],
+            "e_letter": [{"phones": ["e_l"]}],
+            "f_letter": [{"phones": ["E", "f"]}],
+            "g_letter": [{"phones": ["x", "e_l"]}],
+            "h_letter": [{"phones": ["h", "a_l"]}],
+            "i_letter": [{"phones": ["i"]}],
+            "j_letter": [{"phones": ["j", "_"]}],
+            "k_letter": [{"phones": ["k", "a_l"]}],
+            "l_letter": [{"phones": ["_ae_", "l"]}],
+            "m_letter": [{"phones": ["E", "m"]}],
+            "n_letter": [{"phones": ["E", "n"]}],
+            "o_letter": [{"phones": ["o_l"]}],
+            "p_letter": [{"phones": ["p", "e_l"]}],
+            "q_letter": [{"phones": ["k", "y"]}],
+            "r_letter": [{"phones": ["_ae_", "r"]}],
+            "s_letter": [{"phones": ["E", "s"]}],
+            "t_letter": [{"phones": ["t", "e_l"]}],
+            "u_letter": [{"phones": ["y"]}],
+            "v_letter": [{"phones": ["f", "e_l"]}],
+            "w_letter": [{"phones": ["v", "e_l"]}],
+            "x_letter": [{"phones": ["E", "k", "s"]}],
+            "y_letter": [{"phones": ["_i"]}],
+            "z_letter": [{"phones": ["z", "E", "t"]}]
+      }
+  }

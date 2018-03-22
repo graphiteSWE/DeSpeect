@@ -1,0 +1,59 @@
+  {
+    "addendum-definition" :
+      {
+	"name" : "isiXhosa Lwazi",
+	"language" : "isiXhosa",
+	"lang-code" : "xho",
+	"description" : "An isiXhosa addendum for the Lwazi project.",
+	"version" :
+	  {
+	    "major" : 1,
+	    "minor" : 2
+	  }
+      },
+    "addendum-entries" :
+      {
+	"john" : [{"phones" : ["d_0Z", "O", "n"]}],
+      	"healdtown" : [{"phones" : ["h", "i", "l", "t_e", "A", "u", "n"]}],
+	"cape" : [{"phones" : ["k_e", "E", "p_e"]}],
+	"province" : [{"phones" : ["p_e", "r", "O", "v", "E", "n", "s"]}],
+	"church" : [{"phones" : ["tS_e", "E", "tS_e"]}],
+	"monica" : [{"phones" : ["m", "O", "n", "i", "k_e", "A"]}],
+	"williams" : [{"phones" : ["w", "i", "l", "i", "A", "m", "z"]}],
+	"brownlee" : [{"phones" : ["b", "r", "A", "u", "n", "l", "i"]}],
+	"smuts" : [{"phones" : ["s", "m", "A", "t_h", "s"]}],
+	"ibritish" : [{"phones" : ["i", "b", "r", "i", "t_e", "i", "S"]}],
+	"airways" : [{"phones" : ["E", "w", "E", "i", "z"]}],
+	"sydwell" : [{"phones" : ["s", "i", "d", "w", "E", "l"]}],
+	"kwiinformation" : [{"phones" : ["k_e", "w", "i", "i", "n", "f", "O", "m", "E", "i", "S", "n"]}],
+	"technology" : [{"phones" : ["t_e", "E", "k_e", "n", "O", "l", "O", "d_0Z", "i"]}],
+	"iihuguenots" : [{"phones" : ["i", "j", "u", "g", "n", "O", "t_e", "s"]}],
+        "efranch" : [{"phones" : ["f", "r", "A", "n", "S"]}],
+	"ustewart" : [{"phones" : ["u", "s", "t_e", "i", "u", "w", "A", "t_e"]}],
+	"knox" : [{"phones" : ["n", "O", "k_e", "s"]}],
+	"hoek" : [{"phones" : ["h", "u", "k_e"]}],
+	"one" : [{"phones" : ["w", "A", "n"]}],
+        "two" : [{"phones" : ["t_e", "u"]}],
+        "three" : [{"phones" : ["t_e", "r", "i"]}],
+        "four" : [{"phones" : ["f", "O"]}],
+        "five" : [{"phones" : ["f", "A", "i", "f"]}],
+        "six" : [{"phones" : ["s", "i", "k_e", "s"]}],
+        "seven" : [{"phones" : ["s", "E", "v", "E", "n"]}],
+        "eight" : [{"phones" : ["E", "i", "d"]}],
+        "nine" : [{"phones" : ["n", "A", "i", "n"]}],
+        "ten" : [{"phones" : ["t_h", "E", "n"]}],
+        "zero" : [{"phones" : ["z", "i", "r", "O"]}],
+        "eleven" : [{"phones" : ["i", "l", "E", "v", "E", "n"]}],
+        "twelve" : [{"phones" : ["t_e", "w", "E", "l", "f"]}],
+        "thirteen" : [{"phones" : ["t_h", "E", "t_h", "i", "n"]}],
+        "fifteen" : [{"phones" : ["f", "i", "f", "t_h", "i", "n"]}],
+        "twenty" : [{"phones" : ["t_h", "w", "E", "n", "t_h", "i"]}],
+        "thirty" :  [{"phones" : ["t_h", "E", "t_h", "i"]}],
+        "forty" : [{"phones" : ["f", "O", "t_h", "i"]}],
+        "hundred" : [{"phones" : ["h", "A", "n", "d", "r", "E", "d"]}],
+        "thousand" : [{"phones" : ["t_h", "A", "u", "z", "E", "n", "d"]}],
+        "million" : [{"phones" : ["m", "i", "l", "j", "O", "n"]}],
+        "rand" : [{"phones" : ["r", "A", "n", "d"]}],
+        "gauteng" : [{"phones" : ["kx_e", "A", "u", "t_h", "E", "N"]}]
+      }
+  }

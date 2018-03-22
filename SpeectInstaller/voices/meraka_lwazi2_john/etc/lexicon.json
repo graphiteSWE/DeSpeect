@@ -1,0 +1,17 @@
+  {
+    "lexicon-definition" :
+      {
+	"name" : "Lwazi isiXhosa",
+	"language" : "isixhosa",
+	"lang-code" : "xho",
+	"description" : "An isiXhosa lexicon for the Lwazi project",
+	"version" :
+	  {
+	    "major" : 1,
+	    "minor" : 2
+	  }
+      },
+    "lexicon-entries" :
+      {
+      }
+  }

@@ -1,0 +1,80 @@
+  {
+    "phoneset-definition" :
+    {
+      "name" : "English US",
+      "language" : "english",
+      "lang-code" : "eng-US",
+      "description" : "North American English phoneset (cmudict.0.7a phones)",
+      "version" :
+      {
+	"major" : 1,
+	"minor" : 0
+      }
+    },
+    "features" :
+    {
+      "syllable_clusters": ["VCV", "VCCV", "VCCCV", "VCCCCV",
+			    "VCGV", "VCCGV", "VCCCGV", "VV"],
+      "wellformed_plosive_clusters": ["pl", "bl", "kl", "gl", "pr",
+                                      "br", "tr", "dr", "kr", "gr",
+                                      "tw", "dw", "gw", "kw", "py",
+                                      "by", "ty", "dy", "ky", "gy"],
+      "wellformed_fricative_clusters": ["fl", "fr", "thr", "shr",
+					"thw", "hw", "fy", "vy",
+					"thy", "zy", "hy"],
+      "wellformed_other_clusters": ["my", "ny", "ly"],
+      "wellformed_s_clusters": ["sp", "st", "sk", "sm", "sn",
+				"sf", "sw", "sl", "sy", "spl",
+				"spr", "spy", "smy", "str",
+				"sty", "skl", "skr", "skw",
+				"sky"],
+      "bursts": ["b", "d", "k", "t", "g", "p", "ch", "jh"],
+      "silence_phone": "pau",
+      "closure_phone": "pau_cl"
+    },
+    "phones" :
+    {
+      "pau" : ["pause"],
+      "pau_cl" : ["closure"],
+      "pau_gs" : ["glottal-stop"],
+      "aa" : ["duration_short", "position_back", "height_low", "class_syllabic", "vowel", "class_sonorant"],
+      "iy" : ["position_front", "duration_long", "height_high", "class_syllabic", "vowel", "class_sonorant"],
+      "ch" : ["place_alveolar", "class_consonantal", "manner_affricate", "consonant", "manner_strident", "place_post-alveolar"],
+      "ae" : ["duration_short", "position_front", "height_low", "class_syllabic", "vowel", "class_sonorant"],
+      "eh" : ["duration_short", "position_front", "class_syllabic", "vowel", "height_mid", "class_sonorant"],
+      "ah" : ["duration_short", "position_back", "class_syllabic", "vowel", "height_mid", "class_sonorant"],
+      "ao" : ["duration_long", "articulation_round", "position_back", "class_syllabic", "vowel", "height_mid", "class_sonorant"],
+      "ih" : ["duration_short", "position_front", "height_high", "class_syllabic", "vowel", "class_sonorant"],
+      "ey" : ["position_front", "duration_diphthong", "class_syllabic", "vowel", "height_mid", "class_sonorant"],
+      "aw" : ["position_front", "duration_diphthong", "height_low", "class_syllabic", "vowel", "class_sonorant"],
+      "ay" : ["position_front", "duration_diphthong", "height_low", "class_syllabic", "vowel", "class_sonorant"],
+      "zh" : ["class_consonantal", "voiced", "manner_fricative", "consonant", "place_post-alveolar"],
+      "er" : ["position_central", "duration_short", "class_syllabic", "vowel", "height_mid", "class_sonorant"],
+      "ng" : ["class_consonantal", "voiced", "manner_nasal", "place_velar", "consonant", "class_sonorant"],
+      "r" : ["place_alveolar", "class_consonantal", "manner_liquid", "voiced", "manner_approximant", "consonant", "class_sonorant"],
+      "th" : ["class_consonantal", "manner_fricative", "consonant", "place_dental"],
+      "uh" : ["duration_short", "position_back", "height_high", "class_syllabic", "vowel", "class_sonorant"],
+      "oy" : ["duration_diphthong", "articulation_round", "position_back", "class_syllabic", "vowel", "height_mid", "class_sonorant"],
+      "dh" : ["class_consonantal", "voiced", "manner_fricative", "consonant", "place_dental"],
+      "ow" : ["duration_diphthong", "articulation_round", "position_back", "class_syllabic", "vowel", "height_mid", "class_sonorant"],
+      "hh" : ["manner_fricative", "consonant", "place_glottal"],
+      "jh" : ["place_alveolar", "class_consonantal", "manner_affricate", "voiced", "consonant", "manner_strident", "place_post-alveolar"],
+      "b" : ["class_consonantal", "place_bilabial", "voiced", "manner_plosive", "consonant"],
+      "d" : ["place_alveolar", "class_consonantal", "voiced", "manner_plosive", "consonant"],
+      "g" : ["class_consonantal", "voiced", "place_velar", "manner_plosive", "consonant"],
+      "f" : ["class_consonantal", "manner_fricative", "consonant", "manner_strident", "place_labiodental"],
+      "uw" : ["duration_long", "articulation_round", "position_back", "height_high", "class_syllabic", "vowel", "class_sonorant"],
+      "m" : ["class_consonantal", "voiced", "manner_nasal", "consonant", "place_labial", "class_sonorant"],
+      "l" : ["place_alveolar", "class_consonantal", "manner_liquid", "voiced", "manner_approximant", "consonant", "manner_lateral", "class_sonorant"],
+      "n" : ["place_alveolar", "class_consonantal", "voiced", "manner_nasal", "consonant", "class_sonorant"],
+      "p" : ["class_consonantal", "place_bilabial", "manner_plosive", "consonant"],
+      "s" : ["place_alveolar", "class_consonantal", "manner_fricative", "consonant", "manner_strident"],
+      "sh" : ["class_consonantal", "manner_fricative", "consonant", "place_post-alveolar"],
+      "t" : ["place_alveolar", "class_consonantal", "manner_plosive", "consonant"],
+      "w" : ["voiced", "place_velar", "manner_approximant", "manner_glide", "consonant", "place_labial", "class_sonorant"],
+      "v" : ["class_consonantal", "voiced", "manner_fricative", "consonant", "manner_strident", "place_labiodental"],
+      "y" : ["voiced", "place_palatal", "manner_approximant", "manner_glide", "consonant", "class_sonorant"],
+      "z" : ["place_alveolar", "class_consonantal", "voiced", "manner_fricative", "consonant", "manner_strident"],
+      "k" : ["class_consonantal", "place_velar", "manner_plosive", "consonant"]
+    }
+  }

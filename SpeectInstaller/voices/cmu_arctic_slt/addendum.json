@@ -1,0 +1,19 @@
+  {
+    "addendum-definition" :
+      {
+	"name" : "English US",
+	"language" : "english",
+	"lang-code" : "eng-US",
+	"description" : "North American English pronunciation addendum",
+	"version" :
+	  {
+	    "major" : 1,
+	    "minor" : 0
+	  }
+      },
+    "addendum-entries" :
+      {
+            "speect" : [{"phones" : ["s", "p", "iy", "k", "t"]}]
+      }
+  }
+

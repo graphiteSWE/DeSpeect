@@ -1,0 +1,50 @@
+The Speect Meraka Lwazi2 john voice, version 1.2.
+
+    * Please see LICENSE for licensing information.
+    * This voice only works with the Speect HTS Engine
+      plug-in version 1.03 
+    * This voice does not employ sophisticated NLP modules (no text
+      normalization).
+
+The voice consists of the folowing files:
+
+.
+├── etc                  <- NLP data
+│   ├── addendum.json
+│   ├── g2p.spct
+│   ├── lexicon.json
+│   └── phoneset.json
+├── hts                  <- HTS Engine files (hts_engine API version 1.03)
+│   ├── dur.pdf
+│   ├── gv-lf0.pdf
+│   ├── gv-mgc.pdf
+│   ├── gv-switch.inf
+│   ├── lf0.pdf
+│   ├── lf0.win1
+│   ├── lf0.win2
+│   ├── lf0.win3
+│   ├── mgc.pdf
+│   ├── mgc.win1
+│   ├── mgc.win2
+│   ├── mgc.win3
+│   ├── tree-dur.inf
+│   ├── tree-gv-lf0.inf
+│   ├── tree-gv-mgc.inf
+│   ├── tree-lf0.inf
+│   └── tree-mgc.inf
+├── LICENSE              <- licensing info
+├── README               <- this README file
+└── voice.json           <- Speect voice description
+
+
+To use the voice with Speect load the voice description file
+``voice.json``, with the Speect Python interface::
+
+	Python 2.7.1+ (r271:86832, Apr 11 2011, 18:05:24) 
+	[GCC 4.5.2] on linux2
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>> import speect
+	>>> import speect.audio
+	>>> voice = speect.SVoice("voice.json")
+	>>> utt = voice.synth("indoda iyambona umntwana")
+	>>> utt.play()
