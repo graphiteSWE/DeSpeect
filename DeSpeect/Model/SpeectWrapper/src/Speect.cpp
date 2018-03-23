@@ -28,8 +28,8 @@ Speect::~Speect()
     S_DELETE(voice,NULL,&error);
     error=speect_quit();
 }
-//return error state as integer s_erc is an enum of speect engine see documentation for more info
-int Speect::getErrorState() const
+//return error state s_erc is an enum of speect engine see documentation for more info
+s_erc &Speect::getErrorState()
 {
     return error;
 }
@@ -47,44 +47,50 @@ Configuration *Speect::getConfiguration() const
 //load a plugin and add to the list of plugins loaded to manage memory
 bool Speect::addPlugin(const std::string& PluginPath)
 {
-    plugins.push_back(
-                s_pm_load_plugin(PluginPath.c_str(),&error)
-                );
-    return error==S_SUCCESS;
+    bool success=false;
+    SPlugin* p=s_pm_load_plugin(PluginPath.c_str(),&error);
+    if(error==S_SUCCESS)
+    {
+        plugins.push_back(p);
+        success=true;
+    }
+    else
+    {
+        S_DELETE(p,NULL,&error);
+        success=false;
+    }
+    return success;
 }
 //instatiate the utterance and set the text to Configuration Utterancetext
 //voice must be inizialized
 bool Speect::createUtt()
 {
-    //if the text has changed reinitialize the utterance
-    //to reinizialize a clear utterance with same text just set configuration
-    //to same string
-    if(config->hasChanged(Configuration::UtteranceText))
-    {
+
         //if you want to re create an utterance delete the current one
         if(utt!=NULL)
         {
 
             delete utt;
         }
-        //instatiate the speect utterance and initialize it
-        SUtterance *i=S_NEW(SUtterance,&error);
-        SUtteranceInit(&i,voice,&error);
-        //set the text of the utterance that speect will use to the one of the configuration
-        SUtteranceSetFeature(i,"input"
-                             ,SObjectSetString(
-                                 config->getConfig(Configuration::UtteranceText).c_str()
+        if(voice!=NULL){
+            //instatiate the speect utterance and initialize it
+            SUtterance *i=S_NEW(SUtterance,&error);
+            SUtteranceInit(&i,voice,&error);
+            //set the text of the utterance that speect will use to the one of the configuration
+            SUtteranceSetFeature(i,"input"
+                                 ,SObjectSetString(
+                                     config->getConfig(Configuration::UtteranceText).c_str()
+                                     ,&error
+                                     )
                                  ,&error
-                                 )
-                             ,&error
-                             );
-        //create the utterance object from the SUtterance if it's creation had success
-        if(error==S_SUCCESS)
-            utt=new Utterance(i);
-    }
-    //return if the utterance has been created
-    return utt==NULL;
+                                 );
+            //create the utterance object from the SUtterance if it's creation had success
+            if(error==S_SUCCESS)
+                utt=new Utterance(i);
+        }
 
+    //return if the utterance has been created
+    return utt!=NULL;
 }
 
 //initialize the voice
@@ -131,7 +137,6 @@ const std::list<std::string> Speect::getUttProcessorNames()
     return l;
 }
 //return the utterance processor by name
-const SUttProcessor *Speect::getUttProcessor(const std::string &Name)
-{
+const SUttProcessor *Speect::getUttProcessor(const std::string &Name){
     return SVoiceGetUttProc(voice,Name.c_str(),&error);
 }

@@ -28,8 +28,13 @@ Relation *Utterance::getRelationByName(const std::string &name) const
 std::list<std::string> Utterance::getRelationNamesList() const
 {
     s_erc error=S_SUCCESS;
-    SList* temp=SUtteranceRelationsKeys(utt,&error);
+    SList* temp=NULL;
+    if(utt)
+    temp=SUtteranceRelationsKeys(utt,&error);
+
     std::list<std::string> l;
+    if(temp!=NULL)
+    {
     while(!SListIsEmpty(temp,&error))
     {
 
@@ -38,5 +43,6 @@ std::list<std::string> Utterance::getRelationNamesList() const
         S_DELETE(obj,NULL,&error);
     }
     S_DELETE(temp,NULL,&error);
+    }
     return l;
 }

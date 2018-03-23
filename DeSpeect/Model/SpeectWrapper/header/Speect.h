@@ -4,6 +4,7 @@
 #include "speect.h"
 #include "list"
 #include "string"
+#include "utterance.h"
 class Configuration;
 class Utterance;
 //this class will manage all memory of Speect component
@@ -27,7 +28,7 @@ public:
     //delete his object and all plugin loaded and then remove speect
     ~Speect();
     //return error as a integer, meaning is the same as speect documentation
-    int getErrorState()const;
+    s_erc& getErrorState();
     //return the utterance modifiable
     const Utterance* getUtterance()const;
     //return the configuration modifiable
