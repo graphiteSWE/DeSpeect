@@ -16,7 +16,13 @@
 #include<iostream>
 #include "createaudiocommand.h"
 int main(int argc, char **argv) {
-	//instatiate speect and set some configuration
+
+    //save all speect error on SpeectError.txt
+    //stderr is the output stream used by speect
+    freopen("SpeectError.txt","w",stderr);
+
+    //instatiate speect and set some configuration
+
 Speect* s=new Speect();
 //abstract command to execute operation on speect
 AbstractCommand* t9=NULL;
@@ -24,7 +30,7 @@ AbstractCommand* t9=NULL;
 t9=new SetSpeectConfigCommand(s,Configuration::Audio,"test.wav");
 std::cout<<t9->execute()<<std::endl;
 delete t9;
-t9=new SetSpeectConfigCommand(s,Configuration::Voice,"/home/marc/Scrivania/SWE-Project/SpeectInstaller/voices/cmu_arctic_slt/voice.json");
+t9=new SetSpeectConfigCommand(s,Configuration::Voice,"/home/marco/Scrivania/SWE-Project/SpeectInstaller/voices/cmu_arctic_slt/voice.json");
 std::cout<<t9->execute()<<std::endl;
 delete t9;
 t9=new SetSpeectConfigCommand(s,Configuration::UtteranceText,"Hi speect test.");

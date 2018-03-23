@@ -10,8 +10,6 @@ Speect::Speect()
 {
     //set locale to C so that speect produce the right audio
     std::setlocale(LC_ALL, "C");
-    //save all speect error on SpeectError.txt
-    std::freopen("SpeectError.txt","w",stderr);
     //initialize audio
     error=speect_init(s_logger_console_new(false));
 }
