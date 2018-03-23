@@ -9,8 +9,7 @@ UttProcessorCommand::UttProcessorCommand(Speect*engine, const std::string &proce
 #include "iostream"
 const std::string UttProcessorCommand::execute()const
 {
-    std::string t="Speect Status:";
-    t+=s_error_str(SpeectEngine->getErrorState());
+    std::string t="";
     const Utterance* u=SpeectEngine->getUtterance();
     if(u!=NULL){
         t+=" Executing Processor:"+Processor;
@@ -22,7 +21,7 @@ const std::string UttProcessorCommand::execute()const
     {
         t+=" Utterance not Initialized";
     }
-    t+=" Speect Exit status:";
+    t+=" Operation status:";
 
     t+=s_error_str(SpeectEngine->getErrorState());
     return t;

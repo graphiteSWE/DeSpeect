@@ -14,8 +14,7 @@ SetSpeectConfigCommand::SetSpeectConfigCommand(
 
 const std::string SetSpeectConfigCommand::execute() const
 {
-    std::string t="Speect Status:";
-    t+=s_error_str(SpeectEngine->getErrorState());
+    std::string t="";
     SpeectEngine->getConfiguration()->setConfig(name,value);
     bool error=true;
     if(name==Configuration::Voice)
@@ -32,7 +31,7 @@ const std::string SetSpeectConfigCommand::execute() const
     {
         t+=" Setting Configuration";
     }
-    t+=" Speect Exit status:";
+    t+=" Operation status:";
 
     t+=s_error_str(SpeectEngine->getErrorState());
     return t;

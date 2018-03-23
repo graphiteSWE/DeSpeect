@@ -9,10 +9,8 @@ CreateAudioCommand::CreateAudioCommand(Speect *engine, const std::__cxx11::strin
 
 const std::string CreateAudioCommand::execute() const
 {
-    std::string t="Speect Status:";
-    t+=s_error_str(SpeectEngine->getErrorState());
 
-    t+=" Generating audio to File:"+
+    std::string t=" Generating audio to File:"+
             SpeectEngine->getConfiguration()->getConfig(Configuration::Audio)+" ";
 
     if(SpeectEngine->getUtterance())
@@ -29,7 +27,7 @@ const std::string CreateAudioCommand::execute() const
                                 ,AudioFormat.c_str()
                                 ,&SpeectEngine->getErrorState()
                                 );
-        t+=" Saved audio Feature to file, Exit Status:";
+        t+=" Saved audio Feature to file, Operation status:";
         t+=s_error_str(SpeectEngine->getErrorState());
         }
         else

@@ -8,15 +8,12 @@ LoadPluginCommand::LoadPluginCommand(Speect *engine,const std::__cxx11::string &
 
 const std::string LoadPluginCommand::execute() const
 {
-    std::string t="Speect Status:";
-    t+=s_error_str(SpeectEngine->getErrorState());
-
-    t+=" Adding Plugin:"+PluginPath;
+    std::string t=" Adding Plugin:"+PluginPath;
 
     if(!SpeectEngine->addPlugin(PluginPath))
         t+=" Failed";
 
-    t+=" Speect Exit status:";
+    t+=" Operation status:";
 
     t+=s_error_str(SpeectEngine->getErrorState());
     return t;
