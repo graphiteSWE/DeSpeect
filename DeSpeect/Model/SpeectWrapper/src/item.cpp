@@ -67,7 +67,7 @@ const std::string Item::getName() const
     if(SItemFeatureIsPresent(item,"name",&error))
     return SItemGetName(item,&error);
 }
-
+/*
 //set the name at the given value
 bool Item::setName(const std::string &value)
 {
@@ -75,6 +75,7 @@ bool Item::setName(const std::string &value)
     SItemSetName(item,value.c_str(),&error);
     return error==S_SUCCESS;
 }
+*/
 //return if item isEqual to the item of the relation at given path
 bool Item::IsEqual(const std::string &relation,const std::string& id)const
 {

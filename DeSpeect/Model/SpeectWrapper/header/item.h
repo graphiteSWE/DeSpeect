@@ -29,8 +29,6 @@ public:
     const std::string &getId()const;
     //return the name of the item
     const std::string getName()const;
-    //set the name of the item
-    bool setName(const std::string&);
     //check if this SItem is equal to the SItem found in the given relation at given Path
     //using Speect equals function
     bool IsEqual(const std::string&, const std::string &) const;

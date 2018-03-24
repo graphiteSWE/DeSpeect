@@ -19,13 +19,13 @@ const std::string SetSpeectConfigCommand::execute() const
     bool error=true;
     if(name==Configuration::Voice)
     {
-        t+=" Initializing Voice";
+        t+="Initializing Voice";
         SpeectEngine->init()?t+=" Success":t+=" Failure";
     }
     else if(name==Configuration::UtteranceText)
     {
         t+=" Initializing Utterance";
-        SpeectEngine->createUtt()?t+=" Success":t+=" Failure";;
+        SpeectEngine->createUtt()?t+=" Success":t+=" Failure";
     }
     else
     {
