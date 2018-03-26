@@ -14,9 +14,13 @@ include_directories(${SPCT_INCLUDE_DIRS})
 add_subdirectory(Model)
 include_directories(Model/SpeectWrapper/header)
 include_directories(Model/Command/header)
+
+## aggiunta QT
+add_subdirectory(QT)
+include_directories(QT/header)
+
 ## creazione eseguibile
 add_executable(main main.cpp)
 
 find_library(despeect libspct.so HINTS ${spct_DIR}/../../../lib)
-target_link_libraries( main ${Qt5Widgets_LIBRARIES} SpeectWrapper Command ${despeect})
-
+target_link_libraries( main ${Qt5Widgets_LIBRARIES} QTGraph SpeectWrapper Command ${despeect})
