@@ -9,7 +9,7 @@ private:
     Item relationHead;
     std::string name;
 public:
-    Relation(Item item,const std::string& name);
+    Relation(const Item &item, const std::string& name);
     ~Relation();
     //return the relation name
     const std::string& getName()const ;

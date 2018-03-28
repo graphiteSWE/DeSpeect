@@ -19,10 +19,10 @@ Utterance::~Utterance()
     S_DELETE(utt,NULL,&error);
 }
 
-Relation *Utterance::getRelationByName(const std::string &name) const
+Relation Utterance::getRelationByName(const std::string &name) const
 {
     s_erc error=S_SUCCESS;
-    return new Relation(Item(SRelationHead(SUtteranceGetRelation(utt,name.c_str(),&error),&error)),name);
+    return Relation(Item(SRelationHead(SUtteranceGetRelation(utt,name.c_str(),&error),&error)),name);
 }
 
 std::list<std::string> Utterance::getRelationNamesList() const

@@ -10,15 +10,27 @@ add_definitions(${Qt5Widgets_DEFINITIONS})
 set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 set (CMAKE_CXX_STANDARD 11)
 include_directories(header)
+include_directories(ui)
 include_directories(src)
 set( SOURCES
-	# qua sorgenti
-)
+        src/arc.cpp
+	src/graphmanager.cpp
+	src/id.cpp
+	src/mainwindow.cpp
+        src/node.cpp
+        src/line.cpp
+        src/mainwindow.ui
+        )
 set( HEADER
-	# qua head
+        header/arc.h
+        header/graphmanager.h
+	header/id.h
+	header/mainwindow.h
+	header/node.h
+        header/line.h
 )
 set( MOC_HEADER
-	# qua moc
+        mainwindow.moc
 )
 QT5_ADD_RESOURCES( RES_SOURCES ${RESOURCES} )
 QT5_WRAP_UI( UI_HEADERS ${UIS} )

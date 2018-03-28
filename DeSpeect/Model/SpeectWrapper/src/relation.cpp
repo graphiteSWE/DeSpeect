@@ -1,5 +1,5 @@
 #include "relation.h"
-Relation::Relation(Item item, const std::__cxx11::string &name)
+Relation::Relation(const Item& item, const std::string &name)
     :relationHead(item)
     ,name(name)
 {

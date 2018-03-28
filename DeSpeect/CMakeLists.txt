@@ -16,8 +16,8 @@ include_directories(Model/SpeectWrapper/header)
 include_directories(Model/Command/header)
 
 ## aggiunta QT
-add_subdirectory(QT)
-include_directories(QT/header)
+add_subdirectory(Qt)
+include_directories(Qt/header)
 
 ## creazione eseguibile
 add_executable(main main.cpp)

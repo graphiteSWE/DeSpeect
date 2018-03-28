@@ -2,6 +2,7 @@
 #include <direct.h>
 #define GetCurrentDir _getcwd
 #else
+#include <QApplication>
 #include <unistd.h>
 #define GetCurrentDir getcwd
 #endif
@@ -15,6 +16,7 @@
 #include <configuration.h>
 #include<iostream>
 #include "createaudiocommand.h"
+#include "mainwindow.h"
 int main(int argc, char **argv) {
 
     //save all speect error on SpeectError.txt
@@ -22,7 +24,9 @@ int main(int argc, char **argv) {
     freopen("SpeectError.txt","w",stderr);
 
     //instatiate speect and set some configuration
-
+QApplication a(argc,argv);
+MainWindow x;
+x.show();
 Speect* s=new Speect();
 //abstract command to execute operation on speect
 AbstractCommand* t9=NULL;
@@ -36,7 +40,6 @@ delete t9;
 t9=new SetSpeectConfigCommand(s,Configuration::UtteranceText,"Hi speect test.");
 std::cout<<t9->execute()<<std::endl;
 delete t9;
-
 //if the voice get inizialized
   //  if(s->init())
  //   {
@@ -94,16 +97,26 @@ delete t9;
         std::cout<< t9->execute()<<std::endl;
         delete t9;
         t9=NULL;
-        /*   if(s->getUtterance()){
+   if(s->getUtterance()){
         std::cout<<"Printing the generated relations:"<<std::endl;
         std::list<std::string> t2=(s->getUtterance())->getRelationNamesList();
 		for(std::list<std::string>::iterator it=t2.begin();it!=t2.end();++it)
         std::cout<<(*it)<<std::endl;
-        }*/
+        }
         t9=new CreateAudioCommand(s,"riff");
         std::cout<<t9->execute();
-        delete t9;
+        Item it=s->getUtterance()->getRelationByName("Token").getRelationHead();
 
+        x.g.printRelation("Token",&it,Qt::red);
+        it=s->getUtterance()->getRelationByName("Word").getRelationHead();
+
+        x.g.printRelation("Word",&it,Qt::blue);
+        it=s->getUtterance()->getRelationByName("Phrase").getRelationHead();
+
+        x.g.printRelation("Phrase",&it,Qt::green);
+
+        delete t9;
+return a.exec();
         /*
 		std::cout<<"Checking if Token head is equal to Word head and checking if IsEqual work: should return false"<<std::endl;
 		std::cout<<(s->getUtterance()->getRelationByName("Token"))->getRelationHead().IsEqual("Word","")<<std::endl;
