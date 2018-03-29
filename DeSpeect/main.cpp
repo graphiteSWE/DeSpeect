@@ -16,6 +16,7 @@
 #include <configuration.h>
 #include<iostream>
 #include "createaudiocommand.h"
+#include "abstractcommandlist.h"
 #include "mainwindow.h"
 int main(int argc, char **argv) {
 
@@ -28,16 +29,14 @@ int main(int argc, char **argv) {
 Speect* s=new Speect();
 //abstract command to execute operation on speect
 AbstractCommand* t9=NULL;
+AbstractCommandList commandList;
 
 t9=new SetSpeectConfigCommand(s,Configuration::Audio,"test.wav");
-std::cout<<t9->execute()<<std::endl;
-delete t9;
-t9=new SetSpeectConfigCommand(s,Configuration::Voice,"/home/marco/Scrivania/SWE-Project/SpeectInstaller/voices/cmu_arctic_slt/voice.json");
-std::cout<<t9->execute()<<std::endl;
-delete t9;
+commandList.addCommand(t9);
+t9=new SetSpeectConfigCommand(s,Configuration::Voice,"/home/user/Desktop/DeSpeect/SpeectInstaller/voices/cmu_arctic_slt/voice.json");
+commandList.addCommand(t9);
 t9=new SetSpeectConfigCommand(s,Configuration::UtteranceText,"Hi speect test.This is a test for multisons");
-std::cout<<t9->execute()<<std::endl;
-delete t9;
+commandList.addCommand(t9);
 //if the voice get inizialized
   //  if(s->init())
  //   {
@@ -48,9 +47,7 @@ delete t9;
 
         std::cout<<"Adding Plugins via Commmand"<<std::endl;
         t9=new LoadPluginCommand(s,"audio_riff.spi");
-        std::cout<<t9->execute();
-        delete t9;
-        t9=NULL;
+        commandList.addCommand(t9);
         //instatiate the utterance
  //       s->createUtt();
 
@@ -60,9 +57,7 @@ delete t9;
 
       //  AbstractCommand* t9=new UttProcessorCommand(s,"Tokenize");
         t9=new UttProcessorCommand(s,"Tokenize");
-        std::cout<< t9->execute()<<std::endl;
-        delete t9;
-        t9=NULL;
+        commandList.addCommand(t9);
 
       /* if(s->getUtterance()){
         std::cout<<"Printing the generated relations:"<<std::endl;
@@ -72,29 +67,20 @@ delete t9;
         }*/
         std::cout<<"Executing Normalizer"<<std::endl;
         t9=new UttProcessorCommand(s,"Normalize");
-        std::cout<< t9->execute()<<std::endl;
-        delete t9;
-        t9=NULL;
+        commandList.addCommand(t9);
         std::cout<<"Executing Phrasify"<<std::endl;
         t9=new UttProcessorCommand(s,"Phrasify");
-        std::cout<< t9->execute()<<std::endl;
-        delete t9;
-        t9=NULL;
+        commandList.addCommand(t9);
         std::cout<<"Executing LexLookup"<<std::endl;
         t9=new UttProcessorCommand(s,"LexLookup");
-        std::cout<< t9->execute()<<std::endl;
-        delete t9;
-        t9=NULL;
+        commandList.addCommand(t9);
         std::cout<<"Executing Pauses"<<std::endl;
         t9=new UttProcessorCommand(s,"Pauses");
-        std::cout<< t9->execute()<<std::endl;
-        delete t9;
-        t9=NULL;
+        commandList.addCommand(t9);
         std::cout<<"Executing HTS Engine Synthesizer"<<std::endl;
         t9=new UttProcessorCommand(s,"HTS Engine Synthesizer");
-        std::cout<< t9->execute()<<std::endl;
-        delete t9;
-        t9=NULL;
+        commandList.addCommand(t9);
+        commandList.executeAll();
    if(s->getUtterance()){
         std::cout<<"Printing the generated relations:"<<std::endl;
         std::list<std::string> t2=(s->getUtterance())->getRelationNamesList();
@@ -102,7 +88,8 @@ delete t9;
         std::cout<<(*it)<<std::endl;
         }
         t9=new CreateAudioCommand(s,"riff");
-        std::cout<<t9->execute();
+        commandList.addCommand(t9);
+        commandList.executeStep();
         QApplication a(argc,argv);
         MainWindow x;
         x.show();
@@ -122,9 +109,6 @@ delete t9;
             x.g.printRelation(relname.c_str(),&it,colors.at(i));
             ++i;
         }
-
-
-        delete t9;
 return a.exec();
         /*
 		std::cout<<"Checking if Token head is equal to Word head and checking if IsEqual work: should return false"<<std::endl;
