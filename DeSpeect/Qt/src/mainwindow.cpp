@@ -7,10 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
     ,g()
 {
     ui->setupUi(this);
-    g.linkGraphModel(ui->graphView);
-    ui->graphView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    ui->graphView->setAlignment(Qt::AlignTop|Qt::AlignLeft);
-    g.linkRelationModel(ui->relations);
+    g.linkGraphModel(ui->graphicsView);
+    ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    ui->graphicsView->setAlignment(Qt::AlignTop|Qt::AlignLeft);
+    g.linkRelationModel(ui->listView);
 }
 
 MainWindow::~MainWindow()

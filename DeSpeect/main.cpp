@@ -34,7 +34,7 @@ AbstractCommand* t9=NULL;
 t9=new SetSpeectConfigCommand(s,Configuration::Audio,"test.wav");
 std::cout<<t9->execute()<<std::endl;
 delete t9;
-t9=new SetSpeectConfigCommand(s,Configuration::Voice,"/home/maco/Scrivania/SWE-Project/SpeectInstaller/voices/cmu_arctic_slt/voice.json");
+t9=new SetSpeectConfigCommand(s,Configuration::Voice,"/home/marco/Scrivania/SWE-Project/SpeectInstaller/voices/cmu_arctic_slt/voice.json");
 std::cout<<t9->execute()<<std::endl;
 delete t9;
 t9=new SetSpeectConfigCommand(s,Configuration::UtteranceText,"Hi speect test.This is a test for multisons");
