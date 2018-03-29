@@ -105,15 +105,22 @@ delete t9;
         }
         t9=new CreateAudioCommand(s,"riff");
         std::cout<<t9->execute();
-        Item it=s->getUtterance()->getRelationByName("Token").getRelationHead();
 
-        x.g.printRelation("Token",&it,Qt::red);
-        it=s->getUtterance()->getRelationByName("Word").getRelationHead();
-
-        x.g.printRelation("Word",&it,Qt::blue);
-        it=s->getUtterance()->getRelationByName("Phrase").getRelationHead();
-
-        x.g.printRelation("Phrase",&it,Qt::green);
+        QVector<QColor> colors;
+        colors.push_back(QColor(qRgb(172,25,248)));
+        colors.push_back(QColor(qRgb(5,210,153)));
+        colors.push_back(QColor(qRgb(71,194,52)));
+        colors.push_back(QColor(qRgb(24,241,95)));
+        colors.push_back(QColor(qRgb(199,1,7)));
+        colors.push_back(QColor(qRgb(63,230,150)));
+        colors.push_back(QColor(qRgb(151,157,0)));
+        int i=0;
+        foreach(auto relname,s->getUtterance()->getRelationNamesList())
+        {
+            auto it=s->getUtterance()->getRelationByName(relname).getRelationHead();
+            x.g.printRelation(relname.c_str(),&it,colors.at(i));
+            ++i;
+        }
 
         delete t9;
 return a.exec();

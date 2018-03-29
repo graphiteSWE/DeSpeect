@@ -2,7 +2,7 @@
 #define LINE_H
 
 #include <QGraphicsObject>
-
+//
 class Line:public QGraphicsObject
 {
     Q_OBJECT

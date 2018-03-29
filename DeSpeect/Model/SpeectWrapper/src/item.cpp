@@ -96,7 +96,9 @@ const std::string Item::getName() const
 {
     s_erc error=S_SUCCESS;
     if(SItemFeatureIsPresent(item,"name",&error))
-    return SItemGetName(item,&error);
+        return SItemGetName(item,&error);
+    else
+        return "";
 }
 /*
 //set the name at the given value
