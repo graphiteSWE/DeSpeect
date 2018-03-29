@@ -1,16 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+//moc class
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent)
     ,ui(new Ui::MainWindow)
     ,g()
 {
     ui->setupUi(this);
-    ui->graphView->setScene(g.getGraphModel());
+    g.linkGraphModel(ui->graphView);
     ui->graphView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     ui->graphView->setAlignment(Qt::AlignTop|Qt::AlignLeft);
-    ui->relations->setModel(g.getRelationModel());
+    g.linkRelationModel(ui->relations);
 }
 
 MainWindow::~MainWindow()

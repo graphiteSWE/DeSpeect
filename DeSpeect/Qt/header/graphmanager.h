@@ -32,10 +32,10 @@ public:
     GraphManager();
     ~GraphManager();
     //return the model to be linked with the view(could be better do the opposite)
-    QGraphicsScene *getGraphModel() const;
+    void linkGraphModel(QGraphicsView* view);
 
     //return the model to be linked with the view(could be better do the opposite)
-    QAbstractItemModel *getRelationModel()const;
+    void linkRelationModel(QListView*);
 
     //print the relations that start from the item,with the chosen name and the chosen color
     bool printRelation(const QString&, const Item*, const QColor&);

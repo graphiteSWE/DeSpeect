@@ -7,6 +7,7 @@
 //ID of a node
 //id is the path to the phisical node from the head of his relation
 //relation is the relation of the phisical node
+//id is unique in a relation but not between different relations
 class ID
 {
 private:

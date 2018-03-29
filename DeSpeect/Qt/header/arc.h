@@ -13,8 +13,6 @@ private:
     //point needed to draw the arrow
     QPointF arrowPoint1;
     QPointF arrowPoint2;
-    //return if the nodes that arc is connecting are colliding
-    bool NodesColliding()const;
     //fix the end point and arrow points when nodes move
     QPointF FixEnd();
 public:

@@ -1,6 +1,5 @@
 #include "id.h"
 
-
 const QString& ID::getRelation() const
 {
     return relation;
