@@ -8,6 +8,7 @@ set( SOURCES
     src/loadplugincommand.cpp
     src/setspeectconfigcommand.cpp
     src/createaudiocommand.cpp
+    src/abstractcommandlist.cpp
 )
 set( HEADER
     header/abstractcommand.h
@@ -15,6 +16,7 @@ set( HEADER
     header/loadplugincommand.h
     header/setspeectconfigcommand.h
     header/createaudiocommand.h
+    header/abstractcommandlist.h
 
 )
 # compile
