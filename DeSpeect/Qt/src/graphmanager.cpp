@@ -64,7 +64,7 @@ bool GraphManager::printRelation(const QString &id, const Item *SpeectNode, cons
         Graph->addItem(parentRelation);
         //add to nodes that must be checked the head node
         ToBeChecked.push_back(SpeectNode);
-        Node* t=new Node(QString(SpeectNode->getId().c_str()),id,QString(SpeectNode->getName().c_str()),0,0,Radius,Color,parentRelation);
+        Node* t=new Node(QString(SpeectNode->getId().c_str()),id,QString(SpeectNode->getName().c_str()),Radius+10,Radius+20,Radius,Color,parentRelation);
         Printed.push_back(t);
         FixHeadPosition(*t);
         //cicle till there is no more nodes to be checked

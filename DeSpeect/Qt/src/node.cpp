@@ -46,8 +46,8 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
     //bounding rect is a square so ellipse is a circle
     painter->drawEllipse(t);
     //draw the name info at bottom of item
-    t.setTop(t.bottom());
-    t.setBottom(t.bottom()+10);
+    t.setBottom(t.top());
+    t.setTop(t.top()-15);
     painter->drawText(t,Qt::AlignCenter|Qt::TextDontClip,name);
 
 }

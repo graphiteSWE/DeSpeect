@@ -24,9 +24,7 @@ int main(int argc, char **argv) {
     freopen("SpeectError.txt","w",stderr);
 
     //instatiate speect and set some configuration
-QApplication a(argc,argv);
-MainWindow x;
-x.show();
+
 Speect* s=new Speect();
 //abstract command to execute operation on speect
 AbstractCommand* t9=NULL;
@@ -105,7 +103,9 @@ delete t9;
         }
         t9=new CreateAudioCommand(s,"riff");
         std::cout<<t9->execute();
-
+        QApplication a(argc,argv);
+        MainWindow x;
+        x.show();
         QVector<QColor> colors;
         colors.push_back(QColor(qRgb(172,25,248)));
         colors.push_back(QColor(qRgb(5,210,153)));
@@ -122,6 +122,7 @@ delete t9;
             x.g.printRelation(relname.c_str(),&it,colors.at(i));
             ++i;
         }
+
 
         delete t9;
 return a.exec();

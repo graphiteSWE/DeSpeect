@@ -8,8 +8,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     g.linkGraphModel(ui->graphicsView);
-    ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    ui->graphicsView->setAlignment(Qt::AlignTop|Qt::AlignLeft);
     g.linkRelationModel(ui->listView);
 }
 
