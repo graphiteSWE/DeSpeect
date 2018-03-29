@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->graphView->setScene(g.getGraphModel());
     ui->graphView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    ui->graphView->setAlignment(Qt::AlignTop|Qt::AlignLeft);
     ui->relations->setModel(g.getRelationModel());
 }
 

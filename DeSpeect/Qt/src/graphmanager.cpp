@@ -170,23 +170,9 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
         }
         */
     }
-    if(hasDaughter)
-    {
-        Node* temp=new Node(QString(daughter.getId().c_str()),relation,QString(daughter.getName().c_str()),me->pos().x(),me->pos().y()+4*Radius,Radius,color,parentRelation);
-        tbc.push_back(new Item(daughter));
-        Printed.push_back(temp);
-        Arc* a=new Arc(10,Radius,color,parentRelation,true);
-
-        connect(temp,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
-        connect(me,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateStartPoint(QPointF)));
-        PositionNode(*temp);
-        a->UpdateEndPoint(temp->pos());
-
-
-    }
     if(hasNext)
     {
-        tbc.push_back(new Item(next));
+        tbc.push_front(new Item(next));
         Node* temp=new Node(QString(next.getId().c_str()),relation,QString(next.getName().c_str()),me->pos().x()+4*Radius,me->pos().y(),Radius,color,parentRelation);
         Printed.push_back(temp);
         Arc* a=new Arc(10,Radius,color,parentRelation,true);
@@ -197,6 +183,21 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
         a->UpdateEndPoint(temp->pos());
 
     }
+    if(hasDaughter)
+    {
+        Node* temp=new Node(QString(daughter.getId().c_str()),relation,QString(daughter.getName().c_str()),me->pos().x(),me->pos().y()+4*Radius,Radius,color,parentRelation);
+        tbc.push_front(new Item(daughter));
+        Printed.push_back(temp);
+        Arc* a=new Arc(10,Radius,color,parentRelation,true);
+
+        connect(temp,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
+        connect(me,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateStartPoint(QPointF)));
+        PositionNode(*temp);
+        a->UpdateEndPoint(temp->pos());
+
+
+    }
+
     me->notifyPositionChange(me->pos());
 }
 
