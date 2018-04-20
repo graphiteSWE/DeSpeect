@@ -1,0 +1,70 @@
+os: linux
+
+dist: trusty
+
+sudo: required
+
+language: cpp
+
+compiler: gcc
+
+addons:
+  sonarcloud:
+    organization: graphiteswe-github
+    token:
+      secure: 8b51b6fb3d84c5b90bd692bcdee2005f3bc81bc6
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - cmake
+      - gcc-7
+      - g++-7
+      - swig
+      - libxml2-dev
+      - python-dev
+      - python-sphinx
+      - doxygen
+      - lcov
+
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
+
+notifications:
+  email: false
+
+env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+before_install:
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - eval "${MATRIX_EVAL}"
+  - sudo apt-get update -qq
+  - sudo apt-get install qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev
+  - sudo apt-get install qt5-default qttools5-dev-tools
+  - chmod +x build.sh
+  - chmod +x travis.sh
+  - chmod +x get_code_cov.sh
+  - chmod +x SpeectInstaller/install.sh
+
+install:
+  - sudo apt-get install -qq g++-5
+  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+  - sudo apt-get install libcppunit-dev
+
+script:
+  - build-wrapper-linux-x86-64 --out-dir bw-output ./travis.sh
+
+after_success:
+  - cd ${TRAVIS_BUILD_DIR}
+  - ./get_code_cov.sh
+  - bash <(curl -s https://codecov.io/bash)
+  - "sonar-scanner \
+    -Dsonar.projectKey=DeSpeect_Official_Build \
+    -Dsonar.sources=DeSpeect/ \
+    -Dsonar.cfamily.build-wrapper-output=bw-output \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.organization=graphiteswe-github \
+    -Dsonar.login=8b51b6fb3d84c5b90bd692bcdee2005f3bc81bc6 \
+    -Dsonar.test=DeSpeect/Test \
+    -Dsonar.cfamily.gcov.reportsPath=. "
