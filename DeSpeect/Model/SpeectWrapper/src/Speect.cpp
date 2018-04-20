@@ -63,14 +63,14 @@ bool Speect::addPlugin(const std::string& PluginPath)
 }
 //instatiate the utterance and set the text to Configuration Utterancetext
 //voice must be inizialized
+#include "iostream"
 bool Speect::createUtt()
 {
-
         //if you want to re create an utterance delete the current one
         if(utt!=NULL)
         {
-
             delete utt;
+            utt=NULL;
         }
         if(voice!=NULL){
             //instatiate the speect utterance and initialize it
@@ -96,19 +96,20 @@ bool Speect::createUtt()
 //initialize the voice
 bool Speect::init()
 {
-    //if there is a voice delete it
-    if(voice==NULL)
-    {
-        S_DELETE(voice,NULL,&error);
-    }
-
     //if there is an utterance delete it
     //utterance depend on voice
-    if(utt==NULL)
+    if(utt!=NULL)
     {
         delete utt;
         utt=NULL;
     }
+    //if there is a voice delete it
+    if(voice!=NULL)
+    {
+        S_DELETE(voice,NULL,&error);
+    }
+
+
     //load the voice
     voice=s_vm_load_voice(config->getConfig(Configuration::Voice).c_str(),&error);
     bool loadResult=error==S_SUCCESS;

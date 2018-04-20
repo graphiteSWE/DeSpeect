@@ -4,19 +4,19 @@ include_directories(../SpeectWrapper/header)
 include_directories(header)
 set( SOURCES
     src/abstractcommand.cpp
+    src/commandlist.cpp
     src/uttprocessorcommand.cpp
     src/loadplugincommand.cpp
     src/setspeectconfigcommand.cpp
     src/createaudiocommand.cpp
-    src/abstractcommandlist.cpp
 )
 set( HEADER
     header/abstractcommand.h
+    header/commandlist.h
     header/uttprocessorcommand.h
     header/loadplugincommand.h
     header/setspeectconfigcommand.h
     header/createaudiocommand.h
-    header/abstractcommandlist.h
 
 )
 # compile

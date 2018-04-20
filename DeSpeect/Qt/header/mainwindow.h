@@ -3,8 +3,6 @@
 
 #include <QMainWindow>
 #include <graphmanager.h>
-
-//just a moc class to test the Ui
 namespace Ui {
 class MainWindow;
 }

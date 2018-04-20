@@ -8,7 +8,7 @@ private:
 
     // AbstractCommand interface
 public:
-    CreateAudioCommand(Speect*,const std::string&);
-    const std::string execute() const;
+    CreateAudioCommand(const std::string&);
+    const std::string execute(Speect* engine) const;
 };
 #endif // CREATEAUDIOCOMMAND_H

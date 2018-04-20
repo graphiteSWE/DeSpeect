@@ -1,18 +1,17 @@
 
 #include "setspeectconfigcommand.h"
 SetSpeectConfigCommand::SetSpeectConfigCommand(
-        Speect *engine
-        ,const Configuration::configName &name
-        , const std::__cxx11::string &value
+        const Configuration::configName &name
+        , const std::string &value
         )
-    :AbstractCommand(engine)
+    :AbstractCommand()
     ,name(name)
     ,value(value)
 {
 
 }
 
-const std::string SetSpeectConfigCommand::execute() const
+const std::string SetSpeectConfigCommand::execute(Speect *SpeectEngine) const
 {
     std::string t="";
     SpeectEngine->getConfiguration()->setConfig(name,value);

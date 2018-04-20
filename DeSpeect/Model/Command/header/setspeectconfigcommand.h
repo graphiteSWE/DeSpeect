@@ -8,7 +8,7 @@ class SetSpeectConfigCommand:public AbstractCommand
     const std::string value;
     // AbstractCommand interface
 public:
-    SetSpeectConfigCommand(Speect*,const Configuration::configName&,const std::string&);
-    const std::string execute() const;
+    SetSpeectConfigCommand(const Configuration::configName&, const std::string&);
+    const std::string execute(Speect *SpeectEngine) const;
 };
 #endif // SETSPEECTCONFIGCOMMAND_H

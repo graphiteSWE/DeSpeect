@@ -18,8 +18,8 @@ public:
     //delete the inner utterance
     ~Utterance();
     //return the relation by name ownership of object to caller
-    Relation getRelationByName(const std::string &name)const;
+    Relation* getRelationByName(const std::string &name)const;
     //return all the relations name as a list ownership of list to caller
-    std::list<std::string> getRelationNamesList()const;
+    const std::list<std::string> getRelationNamesList()const;
 };
 #endif // UTTERANCE_H

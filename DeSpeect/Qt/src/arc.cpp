@@ -34,14 +34,15 @@ void Arc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     //set the painter brush that fills empty space inside the line of the right color
     painter->setBrush(QBrush(color));
     //set the pen that draw the outside line to black
-    painter->setPen(Qt::black);
+    painter->setPen(QPen(painter->brush(),2));
     //create the arrow polygon to be drawn
     QPolygonF head;
     head.clear();
     QPointF end=FixEnd();
     head<<end<<arrowPoint1<<arrowPoint2;
     //draw the polygon and the line
-    painter->drawPolygon(head);
+    painter->drawLine(end,arrowPoint1);
+    painter->drawLine(end,arrowPoint2);
     painter->drawLine(QLineF(FixStart(),end));
 
 

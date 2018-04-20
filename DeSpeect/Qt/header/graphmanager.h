@@ -10,7 +10,7 @@
 class Item;
 class Node;
 //manage graphs and relation to keep coherent the two models
-class GraphManager:public QObject
+class GraphManager : public QObject
 {
     Q_OBJECT
 private:

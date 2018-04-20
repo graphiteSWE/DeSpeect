@@ -25,17 +25,7 @@ GraphManager::GraphManager()
 GraphManager::~GraphManager()
 {
 
-    //clear the vector and the Relations
-    Relations.clear();
-    Printed.clear();
-    //clear the graph (delete all items inside)
-    Graph->clear();
-
-    //clear the relationsModel and delete all item in it
-    for(int i=0;i<RelationsModel->rowCount();++i)
-    {
-        delete RelationsModel->item(0);
-    }
+    clear();
 
     delete Graph;
     delete RelationsModel;
@@ -74,6 +64,22 @@ bool GraphManager::printRelation(const QString &id, const Item *SpeectNode, cons
             checkRelations(ToBeChecked,id,Color,parentRelation);
         }
     }
+}
+#include "iostream"
+void GraphManager::clear()
+{
+    //clear the vector and the Relations
+    Relations.clear();
+    Printed.clear();
+    //clear the graph (delete all items inside)
+    Graph->clear();
+
+    //clear the relationsModel and delete all item in it
+    for(int i=0;i<RelationsModel->rowCount();++i)
+    {
+        delete RelationsModel->item(0);
+    }
+    RelationsModel->clear();
 }
 
 //return a new relation if and add it to the relation model if relation not exist otherwise

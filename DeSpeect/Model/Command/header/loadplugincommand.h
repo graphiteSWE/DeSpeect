@@ -6,7 +6,7 @@ class LoadPluginCommand:public AbstractCommand
     const std::string PluginPath;
     // AbstractCommand interface
 public:
-    LoadPluginCommand(Speect*, const std::string&);
-    const std::string execute() const;
+    LoadPluginCommand(const std::string&);
+    const std::string execute(Speect *SpeectEngine) const;
 };
 #endif // LOADPLUGINCOMMAND_H

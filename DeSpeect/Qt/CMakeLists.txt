@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 find_package(Qt5Widgets REQUIRED)
 include_directories(${Qt5Widgets_INCLUDES})
 add_definitions(${Qt5Widgets_DEFINITIONS})
-set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 set (CMAKE_CXX_STANDARD 11)
 include_directories(header)
 include_directories(ui)
@@ -15,19 +15,21 @@ include_directories(src)
 set( SOURCES
         src/arc.cpp
 	src/graphmanager.cpp
-	src/id.cpp
-	src/mainwindow.cpp
+        src/id.cpp
         src/node.cpp
         src/line.cpp
-        src/mainwindow.ui
+        src/modelview.cpp
+        src/processormanager.cpp
+        src/view.ui
         )
 set( HEADER
         header/arc.h
         header/graphmanager.h
-	header/id.h
-	header/mainwindow.h
-	header/node.h
+        header/id.h
+        header/modelview.h
+        header/node.h
         header/line.h
+        header/processormanager.h
 )
 set( MOC_HEADER
         mainwindow.moc

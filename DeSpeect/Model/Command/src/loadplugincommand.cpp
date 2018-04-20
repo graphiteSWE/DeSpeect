@@ -1,12 +1,12 @@
 #include "loadplugincommand.h"
-LoadPluginCommand::LoadPluginCommand(Speect *engine,const std::__cxx11::string & PluginPath)
-    :AbstractCommand(engine)
+LoadPluginCommand::LoadPluginCommand(const std::string & PluginPath)
+    :AbstractCommand()
     ,PluginPath(PluginPath)
 {
 
 }
 
-const std::string LoadPluginCommand::execute() const
+const std::string LoadPluginCommand::execute(Speect *SpeectEngine) const
 {
     std::string t="Adding Plugin:"+PluginPath;
 

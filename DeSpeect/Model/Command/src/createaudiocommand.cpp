@@ -1,13 +1,13 @@
 #include "createaudiocommand.h"
 #include "configuration.h"
-CreateAudioCommand::CreateAudioCommand(Speect *engine, const std::__cxx11::string &format)
-    :AbstractCommand(engine)
+CreateAudioCommand::CreateAudioCommand(const std::string &format)
+    :AbstractCommand()
     ,AudioFormat(format)
 {
 
 }
 
-const std::string CreateAudioCommand::execute() const
+const std::string CreateAudioCommand::execute(Speect *SpeectEngine) const
 {
 
     std::string t="Generating audio to File:"+
