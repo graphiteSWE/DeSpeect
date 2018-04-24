@@ -1,2 +1,0 @@
-/usr/bin/ar qc libCommand.a  CMakeFiles/Command.dir/src/abstractcommand.cpp.o CMakeFiles/Command.dir/src/uttprocessorcommand.cpp.o CMakeFiles/Command.dir/src/loadplugincommand.cpp.o CMakeFiles/Command.dir/src/setspeectconfigcommand.cpp.o CMakeFiles/Command.dir/src/createaudiocommand.cpp.o CMakeFiles/Command.dir/src/abstractcommandlist.cpp.o
-/usr/bin/ranlib libCommand.a
