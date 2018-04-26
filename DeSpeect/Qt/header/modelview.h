@@ -8,6 +8,7 @@ class View;
 #include <Speect.h>
 #include <commandlist.h>
 #include "configuration.h"
+#include "datanodemanager.h"
 #include <processormanager.h>
 
 
@@ -26,22 +27,27 @@ private:
     //here start the real var
     bool utteranceIsProcessed=false;
     GraphManager* g;
+    DataNodeManager *properties;
     ProcessorManager* p;
     Ui::View *ui;
     QVector<QColor>colors;
-
+    void printLog();
     void clearLayoutProcessor();
     void lockUpdateItem();
     void unlockUpdateItem();
     void evidenceNextProcessor();
     void evidenceAllProcessor();
 public slots:
+    void utteranceTypeChanged();
+    void findNode(QString,QString);
     void requestProcessorRun(bool execSteps=0);
     void runSingleStep();
     void loadSelectedProcessor();
-    void requestPluginRun();
-    void requestPluginLoad(const QList<QString>&);
+    void requestAudioSave(QString);
     void requestConfiguration(const QString& info,const Configuration::configName&config = Configuration::Voice);
+
+
+    //void requestPluginLoad(const QList<QString>&);
 
 };
 

@@ -18,7 +18,7 @@ GraphManager::GraphManager()
 {
     //when an item in the relations model get checked or unchecked graph manager will tell to the graph to hide or show the relation
     connect(RelationsModel,SIGNAL(itemChanged(QStandardItem*)),this,SLOT(changeRelationVisibility(QStandardItem*)));
-
+    connect(Graph,SIGNAL(selectionChanged()),this,SLOT(notifySelection()));
 }
 
 //clear memory
@@ -228,4 +228,17 @@ void GraphManager::changeRelationVisibility(QStandardItem *key)
     //find the item that represent the relation in the graph model and hide it
     auto it=Relations.find(key->text());
     (*it)->setVisible(!(*it)->isVisible());
+}
+
+void GraphManager::notifySelection()
+{
+    QList<QGraphicsItem*> selected(Graph->selectedItems());
+    if(selected.size()==1)
+    {
+        Node* myNode=dynamic_cast<Node*>(selected.first());
+        if(myNode)
+        {
+            focusSignal(myNode->getId(),myNode->getRelation());
+        }
+    }
 }

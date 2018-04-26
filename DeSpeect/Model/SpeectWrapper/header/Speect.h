@@ -5,6 +5,7 @@
 #include "list"
 #include "string"
 #include "utterance.h"
+#include <map>
 class Configuration;
 class Utterance;
 //this class will manage all memory of Speect component
@@ -22,6 +23,7 @@ private:
     Configuration* config;
     //list of plugins that are loaded into speect
     std::list<SPlugin*> plugins;
+    std::string createId(const SItem*);
 public:
     //initialize speect
     Speect();
@@ -43,6 +45,12 @@ public:
     const std::list<std::string> getUttProcessorNames();
     //if voice is initialize correctly return the named utterance processor or NULL if not exist
     const SUttProcessor *getUttProcessor(const std::string& Name);
+    //if voice is initialize correctly return the named utterance processor
+    const std::list<std::string> getUttTypeName();
+    const std::list<std::string> getUttProcessorNames(const std::string&);
+    const std::map<std::string,std::string> getNode(const std::string &relation, const std::string &path);
+
+
 };
 
 #endif // MOC_H

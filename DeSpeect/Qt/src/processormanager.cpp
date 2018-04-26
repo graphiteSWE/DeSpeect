@@ -74,16 +74,19 @@ void ProcessorManager::evidenceNextProcessor(){
 void ProcessorManager::evidenceAllProcessor(){
     QFont font;
     font.setBold(false);
-    for(int i=0;i<ProcessorModel->rowCount();++i){
-        if(ProcessorModel->item(i)->checkState()==Qt::Checked){
-            ProcessorModel->item(i)->setFont(font);
-            ProcessorModel->item(i)->setForeground(Qt::green);
-            indexProcessor=i;
+    if(ProcessorModel->rowCount()>0)
+    {
+        for(int i=0;i<ProcessorModel->rowCount();++i){
+            if(ProcessorModel->item(i)->checkState()==Qt::Checked){
+                ProcessorModel->item(i)->setFont(font);
+                ProcessorModel->item(i)->setForeground(Qt::green);
+                indexProcessor=i;
+            }
         }
-    }
-    if(ProcessorModel->rowCount()>0){
-        font.setBold(true);
-        ProcessorModel->item(indexProcessor)->setFont(font);
+        if(ProcessorModel->rowCount()>0&&indexProcessor!=-1){
+            font.setBold(true);
+            ProcessorModel->item(indexProcessor)->setFont(font);
+        }
     }
 }
 

@@ -4,6 +4,7 @@
 #include <list>
 #include "string"
 #include "configuration.h"
+#include <bits/stl_map.h>
 //List of abstract command
 class CommandList
 {
@@ -33,7 +34,7 @@ public:
     void executeAll();
     void executeStep();
 
-    std::list<std::string> getErrorState() const;
+    std::list<std::string> getErrorState();
     void clearErrorState();
 
     void addCommand(AbstractCommand*);
@@ -45,7 +46,9 @@ public:
     const std::list<std::string> getRelationNames()const ;
     const Configuration* getConfiguration()const;
     const std::list<std::string> getUttProcessorsNames()const;
-
+    const std::list<std::string> getUttProcessorsNames(const std::string&)const;
+    const std::list<std::string> getUttTypeNames()const;
+    const std::map<std::string,std::string> getNode(const std::string& rel,const std::string& path);
 
 private:
     CommandList();

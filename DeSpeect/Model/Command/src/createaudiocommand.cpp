@@ -27,7 +27,7 @@ const std::string CreateAudioCommand::execute(Speect *SpeectEngine) const
                                 ,AudioFormat.c_str()
                                 ,&SpeectEngine->getErrorState()
                                 );
-        t+=" Saved audio Feature to file, Operation status:";
+        t+="Saved audio Feature to file, Operation status:";
         t+=s_error_str(SpeectEngine->getErrorState());
         }
         else

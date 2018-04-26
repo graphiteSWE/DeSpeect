@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QStandardItemModel>
 #include <QListView>
+#include "datanodemanager.h"
 #include "id.h"
 #include "node.h"
 class Item;
@@ -59,8 +60,9 @@ private:
 public slots:
     //change the visibility of the relations in the graph
     void changeRelationVisibility(QStandardItem *);
-//signals:
-//        void focusSignal(const ID&, const QString&);
+    void notifySelection();
+signals:
+        void focusSignal(const QString&, const QString&);
 };
 
 #endif // GRAPHMANAGER_H

@@ -20,7 +20,9 @@ set( SOURCES
         src/line.cpp
         src/modelview.cpp
         src/processormanager.cpp
+        src/datanodemanager.cpp
         src/view.ui
+
         )
 set( HEADER
         header/arc.h
@@ -30,6 +32,7 @@ set( HEADER
         header/node.h
         header/line.h
         header/processormanager.h
+        header/datanodemanager.h
 )
 set( MOC_HEADER
         mainwindow.moc

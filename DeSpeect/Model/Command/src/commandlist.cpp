@@ -25,8 +25,10 @@ void CommandList::executeStep(){
 }
 
 //Return ErrorLog list
-std::list<std::string> CommandList::getErrorState() const{
-   return ErrorLog;
+std::list<std::string> CommandList::getErrorState(){
+   std::list<std::string>Error(ErrorLog);
+   ErrorLog.clear();
+   return Error;
 }
 
 
@@ -86,6 +88,21 @@ const std::list<std::string> CommandList::getUttProcessorsNames() const
     return Speectengine->getUttProcessorNames();
 }
 
+const std::list<std::string> CommandList::getUttProcessorsNames(const std::string &uttType) const
+{
+    return Speectengine->getUttProcessorNames(uttType);
+}
+
+const std::list<std::string> CommandList::getUttTypeNames() const
+{
+    return Speectengine->getUttTypeName();
+}
+
+const std::map<std::string, std::string> CommandList::getNode(const std::string &rel, const std::string &path)
+{
+    return Speectengine->getNode(rel,path);
+}
+
 
 
 CommandList::CommandList(Speect *engine)
@@ -134,11 +151,11 @@ CommandList::CommandBuilder &CommandList::CommandBuilder::SaveUtteranceAs(const 
 }
 
 CommandList::CommandBuilder &CommandList::CommandBuilder::LoadPlugins(const std::list<const std::string> & plugins)
-{
- /*   for(auto PluginName=plugins.begin();PluginName!=plugins.end();++PluginName) {
-        Commands.push_back(new LoadPluginCommand((*PluginName)));
-    }*/
-    return *this;
+{/*
+   for(auto PluginName=plugins.begin();PluginName!=plugins.end();++PluginName) {
+        Commands->commands.push_back(new LoadPluginCommand((*PluginName)));
+    }
+    return *this;*/
 }
 
 CommandList::CommandBuilder &CommandList::CommandBuilder::LoadConfig(const Configuration::configName &config, const std::string &value)

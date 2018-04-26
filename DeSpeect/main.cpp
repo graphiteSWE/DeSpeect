@@ -3,6 +3,7 @@
 #define GetCurrentDir _getcwd
 #else
 #include <QApplication>
+#include <QFile>
 #include <commandlist.h>
 #include <unistd.h>
 #define GetCurrentDir getcwd
@@ -19,19 +20,30 @@
 #include "createaudiocommand.h"
 #include "modelview.h"
 int main(int argc, char **argv) {
-
+    //set locale to C so that speect produce the right audio
+    std::setlocale(LC_ALL, "C");
     //save all speect error on SpeectError.txt
     //stderr is the output stream used by speect
-    freopen("SpeectError.txt","w",stderr);
-
+    QFile file("ErrorLog.txt");
+    file.remove();
+    stderr=freopen("ErrorLog.txt","a",stderr);
+    setvbuf(stderr, NULL, _IONBF, 0);
     //instatiate speect and set some configuration
 
 Speect* s=new Speect();
+//set locale to C so that speect produce the right audio
+std::setlocale(LC_ALL, "C");
 QApplication a(argc,argv);
+//set locale to C so that speect produce the right audio
+std::setlocale(LC_ALL, "C");
 CommandList::CommandBuilder* Builder=new CommandList::CommandBuilder(s);
+//set locale to C so that speect produce the right audio
+std::setlocale(LC_ALL, "C");
 ModelView x(Builder);
+//set locale to C so that speect produce the right audio
+std::setlocale(LC_ALL, "C");
 //Builder->LoadConfig(Configuration::Audio,"test.wav").getCommandList()->executeAll();
-AbstractCommand* t9;
+//AbstractCommand* t9;
 //t9=new UttProcessorCommand(s,"Tokenize");
 //t9->execute();
 
@@ -56,11 +68,18 @@ tempList.push_back("audio_riff.spi");
 x.requestPluginLoad(tempList);
 x.requestProcessorRun(0);
 */
-
+/*
 QList<QString> tempList;
 tempList.push_back("audio_riff.spi");
 x.requestPluginLoad(tempList);
+
+*/
+//set locale to C so that speect produce the right audio
+std::setlocale(LC_ALL, "C");
 x.show();
+//set locale to C so that speect produce the right audio
+std::setlocale(LC_ALL, "C");
+
 a.exec();/*
 t9=new CreateAudioCommand(s,"riff");
 std::cout<<t9->execute();

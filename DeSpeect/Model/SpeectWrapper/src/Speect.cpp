@@ -1,6 +1,36 @@
 #include "Speect.h"
 #include "utterance.h"
 #include "configuration.h"
+std::string Speect::createId(const SItem *it)
+{
+    std::string path="";
+    const SRelation* rel=SItemRelation(it,&error);
+    bool fail=false;
+    SItem *temp=NULL;
+    while(!SItemEqual(it,SRelationHead(rel,&error),&error)&&!fail)
+    {
+        temp=SItemPrev(it,&error);
+        if(temp!=NULL)
+        {
+            path=".n"+path;
+            it=temp;
+        }
+        else{
+            temp=SItemParent(it,&error);
+            if(temp!=NULL)
+            {
+            path=".daughter"+path;
+            it=temp;
+            }
+            else
+                fail=true;
+        }
+    }
+
+    return fail?"":path=" "+path;
+
+}
+
 Speect::Speect()
     :error(S_SUCCESS)
     ,utt(NULL)
@@ -8,10 +38,10 @@ Speect::Speect()
     ,config(new Configuration())
     ,plugins(std::list<SPlugin*>())
 {
-    //set locale to C so that speect produce the right audio
-    std::setlocale(LC_ALL, "C");
+
     //initialize audio
     error=speect_init(s_logger_console_new(false));
+    addPlugin("audio_riff.spi");
 }
 
 Speect::~Speect()
@@ -64,6 +94,8 @@ bool Speect::addPlugin(const std::string& PluginPath)
 //instatiate the utterance and set the text to Configuration Utterancetext
 //voice must be inizialized
 #include "iostream"
+
+#include <bits/stl_map.h>
 bool Speect::createUtt()
 {
         //if you want to re create an utterance delete the current one
@@ -140,4 +172,76 @@ const std::list<std::string> Speect::getUttProcessorNames()
 //return the utterance processor by name
 const SUttProcessor *Speect::getUttProcessor(const std::string &Name){
     return SVoiceGetUttProc(voice,Name.c_str(),&error);
+}
+
+const std::list<std::string> Speect::getUttTypeName()
+{
+    SList *temp=SVoiceGetUttTypesKeys(voice,&error);
+    std::list<std::string> l;
+    while(!SListIsEmpty(temp,&error))
+    {
+        SObject*obj=SListPop(temp,&error);
+        l.push_front(std::string(SObjectGetString(obj,&error)));
+        S_DELETE(obj,NULL,&error);
+    }
+    S_DELETE(temp,NULL,&error);
+    return l;
+
+}
+const std::list<std::string> Speect::getUttProcessorNames(const std::string & uttType)
+{
+
+    const SList *temp=SVoiceGetUttType(voice,uttType.c_str(),&error);
+    std::list<std::string> l;
+
+    if(temp){
+        int size=SListSize(temp,&error);
+        for(int i=0;i<size;++i)
+        {
+            l.push_back(std::string(SObjectGetString(SListNth(temp,i,&error),&error)));
+        }
+    }
+    return l;
+}
+
+const std::map<std::string, std::string> Speect::getNode(const std::string &path, const std::string& relation)
+{
+    std::map<std::string,std::string> featureMap;
+
+    const SItem* temp=SItemPathToItem(SRelationHead(SUtteranceGetRelation(utt->getUtterance(),relation.c_str(),&error),&error),path.c_str(),&error);
+
+    featureMap.insert(std::pair<std::string,std::string>
+                      ("DespeectItemIDPath",createId(temp))
+                      );
+    featureMap.insert(std::pair<std::string,std::string>
+                      ("DespeectItemIDRelation",relation)
+                      );
+    SList* list=SItemFeatKeys(temp,&error);
+    if(list)
+    {
+        int size=SListSize(list,&error);
+        for(int i=0;i<size;++i)
+        {
+            std::string featureName(SObjectGetString(SListNth(list,i,&error),&error));
+            const char* feature=SItemGetString(temp,featureName.c_str(),&error);
+            if(feature!=NULL){
+            featureMap.insert(std::pair<std::string,std::string>
+                              (std::string(featureName)
+                              ,(std::string(feature)
+                                )
+                               )
+                              );
+            }
+            else
+            {
+                featureMap.insert(std::pair<std::string,std::string>
+                               (std::string(featureName)
+                               ,(std::string(featureName)
+                                 )
+                                )
+                               );
+            }
+        }
+    }
+    return featureMap;
 }
