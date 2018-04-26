@@ -6,7 +6,7 @@ void DataNodeManager::linkToModel(QTableView *view)
     view->setModel(&nodeInfo);
 }
 
-void DataNodeManager::showNode(const std::map<std::__cxx11::string, std::__cxx11::string> &features)
+void DataNodeManager::showNode(const std::map<std::string, std::string> &features)
 {
     nodeInfo.clear();
     QStringList headers;
