@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1118</width>
-    <height>899</height>
+    <width>1100</width>
+    <height>933</height>
    </rect>
   </property>
   <property name="palette">
@@ -168,7 +168,7 @@
      <enum>QLayout::SetMaximumSize</enum>
     </property>
     <item>
-     <layout class="QVBoxLayout" name="LayoutSettings" stretch="0,0,0">
+     <layout class="QVBoxLayout" name="LayoutSettings" stretch="0,0">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -279,6 +279,9 @@
             <height>25</height>
            </size>
           </property>
+          <property name="editable">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -291,7 +294,7 @@
         <property name="sizeConstraint">
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
-        <item>
+        <item alignment="Qt::AlignVCenter">
          <widget class="QTextEdit" name="UtteranceText">
           <property name="minimumSize">
            <size>
@@ -373,8 +376,8 @@
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="placeholderText">
            <string>Enter the text.</string>
@@ -385,6 +388,43 @@ p, li { white-space: pre-wrap; }
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QGroupBox" name="groupBox">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
             <property name="title">
              <string>Run all processors</string>
             </property>
@@ -407,6 +447,43 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_2">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
             <property name="title">
              <string>Run single processor</string>
             </property>
@@ -459,53 +536,7 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </item>
-      <item>
-       <widget class="QListView" name="Properties">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="flow">
-         <enum>QListView::TopToBottom</enum>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
      </layout>
-    </item>
-    <item>
-     <widget class="QTableView" name="PropertyTable">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>1100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOn</enum>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-      <property name="textElideMode">
-       <enum>Qt::ElideNone</enum>
-      </property>
-      <property name="verticalScrollMode">
-       <enum>QAbstractItemView::ScrollPerPixel</enum>
-      </property>
-      <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-     </widget>
     </item>
     <item>
      <widget class="Line" name="line">
@@ -688,9 +719,9 @@ p, li { white-space: pre-wrap; }
                   <colorrole role="Base">
                    <brush brushstyle="SolidPattern">
                     <color alpha="255">
-                     <red>62</red>
-                     <green>64</green>
-                     <blue>66</blue>
+                     <red>64</red>
+                     <green>66</green>
+                     <blue>68</blue>
                     </color>
                    </brush>
                   </colorrole>
@@ -726,9 +757,9 @@ p, li { white-space: pre-wrap; }
                   <colorrole role="Base">
                    <brush brushstyle="SolidPattern">
                     <color alpha="255">
-                     <red>62</red>
-                     <green>64</green>
-                     <blue>66</blue>
+                     <red>64</red>
+                     <green>66</green>
+                     <blue>68</blue>
                     </color>
                    </brush>
                   </colorrole>
@@ -852,9 +883,9 @@ p, li { white-space: pre-wrap; }
                   <colorrole role="Base">
                    <brush brushstyle="SolidPattern">
                     <color alpha="255">
-                     <red>62</red>
-                     <green>64</green>
-                     <blue>66</blue>
+                     <red>64</red>
+                     <green>66</green>
+                     <blue>68</blue>
                     </color>
                    </brush>
                   </colorrole>
@@ -890,9 +921,9 @@ p, li { white-space: pre-wrap; }
                   <colorrole role="Base">
                    <brush brushstyle="SolidPattern">
                     <color alpha="255">
-                     <red>62</red>
-                     <green>64</green>
-                     <blue>66</blue>
+                     <red>64</red>
+                     <green>66</green>
+                     <blue>68</blue>
                     </color>
                    </brush>
                   </colorrole>
@@ -969,15 +1000,142 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
+       </layout>
+      </item>
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>120</red>
+              <green>120</green>
+              <blue>120</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
+        <widget class="QWidget" name="PropertiesLayout">
+         <property name="palette">
+          <palette>
+           <active>
+            <colorrole role="Base">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Window">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>64</red>
+               <green>66</green>
+               <blue>68</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="Base">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Window">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>64</red>
+               <green>66</green>
+               <blue>68</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled>
+            <colorrole role="Base">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>64</red>
+               <green>66</green>
+               <blue>68</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Window">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>64</red>
+               <green>66</green>
+               <blue>68</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </disabled>
+          </palette>
+         </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
+         <attribute name="title">
+          <string>Properties</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <widget class="QPushButton" name="LogClear">
-            <property name="text">
-             <string>Clear Log</string>
+           <widget class="QTableView" name="PropertyTable">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
             </property>
+            <attribute name="horizontalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
            </widget>
           </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="ErrorLogLayout">
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
+         <attribute name="title">
+          <string>Error Log</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
            <widget class="QPlainTextEdit" name="ErrorLog">
             <property name="readOnly">
@@ -985,85 +1143,16 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
+          <item alignment="Qt::AlignTop">
+           <widget class="QPushButton" name="LogClear">
+            <property name="text">
+             <string>Clear Log</string>
+            </property>
+           </widget>
+          </item>
          </layout>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item alignment="Qt::AlignLeft">
-         <widget class="QLabel" name="label_4">
-          <property name="font">
-           <font>
-            <pointsize>11</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>Properties</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item alignment="Qt::AlignRight">
-         <widget class="QLabel" name="label_5">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>Node Path:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_8">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>95</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string>R:Words.parent.n</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QGridLayout" name="gridLayout">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetDefaultConstraint</enum>
-        </property>
-       </layout>
+        </widget>
+       </widget>
       </item>
      </layout>
     </item>
@@ -1074,8 +1163,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1118</width>
-     <height>22</height>
+     <width>1100</width>
+     <height>19</height>
     </rect>
    </property>
    <property name="palette">
