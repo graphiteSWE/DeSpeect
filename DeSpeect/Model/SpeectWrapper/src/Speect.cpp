@@ -223,14 +223,38 @@ const std::map<std::string, std::string> Speect::getNode(const std::string &path
         for(int i=0;i<size;++i)
         {
             std::string featureName(SObjectGetString(SListNth(list,i,&error),&error));
-            const char* feature=SItemGetString(temp,featureName.c_str(),&error);
+            const SObject* feature=SItemGetObject(temp,featureName.c_str(),&error);
+
             if(feature!=NULL){
-            featureMap.insert(std::pair<std::string,std::string>
+                if(SObjectIsType(feature,"SInt",&error)){
+                    int t=SObjectGetInt(feature,&error);
+                    featureMap.insert(std::pair<std::string,std::string>
                               (std::string(featureName)
-                              ,(std::string(feature)
+                              ,(std::string(std::to_string(t))
                                 )
                                )
                               );
+                }
+                else
+                if(SObjectIsType(feature,"SFloat",&error)){
+                    float t=SObjectGetFloat(feature,&error);
+                    featureMap.insert(std::pair<std::string,std::string>
+                              (std::string(featureName)
+                              ,(std::string(std::to_string(t))
+                                )
+                               )
+                              );
+                }
+                else
+                if(SObjectIsType(feature,"SString",&error)){
+                    featureMap.insert(std::pair<std::string,std::string>
+                              (std::string(featureName)
+                              ,(std::string(SObjectGetString(feature,&error))
+                                )
+                               )
+                              );
+                }
+
             }
             else
             {
