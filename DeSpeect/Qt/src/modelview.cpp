@@ -78,6 +78,7 @@ void ModelView::utteranceTypeChanged()
     {
         auto processorsNames=commands->getUttProcessorsNames();
         p->clear();
+        g->clear();
         for(auto it=processorsNames.begin();it!=processorsNames.end();++it){
             p->addProcessor((*it));
         }
@@ -86,6 +87,7 @@ void ModelView::utteranceTypeChanged()
     {
         auto processorsNames=commands->getUttProcessorsNames(ui->UtteranceType->currentData().toString().toStdString());
         p->clear();
+        g->clear();
         for(auto it=processorsNames.begin();it!=processorsNames.end();++it){
             p->addProcessor((*it));
         }
