@@ -238,7 +238,10 @@ void GraphManager::notifySelection()
         Node* myNode=dynamic_cast<Node*>(selected.first());
         if(myNode)
         {
-            focusSignal(myNode->getId(),myNode->getRelation());
+            focusSignal(myNode->getId(),myNode->getRelation(),true);
         }
+    }
+    else{
+        focusSignal("","",false);
     }
 }

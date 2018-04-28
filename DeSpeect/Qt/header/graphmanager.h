@@ -62,7 +62,7 @@ public slots:
     void changeRelationVisibility(QStandardItem *);
     void notifySelection();
 signals:
-        void focusSignal(const QString&, const QString&);
+        void focusSignal(const QString&, const QString&, bool);
 };
 
 #endif // GRAPHMANAGER_H

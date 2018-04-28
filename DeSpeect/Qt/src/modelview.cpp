@@ -45,7 +45,7 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     connect(ui->ExecuteAll,SIGNAL(clicked()),this,SLOT(requestProcessorRun()));
     connect(ui->ExecuteSingle,SIGNAL(clicked()),this,SLOT(runSingleStep()));
     connect(ui->LoadProcessor,SIGNAL(clicked()),this,SLOT(loadSelectedProcessor()));
-    connect(g,SIGNAL(focusSignal(QString,QString)),this,SLOT(findNode(QString,QString)));
+    connect(g,SIGNAL(focusSignal(QString,QString,bool)),this,SLOT(findNode(QString,QString,bool)));
 
 }
 
@@ -93,11 +93,16 @@ void ModelView::utteranceTypeChanged()
         }
     }
 }
-#include "iostream"
-void ModelView::findNode(QString rel, QString path)
+
+void ModelView::findNode(QString rel, QString path, bool show)
 {
-    std::map<std::string,std::string> m = commands->getNode(rel.toStdString(),path.toStdString());
-    properties->showNode(m);
+    if(show){
+        std::map<std::string,std::string> m = commands->getNode(rel.toStdString(),path.toStdString());
+        properties->showNode(m);
+    }
+    else{
+        properties->clear();
+    }
 }
 
 void ModelView::requestProcessorRun(bool execSteps)

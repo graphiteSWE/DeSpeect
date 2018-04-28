@@ -39,7 +39,7 @@ private:
     void evidenceAllProcessor();
 public slots:
     void utteranceTypeChanged();
-    void findNode(QString,QString);
+    void findNode(QString,QString,bool);
     void requestProcessorRun(bool execSteps=0);
     void runSingleStep();
     void loadSelectedProcessor();

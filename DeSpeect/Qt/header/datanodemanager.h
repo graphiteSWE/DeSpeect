@@ -13,7 +13,7 @@ private:
     QStandardItemModel nodeInfo;
 public:
     void linkToModel(QTableView *);
-public slots:
+    void clear();
     void showNode(const std::map<std::string,std::string>&);
 };
 #endif // DATANODEMANAGER_H
