@@ -35,9 +35,9 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     colors.push_back(QColor(qRgb(63,230,150)));
     colors.push_back(QColor(qRgb(151,157,0)));
     connect(ui->LogClear,SIGNAL(clicked(bool)),ui->ErrorLog,SLOT(clear()));
-    connect(ui->actionLoadVoice,SIGNAL(triggered(bool)),t,SLOT(open()));
+    connect(ui->actionLoadVoiceJSon,SIGNAL(triggered(bool)),t,SLOT(open()));
     connect(ui->loadVoiceButton,SIGNAL(clicked()),t,SLOT(open()));
-    connect(ui->actionSave_Voice_JSon,SIGNAL(triggered(bool)),FileCreator,SLOT(open()));
+    connect(ui->actionSave_wav,SIGNAL(triggered(bool)),FileCreator,SLOT(open()));
     connect(t,SIGNAL(fileSelected(QString)),this,SLOT(requestConfiguration(QString)));
     connect(t,SIGNAL(fileSelected(QString)),ui->VoicePath,SLOT(setText(QString)));
     connect(FileCreator,SIGNAL(fileSelected(QString)),this,SLOT(requestAudioSave(QString)));
