@@ -4,7 +4,7 @@ include_directories(${SPCT_INCLUDE_DIRS})
 
 find_library(despeect libspct.so HINTS ${spct_DIR}/../../../lib)
 ########################################################################Speect_config
-add_executable(									
+add_executable(
     Speect_config
     Command_setspeectconfig.cpp
     )
@@ -107,6 +107,17 @@ add_executable(
 
 target_link_libraries(
     Command_createaudio
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+        Command_createaudio
+    COMMAND
+        Command_createaudio
+    )
 
 ########################################################################
 add_executable(
@@ -127,14 +138,4 @@ add_test(
     COMMAND
         Command_getuttname
     )
-    gtest_main
-    Command
-    SpeectWrapper
-    ${despeect}
-    )
-add_test(
-    NAME
-        Command_createaudio
-    COMMAND
-        Command_createaudio
-    )
+
