@@ -30,8 +30,6 @@ private:
     CommandList::CommandBuilder* commandsBuilder;
     //allow to execute commands on the model and request specific data from it
     CommandList* commands;
-
-    bool utteranceIsProcessed=false;
     //models the speect graph,and allow the display of it
     GraphManager* g;
     //model the properties of a node and the display of them

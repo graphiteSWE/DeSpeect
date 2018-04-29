@@ -202,3 +202,4 @@ void ModelView::requestConfiguration(const QString &info, const Configuration::c
         }
     }
 }
+
