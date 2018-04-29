@@ -48,7 +48,7 @@ before_install:
   - chmod +x SpeectInstaller/install.sh
 
 install:
-  - sudo apt-get install -qq g++-5
+  - sudo apt-get install -qq g++-7
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
   - sudo apt-get install libcppunit-dev
 
