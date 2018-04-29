@@ -143,7 +143,7 @@ void ProcessorManager::clear()
     //for each item in the model delete it
     for(int i=0;i<ProcessorModel->rowCount();++i)
     {
-        delete ProcessorModel->item(0);
+        delete ProcessorModel->item(i);
     }
     //remove all item from the model otherwise would have bad pointer in it
     ProcessorModel->clear();

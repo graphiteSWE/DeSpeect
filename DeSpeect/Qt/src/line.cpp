@@ -36,7 +36,10 @@ QPointF Line::FixEnd()
     return (MyPoints.p2()+directionVector.toPointF()*offsetFromPoint);
 }
 
-
+//offset from the point to where draw
+//color is the color of the line
+//dashed==1 if the line is dashed
+//parent is the parent item
 Line::Line(const int offset, const QColor&color, bool dashed, QGraphicsItem *parent)
     :QGraphicsObject(parent)
     ,offsetFromPoint(offset)
@@ -48,13 +51,18 @@ Line::Line(const int offset, const QColor&color, bool dashed, QGraphicsItem *par
 //slot to update the line start point
 void Line::UpdateStartPoint(const QPointF& startPoint)
 {
+    //update start point to new point
     MyPoints.setP1(startPoint);
+    //check if the two nodes it connects collide
     NodesColliding();
 }
+
 //slot to update the line end point
 void Line::UpdateEndPoint(const QPointF &endPoint)
 {
+    //update last point to new endpoint
     MyPoints.setP2(endPoint);
+    //check if the two nodes it connect collide
     NodesColliding();
 }
 //slot to change visibility
@@ -63,8 +71,9 @@ void Line::changeVisibility(bool vis)
     //if has parent visibility depends on parent
     if(parentItem()==NULL){
         //vis is 1 if item changed to visible 0 otherwise
-        //math
+        //check if the line should be visible
         Visibility-=(1-2*vis);
+        //if it should set it visible otherwise not visible
         if(Visibility==1)
             setVisible(true);
         else
@@ -85,6 +94,7 @@ void Line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     //if nodes are colliding don t draw
     if(colliding)return;
     //if line is dashed set the pen
+    //to dashed
     if(dashed)
         painter->setPen(Qt::DashLine);
     //draw the line

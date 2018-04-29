@@ -4,7 +4,8 @@
 #include <QStandardItemModel>
 #include <QStringListModel>
 #include <QTableView>
-
+//this class handle the map of data of the node to
+//let the view show it
 class DataNodeManager
 {
 private:
@@ -13,6 +14,7 @@ private:
 public:
     //link the model to a table view
     void linkToModel(QTableView *);
+    //clear the model
     void clear();
     //print the node info
     void showNode(const std::map<std::string,std::string>&);

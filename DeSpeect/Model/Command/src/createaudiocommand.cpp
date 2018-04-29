@@ -16,29 +16,36 @@ CreateAudioCommand::CreateAudioCommand(const std::string &format)
 //get the audio feature from the utterance
 const std::string CreateAudioCommand::execute(Speect *SpeectEngine) const
 {
-
+    //initialize the log string
     std::string t="Generating audio to File:"+
             SpeectEngine->getConfiguration()->getConfig(Configuration::Audio)+" ";
-
+    //check if utterance exists
     if(SpeectEngine->getUtterance())
     {
+        //get the utterance
         SUtterance* utt=SpeectEngine->getUtterance()->getUtterance();
+        //check if the audio feature is present in the utterance
         if(SUtteranceFeatureIsPresent(utt,"audio",&SpeectEngine->getErrorState())){
-                    SObjectSave(
+            //save the object
+            SObjectSave(
+                        //get the feature audio
                                 SUtteranceGetFeature(
-                                    SpeectEngine->getUtterance()->getUtterance()
+                                    utt
                                     ,"audio"
                                     ,&SpeectEngine->getErrorState()
                                     )
+                        //get the audio file output
                                 ,SpeectEngine->getConfiguration()->getConfig(Configuration::Audio).c_str()
                                 ,AudioFormat.c_str()
                                 ,&SpeectEngine->getErrorState()
                                 );
+            //report the ending status
         t+="Saved audio Feature to file, Operation status:";
         t+=s_error_str(SpeectEngine->getErrorState());
         }
         else
         {
+            //set the status to failure because feature not present
             t+="Audio Feature not present, failed to save";
         }
     }

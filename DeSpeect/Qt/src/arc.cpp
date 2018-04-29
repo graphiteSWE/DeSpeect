@@ -31,8 +31,6 @@ Arc::Arc(const int arrowWidth,const int offset,const QColor&color, QGraphicsItem
     //set zvalue so that all node have priority over arcs
     setZValue(0);
 }
-
-
 void Arc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     //if nodes collide don t draw
@@ -50,6 +48,4 @@ void Arc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     painter->drawLine(end,arrowPoint1);
     painter->drawLine(end,arrowPoint2);
     painter->drawLine(QLineF(FixStart(),end));
-
-
 }
