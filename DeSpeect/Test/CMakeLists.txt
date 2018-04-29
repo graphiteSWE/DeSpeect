@@ -118,3 +118,24 @@ add_test(
     COMMAND
         Command_createaudio
     )
+
+########################################################################
+add_executable(
+    Command_getuttname
+    Command_getuttname.cpp
+    )
+
+target_link_libraries(
+    Command_getuttname
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+        Command_getuttname
+    COMMAND
+        Command_getuttname
+    )
+
