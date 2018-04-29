@@ -15,8 +15,8 @@ TEST(Command, createaudiosuccess){
     commands=builder->LoadConfig(Configuration::UtteranceText, text).getCommandList();
     commands->executeAll();
     std::list<std::string> processorList;
-    auto processorName= commands->getUttProcessorsNames();
-    for(auto it=processorName.begin(); it!=processorName.end(); it++) {
+    std::list<std::string> processorName= commands->getUttProcessorsNames();
+    for(std::list<std::string>::iterator it=processorName.begin(); it!=processorName.end(); it++) {
         processorList.push_back(it->c_str());
     }
     builder->WithProcessors(processorList);
