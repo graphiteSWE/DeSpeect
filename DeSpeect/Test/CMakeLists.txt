@@ -4,24 +4,24 @@ include_directories(${SPCT_INCLUDE_DIRS})
 
 find_library(despeect libspct.so HINTS ${spct_DIR}/../../../lib)
 ########################################################################Speect_config
-#add_executable(									
-#    Speect_config
-#    Command_setspeectconfig.cpp
-#    )
-#
-#target_link_libraries(
-#    Speect_config
-#    gtest_main
-#    Command
-#    SpeectWrapper
-#    ${despeect}
-#    )
-#add_test(
-#    NAME
-#        Speect_config
-#    COMMAND
-#        Speect_config
-#    )
+add_executable(									
+    Speect_config
+    Command_setspeectconfig.cpp
+    )
+
+target_link_libraries(
+    Speect_config
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+        Speect_config
+    COMMAND
+        Speect_config
+    )
 ########################################################################Relation_Name
 #add_executable(
 #    Relation_Name
