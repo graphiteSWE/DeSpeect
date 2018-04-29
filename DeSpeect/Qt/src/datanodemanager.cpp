@@ -1,6 +1,6 @@
 #include "datanodemanager.h"
 
-
+//link the manager model to the view
 void DataNodeManager::linkToModel(QTableView *view)
 {
     view->setModel(&nodeInfo);
@@ -9,7 +9,7 @@ void DataNodeManager::linkToModel(QTableView *view)
 void DataNodeManager::clear(){
     nodeInfo.clear();
 }
-
+//clear all node information
 void DataNodeManager::showNode(const std::map<std::string, std::string> &features)
 {
     nodeInfo.clear();

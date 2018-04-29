@@ -5,9 +5,6 @@ Relation::Relation(const Item& item, const std::string &name)
 {
 }
 
-Relation::~Relation()
-{
-}
 //return relations name
 const std::string &Relation::getName() const
 {

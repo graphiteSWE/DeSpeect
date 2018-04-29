@@ -2,7 +2,7 @@
 #define MOC_H
 
 #include "speect.h"
-#include "list"
+#include <list>
 #include "string"
 #include "utterance.h"
 #include <map>
@@ -23,6 +23,7 @@ private:
     Configuration* config;
     //list of plugins that are loaded into speect
     std::list<SPlugin*> plugins;
+    //given an SItem return the path from the head to it
     std::string createId(const SItem*);
 public:
     //initialize speect
@@ -41,16 +42,16 @@ public:
     bool createUtt();
     //initialize the voice configuration voice must be set
     bool init();
-    //if voice is initialize correctly return the utterance processors name
+    //if voice is initialized correctly return the utterance processors name
     const std::list<std::string> getUttProcessorNames();
-    //if voice is initialize correctly return the named utterance processor or NULL if not exist
+    //if voice is initialized correctly return the named utterance processor or NULL if not exist
     const SUttProcessor *getUttProcessor(const std::string& Name);
-    //if voice is initialize correctly return the named utterance processor
+    //if voice is initialized correctly return the list of utterance type defined in it
     const std::list<std::string> getUttTypeName();
+    //if voice is initialized return the list of processors name of the given utterance type
     const std::list<std::string> getUttProcessorNames(const std::string&);
+    //search and return the node given the relation and the path from the head also build the path to that item
     const std::map<std::string,std::string> getNode(const std::string &relation, const std::string &path);
-
-
 };
 
 #endif // MOC_H

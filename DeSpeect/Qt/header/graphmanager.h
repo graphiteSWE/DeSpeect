@@ -60,8 +60,10 @@ private:
 public slots:
     //change the visibility of the relations in the graph
     void changeRelationVisibility(QStandardItem *);
+    //notify the selection/deselection of a item
     void notifySelection();
 signals:
+    //signal launched when the there is only one item focused and it's a node
         void focusSignal(const QString&, const QString&, bool);
 };
 

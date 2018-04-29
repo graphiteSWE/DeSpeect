@@ -19,10 +19,16 @@ QPointF Arc::FixEnd()
 }
 
 
+//arrowWidth is the widht of the base of the arrow
+//offset is the offset of draw from the end and start point
+//color is the color of the item
+//parent is the parent item
+//dashed==true if the line is dashed
 Arc::Arc(const int arrowWidth,const int offset,const QColor&color, QGraphicsItem *parent,bool dashed)
     :Line(offset,color,dashed,parent)
     ,arrowWidth(arrowWidth)
 {
+    //set zvalue so that all node have priority over arcs
     setZValue(0);
 }
 

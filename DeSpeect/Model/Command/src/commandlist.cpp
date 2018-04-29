@@ -1,5 +1,4 @@
 #include "commandlist.h"
-
 #include <createaudiocommand.h>
 #include <loadplugincommand.h>
 #include <setspeectconfigcommand.h>
@@ -52,12 +51,12 @@ void CommandList::addCommand(CommandList &listOfCommands){
      }
 
 }
-
+//return the numbers of commmand in the list
 int CommandList::getNumberCommands(){
     return commands.size();
 
 }
-
+//if utterance exists return the relation if exists otherwisse null
 const Relation* CommandList::getRelation(const std::string& relation)const
 {
     if(Speectengine->getUtterance()!=NULL)
@@ -70,6 +69,7 @@ const Relation* CommandList::getRelation(const std::string& relation)const
 
 }
 
+//return all the relation names or an empty list
 const std::list<std::string> CommandList::getRelationNames() const
 {
     if(Speectengine->getUtterance()!=NULL){
@@ -77,32 +77,28 @@ const std::list<std::string> CommandList::getRelationNames() const
     }
     return std::list<std::string>();
 }
-
-const Configuration *CommandList::getConfiguration() const
-{
-
-}
-
+//return all utterance processor names
 const std::list<std::string> CommandList::getUttProcessorsNames() const
 {
     return Speectengine->getUttProcessorNames();
 }
-
+//return the utterance processor names of the given utt type
 const std::list<std::string> CommandList::getUttProcessorsNames(const std::string &uttType) const
 {
     return Speectengine->getUttProcessorNames(uttType);
 }
 
+//return all the utterance type names
 const std::list<std::string> CommandList::getUttTypeNames() const
 {
     return Speectengine->getUttTypeName();
 }
 
+//return the nodes information
 const std::map<std::string, std::string> CommandList::getNode(const std::string &rel, const std::string &path)
 {
     return Speectengine->getNode(rel,path);
 }
-
 
 
 CommandList::CommandList(Speect *engine)
@@ -110,7 +106,12 @@ CommandList::CommandList(Speect *engine)
 {
 
 }
-//builder
+
+/**
+  start of command builder method definition
+**/
+
+//create a builder for an engine
 CommandList::CommandBuilder::CommandBuilder(Speect *engine)
    :engine(engine)
    ,Commands(new CommandList(engine))
@@ -118,18 +119,20 @@ CommandList::CommandBuilder::CommandBuilder(Speect *engine)
 
 }
 
+//destroy the builder
 CommandList::CommandBuilder::~CommandBuilder()
 {
     delete Commands;
 }
 
+//create the commandlist
 CommandList *CommandList::CommandBuilder::getCommandList()
 {
     auto tempPtr=new CommandList(engine);
     tempPtr->addCommand(*Commands);
     return tempPtr;
 }
-
+//add processors command to the list
 CommandList::CommandBuilder &CommandList::CommandBuilder::WithProcessors(const std::list<std::string> &ProcessorsList)
 {
     for (auto ProcessorName=ProcessorsList.begin();ProcessorName!=ProcessorsList.end();++ProcessorName) {
@@ -137,7 +140,7 @@ CommandList::CommandBuilder &CommandList::CommandBuilder::WithProcessors(const s
     }
     return *this;
 }
-
+//add command to save audio to the list
 CommandList::CommandBuilder &CommandList::CommandBuilder::SaveAudio(const std::string & outPutFile, const std::string& format)
 {
     Commands->commands.push_back(new SetSpeectConfigCommand(Configuration::Audio,outPutFile));
@@ -145,19 +148,7 @@ CommandList::CommandBuilder &CommandList::CommandBuilder::SaveAudio(const std::s
     return *this;
 }
 
-CommandList::CommandBuilder &CommandList::CommandBuilder::SaveUtteranceAs(const std::string &, const std::string &)
-{
-    return *this;
-}
-
-CommandList::CommandBuilder &CommandList::CommandBuilder::LoadPlugins(const std::list<const std::string> & plugins)
-{/*
-   for(auto PluginName=plugins.begin();PluginName!=plugins.end();++PluginName) {
-        Commands->commands.push_back(new LoadPluginCommand((*PluginName)));
-    }
-    return *this;*/
-}
-
+//add command to set a config to the list
 CommandList::CommandBuilder &CommandList::CommandBuilder::LoadConfig(const Configuration::configName &config, const std::string &value)
 {
     Commands->commands.push_back(new SetSpeectConfigCommand(config,value));

@@ -2,6 +2,4 @@
 AbstractCommand::AbstractCommand()
 {}
 AbstractCommand::~AbstractCommand()
-{
-
-}
+{}

@@ -6,11 +6,13 @@
 class Relation
 {
 private:
+    //head of the relation
     Item relationHead;
+    //name of the relation
     std::string name;
 public:
+    //create the SRelation wrapper
     Relation(const Item &item, const std::string& name);
-    ~Relation();
     //return the relation name
     const std::string& getName()const ;
     //return the relationhead
