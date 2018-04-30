@@ -1,6 +1,10 @@
 set(spct_DIR ./../../SpeectInstaller/install/include/speect/engine)
 include(${spct_DIR}/SpeectConf.cmake)
 include_directories(${SPCT_INCLUDE_DIRS})
+find_package(Qt5Widgets REQUIRED)
+include_directories(${Qt5Widgets_INCLUDES})
+add_definitions(${Qt5Widgets_DEFINITIONS})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 find_library(despeect libspct.so HINTS ${spct_DIR}/../../../lib)
 ########################################################################Speect_config

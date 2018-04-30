@@ -7,7 +7,7 @@
 
 TEST(View, Graphprint){
     int argc;
-    char **argv;
+    char **argv=NULL;
     QApplication app(argc,argv);
     Speect* sTest=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
