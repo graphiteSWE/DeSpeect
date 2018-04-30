@@ -5,7 +5,7 @@
 
 A GUI and debugging tool for the Speect TTS library.
 
-![](header.png)
+![](header.jpg)
 
 ## Introduction
 
