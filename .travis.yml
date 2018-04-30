@@ -67,4 +67,5 @@ after_success:
     -Dsonar.organization=graphiteswe-github \
     -Dsonar.login=8b51b6fb3d84c5b90bd692bcdee2005f3bc81bc6 \
     -Dsonar.test=DeSpeect/Test \
-    -Dsonar.cfamily.gcov.reportsPath=. "
+    -Dsonar.cfamily.gcov.reportsPath=. " \
+    -Dsonar.exclusions=DeSpeect/Test/*    
