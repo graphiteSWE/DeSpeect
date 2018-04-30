@@ -6,6 +6,9 @@
 #include "modelview.h"
 
 TEST(View, Graphprint){
+    int argc;
+    char **argv=NULL;
+    QApplication app(argc,argv);
     Speect* sTest=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
     ModelView mv(builder);
