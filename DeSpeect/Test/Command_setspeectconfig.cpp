@@ -17,7 +17,7 @@ TEST(Command, setspeectconfigSuccess)
 	Speect s;
     AbstractCommand* temp(new SetSpeectConfigCommand(Configuration::Voice, "./cmu_arctic_slt/voice.json"));
     temp->execute(&s);
-    EXPECT_FALSE(s.getUttProcessorNames().empty());
+    EXPECT_EQ(temp->execute(&s), "Initializing Voice Success Operation status:No error");
     delete temp;
 }
 
@@ -29,6 +29,17 @@ TEST(Command, setspeectconfigutterancetest)
     delete temp;
     temp=new SetSpeectConfigCommand(Configuration::UtteranceText, "testo esempio");
     EXPECT_EQ(temp->execute(&s), " Initializing Utterance Success Operation status:No error");
+    delete temp;
+}
+
+TEST(Command, setspeectconfigutterancetestFail)
+{
+    Speect s;
+    AbstractCommand* temp(new SetSpeectConfigCommand(Configuration::Voice, "./aaa.json"));
+    temp->execute(&s);
+    delete temp;
+    temp=new SetSpeectConfigCommand(Configuration::UtteranceText, "testo esempio");
+    EXPECT_EQ(temp->execute(&s), " Initializing Utterance Failure Operation status:Failure");
     delete temp;
 }
 
