@@ -24,6 +24,7 @@ public:
     //allow to build the model view
     explicit ModelView(CommandList::CommandBuilder* commandBuilder,QWidget *parent = 0);
     //destroy the modelview
+    Ui::View* getUiView() const;
     ~ModelView();
 private:
     //pointer to the builder that will allow to build commandlist
