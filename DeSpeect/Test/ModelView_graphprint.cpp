@@ -12,7 +12,6 @@ TEST(View, Graphprint){
     Speect* sTest=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
     ModelView mv(builder);
-    mv.show();
     mv.requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
     mv.loadSelectedProcessor();
     builder->LoadConfig(Configuration::UtteranceText,"hi").getCommandList()->executeAll();
