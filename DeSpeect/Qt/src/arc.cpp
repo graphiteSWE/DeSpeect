@@ -1,5 +1,4 @@
 #include "arc.h"
-
 #include <QVector2D>
 #include <qpainter.h>
 
