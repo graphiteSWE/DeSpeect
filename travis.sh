@@ -25,7 +25,6 @@ gcov -o ../gcov_file ../DeSpeect/main.cpp
 gcov -o ../gcov_file ../DeSpeect/Model/Command/src/*.cpp
 gcov -o ../gcov_file ../DeSpeect/Model/SpeectWrapper/src/*.cpp
 gcov -o ../gcov_file ../DeSpeect/Qt/src/*.cpp
-gcov -o ../gcov_file ../DeSpeect/Test/*.cpp
 lcov --directory . --capture --output-file codecov.info
 #lcov --directory . --capture --output-file coverage.info # capture coverage info
 #lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter out system
