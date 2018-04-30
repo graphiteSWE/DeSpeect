@@ -118,3 +118,44 @@ add_test(
     COMMAND
         Command_createaudio
     )
+########################################################################
+add_executable(
+    Command_getuttname
+    Command_getuttname.cpp
+    )
+
+target_link_libraries(
+    Command_getuttname
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+        Command_getuttname
+    COMMAND
+        Command_getuttname
+    )
+
+########################################################################
+add_executable(
+    View_graphprint
+    ModelView_graphprint.cpp
+    )
+
+target_link_libraries(
+    View_graphprint
+    ${Qt5Widgets_LIBRARIES}
+    QTGraph
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+        View_graphprint
+    COMMAND
+        View_graphprint
+    )
