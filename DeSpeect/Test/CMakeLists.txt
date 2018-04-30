@@ -5,6 +5,11 @@ find_package(Qt5Widgets REQUIRED)
 include_directories(${Qt5Widgets_INCLUDES})
 add_definitions(${Qt5Widgets_DEFINITIONS})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+set (ui ../Qt/src/view.ui)
+
+QT5_ADD_RESOURCES( RES_SOURCES ${RESOURCES} )
+QT5_WRAP_UI( UI_HEADERS ${ui} )
+QT5_WRAP_CPP( MOC_SRCS ${MOC_HEADERS} )
 
 find_library(despeect libspct.so HINTS ${spct_DIR}/../../../lib)
 ########################################################################Speect_config
@@ -146,6 +151,7 @@ add_test(
 add_executable(
     View_graphprint
     ModelView_graphprint.cpp
+    ${ui}
     )
 
 target_link_libraries(
