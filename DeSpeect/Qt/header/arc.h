@@ -10,6 +10,8 @@ class Arc:public Line
 private:
     //the triangle base = 2*arrowWidth triangle heigth arrowWidth
     const int arrowWidth;
+    const bool isfilled;
+    const bool type;
     //point needed to draw the arrow
     QPointF arrowPoint1;
     QPointF arrowPoint2;
@@ -17,7 +19,7 @@ private:
     QPointF FixEnd();
 public:
     //radius is needed to offset from the center
-    Arc(const int arrowWidth, const int radius, const QColor& color, QGraphicsItem*parent=0, bool dashed=0);
+    Arc(const int arrowWidth, const int radius, const QColor& color,bool prev_next=1,bool filled=1, QGraphicsItem*parent=0, bool dashed=0);
 public:
     //redefine paint function to draw the arrow of arc
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
