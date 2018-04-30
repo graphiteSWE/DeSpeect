@@ -27,12 +27,12 @@ const std::string SetSpeectConfigCommand::execute(Speect *SpeectEngine) const
     }
     else if(name==Configuration::UtteranceText)
     {
-        t+=" Initializing Utterance";
+        t+="Initializing Utterance";
         SpeectEngine->createUtt()?t+=" Success":t+=" Failure";
     }
     else
     {
-        t+=" Setting Configuration";
+        t+="Setting Configuration";
     }
     t+=" Operation status:";
 

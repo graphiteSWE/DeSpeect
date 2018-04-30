@@ -21,6 +21,14 @@ TEST(Command, setspeectconfigSuccess)
     delete temp;
 }
 
+TEST(Command, setspeectconfigUnreal)
+{
+Speect spct;
+AbstractCommand* tmp(new SetSpeectConfigCommand(Configuration::UtteranceType, "./cmu_arctic_slt/voice.json"));
+EXPECT_EQ(tmp->execute(&spct), "Setting Configuration Operation status:No error");
+delete tmp;
+}
+
 TEST(Command, setspeectconfigutterancetest)
 {
 	Speect s;
@@ -28,7 +36,7 @@ TEST(Command, setspeectconfigutterancetest)
     temp->execute(&s);
     delete temp;
     temp=new SetSpeectConfigCommand(Configuration::UtteranceText, "testo esempio");
-    EXPECT_EQ(temp->execute(&s), " Initializing Utterance Success Operation status:No error");
+    EXPECT_EQ(temp->execute(&s), "Initializing Utterance Success Operation status:No error");
     delete temp;
 }
 
@@ -39,7 +47,7 @@ TEST(Command, setspeectconfigutterancetestFail)
     temp->execute(&s);
     delete temp;
     temp=new SetSpeectConfigCommand(Configuration::UtteranceText, "testo esempio");
-    EXPECT_EQ(temp->execute(&s), " Initializing Utterance Failure Operation status:Failure");
+    EXPECT_EQ(temp->execute(&s), "Initializing Utterance Failure Operation status:Failure");
     delete temp;
 }
 
