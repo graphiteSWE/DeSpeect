@@ -49,6 +49,10 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
 
 }
 
+Ui::View* ModelView::getUiView() const{
+    return ui;
+}
+
 ModelView::~ModelView()
 {
     delete g;
