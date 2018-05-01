@@ -30,6 +30,8 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     QFileDialog *FileCreator=new QFileDialog(this);
     FileCreator->setAcceptMode(QFileDialog::AcceptSave);
     QInputDialog *pathInput=new QInputDialog(this);
+    pathInput->setOkButtonText("Search");
+    pathInput->setWindowTitle("Search Node path");
     pathInput->setInputMode(QInputDialog::TextInput);
     //this is the relations colors after 10 relation start from beginning
     colors.push_back(QColor(qRgb(213,0,0)));
