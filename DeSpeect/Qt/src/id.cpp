@@ -19,8 +19,11 @@ ID::ID(const QString& id,const QString& rel)
 
 ID &ID::operator =(const ID &other)
 {
-    this->id=QString(other.id);
-    this->relation=QString(other.relation);
+    if(this!=&other)
+    {
+        this->id=QString(other.id);
+        this->relation=QString(other.relation);
+    }
     return *this;
 }
 
