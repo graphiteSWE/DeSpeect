@@ -46,7 +46,9 @@ TEST(View, Graphprintcomplete){
     QApplication app(argc,argv);
     Speect* sTest=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
-    ModelView* mv= new ModelView(builder);
+    ModelView* mv = new ModelView(NULL);
+    delete mv;
+    mv= new ModelView(builder);
     mv->requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
     Ui::View* ui = mv->getUiView();
     ui->UtteranceText->setPlainText("hi");
@@ -63,4 +65,5 @@ TEST(View, Graphprintcomplete){
 
     delete builder;
     delete sTest;
+    delete mv;
 }
