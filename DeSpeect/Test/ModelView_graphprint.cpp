@@ -55,6 +55,7 @@ TEST(View, Graphprintcomplete){
     mv.runSingleStep();
     mv.requestProcessorRun();
     sTest->getUttTypeName();
+    mv.show();
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
     delete builder;
