@@ -169,3 +169,22 @@ add_test(
     COMMAND
         View_graphprint
     )
+
+########################################################################
+add_executable(
+    View_idTest
+    View_idTest.cpp
+    )
+
+target_link_libraries(
+    View_idTest
+    QTGraph
+    gtest_main
+    ${despeect}
+    )
+add_test(
+    NAME
+       View_idTest
+    COMMAND
+        View_idTest
+    )

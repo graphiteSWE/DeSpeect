@@ -83,7 +83,7 @@ void ModelView::lockUpdateItem(){
 }
 
 void ModelView::unlockUpdateItem(){
-    ui->UtteranceText->setEnabled(true);    
+    ui->UtteranceText->setEnabled(true);
     ui->ExecuteSingle->setEnabled(true);
     p->unlockUpdateItem();
 }
@@ -96,7 +96,7 @@ void ModelView::utteranceTypeChanged()
         p->clear();
         g->clear();
         for(auto it=processorsNames.begin();it!=processorsNames.end();++it){
-            p->addProcessor((*it));
+            p->addProcessor(*it);
         }
     }
     else
@@ -105,7 +105,7 @@ void ModelView::utteranceTypeChanged()
         p->clear();
         g->clear();
         for(auto it=processorsNames.begin();it!=processorsNames.end();++it){
-            p->addProcessor((*it));
+            p->addProcessor(*it);
         }
     }
 }
@@ -150,7 +150,7 @@ void ModelView::requestProcessorRun(bool execSteps)
     if(commands==NULL || commands->getNumberCommands()<=0)// || p->isLayoutClean())
         loadSelectedProcessor();
 
-    if(commands!=NULL&&commands->getNumberCommands()>0){
+    if(commands!=NULL && commands->getNumberCommands()>0){
 
         if(!execSteps){
             p->evidenceAllProcessor();
@@ -175,7 +175,7 @@ void ModelView::requestProcessorRun(bool execSteps)
             ++i;
         }
     }
-    if(commands->getNumberCommands()==0)
+    if(commands!=NULL && commands->getNumberCommands()==0)
         unlockUpdateItem();
 }
 

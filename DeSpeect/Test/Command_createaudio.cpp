@@ -34,6 +34,7 @@ TEST(Command, createaudiosuccess){
     EXPECT_EQ(ok, true);
     delete s;
     delete commands;
+    delete builder;
 }
 /*
 TEST(Command, createaudiofail){
