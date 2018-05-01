@@ -46,16 +46,19 @@ TEST(View, Graphprintcomplete){
     QApplication app(argc,argv);
     Speect* sTest=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
-    ModelView mv(builder);
-    mv.requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
-    mv.loadSelectedProcessor();
-    builder->LoadConfig(Configuration::UtteranceText,"hi").getCommandList()->executeAll();
-    Ui::View* ui = mv.getUiView();
+    ModelView* mv= new ModelView(builder);
+    mv->requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
+    Ui::View* ui = mv->getUiView();
     ui->UtteranceText->setPlainText("hi");
-    mv.runSingleStep();
-    mv.requestProcessorRun();
+    //mv->loadSelectedProcessor();
+
+    mv->runSingleStep();
+    mv->requestProcessorRun(false);
+    mv->utteranceTypeChanged();
+    ui->UtteranceType->setCurrentIndex(1);
+    mv->utteranceTypeChanged();
     sTest->getUttTypeName();
-    mv.show();
+    mv->show();
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
     delete builder;
