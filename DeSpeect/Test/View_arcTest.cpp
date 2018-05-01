@@ -31,9 +31,11 @@ TEST(Graph, VerifyArc){
     QPainter* p = new QPainter();
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
-    const int Radius=15;
+    const int Radius=1;
     Arc* a1;
     a1=new Arc(12,Radius,colore,0,0,NULL,0);
+    a1->UpdateStartPoint(QPoint(0,0));
+    a1->UpdateEndPoint(QPoint(10,10));
 
     QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem();
     a1->paint(p,option,temp);
