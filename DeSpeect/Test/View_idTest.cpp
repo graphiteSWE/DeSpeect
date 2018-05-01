@@ -12,9 +12,3 @@ TEST(Graph, VerifyIdEq){
     ID b=a;
     EXPECT_TRUE(a==b);
 }
-
-TEST(Graph, VerifyIdEq2){
-    ID a("a","a");
-    a=a;
-    EXPECT_TRUE(a==a);
-}
