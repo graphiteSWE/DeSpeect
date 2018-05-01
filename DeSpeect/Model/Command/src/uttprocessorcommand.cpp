@@ -14,21 +14,23 @@ UttProcessorCommand::UttProcessorCommand(std::string processor)
 const std::string UttProcessorCommand::execute(Speect *SpeectEngine)const
 {
     std::string t="";
-    const Utterance* u=SpeectEngine->getUtterance();
-    if(u!=NULL)
-    {
-        t+="Executing Processor:"+Processor;
-        SUttProcessorRun(SpeectEngine->getUttProcessor(Processor.c_str())
-                         ,u->getUtterance()
-                         ,&SpeectEngine->getErrorState());
-    }
-    else
-    {
-        t+="Failure: Utterance not Initialized";
-    }
-    t+=" Operation status:";
+    if(SpeectEngine!=NULL){
+        const Utterance* u=SpeectEngine->getUtterance();
+        if(u!=NULL)
+        {
+            t+="Executing Processor:"+Processor;
+            SUttProcessorRun(SpeectEngine->getUttProcessor(Processor.c_str())
+                             ,u->getUtterance()
+                             ,&SpeectEngine->getErrorState());
+        }
+        else
+        {
+            t+="Failure: Utterance not Initialized";
+        }
+        t+=" Operation status:";
 
-    t+=s_error_str(SpeectEngine->getErrorState());
+        t+=s_error_str(SpeectEngine->getErrorState());
+    }
     return t;
 }
 

@@ -17,41 +17,44 @@ CreateAudioCommand::CreateAudioCommand(const std::string &format)
 const std::string CreateAudioCommand::execute(Speect *SpeectEngine) const
 {
     //initialize the log string
-    std::string t="Generating audio to File:"+
-            SpeectEngine->getConfiguration()->getConfig(Configuration::Audio)+" ";
-    //check if utterance exists
-    if(SpeectEngine->getUtterance())
-    {
-        //get the utterance
-        SUtterance* utt=SpeectEngine->getUtterance()->getUtterance();
-        //check if the audio feature is present in the utterance
-        if(SUtteranceFeatureIsPresent(utt,"audio",&SpeectEngine->getErrorState())){
-            //save the object
-            SObjectSave(
-                        //get the feature audio
-                                SUtteranceGetFeature(
-                                    utt
-                                    ,"audio"
+    std::string t="";
+    if(SpeectEngine!=NULL){
+        t="Generating audio to File:"+
+                SpeectEngine->getConfiguration()->getConfig(Configuration::Audio)+" ";
+        //check if utterance exists
+        if(SpeectEngine->getUtterance())
+        {
+            //get the utterance
+            SUtterance* utt=SpeectEngine->getUtterance()->getUtterance();
+            //check if the audio feature is present in the utterance
+            if(SUtteranceFeatureIsPresent(utt,"audio",&SpeectEngine->getErrorState())){
+                //save the object
+                SObjectSave(
+                            //get the feature audio
+                                    SUtteranceGetFeature(
+                                        utt
+                                        ,"audio"
+                                        ,&SpeectEngine->getErrorState()
+                                        )
+                            //get the audio file output
+                                    ,SpeectEngine->getConfiguration()->getConfig(Configuration::Audio).c_str()
+                                    ,AudioFormat.c_str()
                                     ,&SpeectEngine->getErrorState()
-                                    )
-                        //get the audio file output
-                                ,SpeectEngine->getConfiguration()->getConfig(Configuration::Audio).c_str()
-                                ,AudioFormat.c_str()
-                                ,&SpeectEngine->getErrorState()
-                                );
-            //report the ending status
-        t+="Saved audio Feature to file, Operation status:";
-        t+=s_error_str(SpeectEngine->getErrorState());
+                                    );
+                //report the ending status
+            t+="Saved audio Feature to file, Operation status:";
+            t+=s_error_str(SpeectEngine->getErrorState());
+            }
+            else
+            {
+                //set the status to failure because feature not present
+                t+="Audio Feature not present, failed to save";
+            }
         }
         else
         {
-            //set the status to failure because feature not present
-            t+="Audio Feature not present, failed to save";
+            t+=" Failed: Utterance is not initialized";
         }
-    }
-    else
-    {
-        t+=" Failed: Utterance is not initialized";
     }
     return t;
 }
