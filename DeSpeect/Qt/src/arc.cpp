@@ -42,7 +42,7 @@ void Arc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     }
     //set the pen that draw the outside line
     QPen mypen(color);
-    mypen.setWidthF(1.5f);
+    mypen.setWidthF(1.5F);
     painter->setPen(mypen);
     QVector2D directionVector(MyPoints.p1()-MyPoints.p2());
     directionVector.normalize();
