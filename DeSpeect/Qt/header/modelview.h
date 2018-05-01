@@ -66,8 +66,9 @@ public slots:
     void requestAudioSave(QString);
     //create the command to request the configuration
     void requestConfiguration(const QString& info,const Configuration::configName&config = Configuration::Voice);
+    //ask model to search the path from the selected node and print if found
+    void search(const QString&);
 
-    //void requestPluginLoad(const QList<QString>&);
 
 };
 

@@ -13,7 +13,7 @@ private:
     //name of the item this node represent
     QString name;
     //color of node
-    const QColor color;
+    QColor color;
     //radius of node
     const int radius;
 public:
@@ -21,6 +21,8 @@ public:
     Node(const QString& id,const QString&rel,const QString& path, const int x, const int y, const int radius,const QColor& color, QGraphicsItem*parent);
     //operator== (not used)
     bool operator==(const Node&)const;
+    //operator==
+    bool operator==(const ID identifier);
     //define how to draw a node
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     //define the bounding rectangle of the node so that the item position is the center of the node
@@ -42,6 +44,8 @@ signals:
 public slots:
     //slot to catch VisibilityChange of QGraphicsObject and call signal notifyVisibilityChange
     void catchVisibilityChange();
+    //reiplements focusPolicy
+
 };
 
 #endif // NODE_H

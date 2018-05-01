@@ -3,7 +3,7 @@
 #include <loadplugincommand.h>
 #include <setspeectconfigcommand.h>
 #include <uttprocessorcommand.h>
-
+#include "regex"
 //Invokes the execute method of all commands in the list and clean the list
 void CommandList::executeAll(){
     while(!commands.empty()){
@@ -97,7 +97,15 @@ const std::list<std::string> CommandList::getUttTypeNames() const
 //return the nodes information
 const std::map<std::string, std::string> CommandList::getNode(const std::string &rel, const std::string &path)
 {
-    return Speectengine->getNode(rel,path);
+    std::string t="";
+    auto map=Speectengine->getNode(path,rel);
+    if(map.size()<=2)
+        t+="Node search failed,Speect Status:";
+    else
+        t+="Node search success,Speect Status:";
+    t+=s_error_str(Speectengine->getErrorState());
+    ErrorLog.push_back(t);
+    return map;
 }
 
 

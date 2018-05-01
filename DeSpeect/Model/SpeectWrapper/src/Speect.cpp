@@ -209,12 +209,12 @@ const std::map<std::string, std::string> Speect::getNode(const std::string &path
     std::map<std::string,std::string> featureMap;
 
     const SItem* temp=SItemPathToItem(SRelationHead(SUtteranceGetRelation(utt->getUtterance(),relation.c_str(),&error),&error),path.c_str(),&error);
-
+    if(temp){
     featureMap.insert(std::pair<std::string,std::string>
                       ("DespeectItemIDPath",createId(temp))
                       );
     featureMap.insert(std::pair<std::string,std::string>
-                      ("DespeectItemIDRelation",relation)
+                      ("DespeectItemIDRelation",SRelationName(SItemRelation(temp,&error),&error))
                       );
     SList* list=SItemFeatKeys(temp,&error);
     if(list)
@@ -266,6 +266,7 @@ const std::map<std::string, std::string> Speect::getNode(const std::string &path
                                );
             }
         }
+    }
     }
     return featureMap;
 }

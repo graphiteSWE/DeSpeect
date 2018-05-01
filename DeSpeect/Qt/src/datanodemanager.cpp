@@ -1,6 +1,13 @@
 #include "datanodemanager.h"
 
 //link the manager model to the view
+DataNodeManager::DataNodeManager()
+    :nodeInfo()
+    ,nodeId("","")
+{
+
+}
+
 void DataNodeManager::linkToModel(QTableView *view)
 {
     view->setModel(&nodeInfo);
@@ -22,6 +29,20 @@ void DataNodeManager::showNode(const std::map<std::string, std::string> &feature
 {
     //clear the model
     nodeInfo.clear();
+    auto it=features.find("DespeectItemIDPath");
+    QString path="";
+    QString relation="";
+    if(it!=features.end())
+    {
+        path=it->second.c_str();
+    }
+    it=features.find("DespeectItemIDRelation");
+    if(it!=features.end())
+    {
+        relation=it->second.c_str();
+    }
+
+    nodeId=ID(path,relation);
     //list of all the headers
     //gonna be filled with map key
     QStringList headers;
@@ -44,4 +65,9 @@ void DataNodeManager::showNode(const std::map<std::string, std::string> &feature
     nodeInfo.setVerticalHeaderLabels(headers);
     //tell that there is only one columns
     nodeInfo.setColumnCount(1);
+}
+
+const ID DataNodeManager::getNodeId()
+{
+    return nodeId;
 }

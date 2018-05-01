@@ -1,6 +1,9 @@
 #include "node.h"
 
+#include <QFocusEvent>
 #include <QPainter>
+#include <QGraphicsScene>
+
 
 Node::Node(const QString& id,const QString& rel,const QString& path, const int x, const int y, const int radius,const QColor& color, QGraphicsItem*parent)
    :QGraphicsObject(parent)
@@ -14,6 +17,7 @@ Node::Node(const QString& id,const QString& rel,const QString& path, const int x
     //allow item movement selection and allow item notification to scene Model
     setFlag(QGraphicsItem::ItemIsMovable);
     setFlag(QGraphicsItem::ItemIsSelectable);
+    setFlag(QGraphicsItem::ItemIsFocusable);
     //enable itemChange slot
     setFlag(QGraphicsItem::ItemSendsScenePositionChanges);
     //set the item position
@@ -27,17 +31,41 @@ bool Node::operator==(const Node &other) const
 {
     return identifier==other.identifier;
 }
+
+bool Node::operator==(const ID identifier)
+{
+    return identifier==this->identifier;
+}
 //paint the circle of node
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     //default pen and brush
     QPen myPen = QPen(Qt::black);
-    QBrush Brush = QBrush(color);
+
+    color.setAlphaF(0.5);
+    QBrush Brush=QBrush(color);
+    //when selected
     if(isSelected())
     {
-        //if item is selected draw bigger perimeter line
+
+        QColor tempC=color;
+        tempC.setAlphaF(1);
         myPen.setWidth(5);
+        Brush.setColor(tempC);
+        myPen.setStyle(Qt::SolidLine);
+    }//only when focused
+    else if(hasFocus())
+    {
+        QColor tempC=color;
+        tempC.setAlphaF(1);
+        myPen.setColor(tempC);
+        Brush.setColor(color);
+        myPen.setWidth(5);
+
     }
+
+
+
     //set the brush and color
     painter->setBrush(Brush);
     painter->setPen(myPen);
@@ -64,6 +92,7 @@ QVariant Node::itemChange(QGraphicsItem::GraphicsItemChange change, const QVaria
     if (change == ItemPositionChange&&scene()) {
         notifyPositionChange(pos());
     }
+    //if selected for search reason set own flag
     return QGraphicsItem::itemChange(change,value);
 }
 
@@ -85,6 +114,7 @@ const QString &Node::getRelation()
 {
     return identifier.getRelation();
 }
+
 //catch when I change visibility and signals to listener
 void Node::catchVisibilityChange()
 {
