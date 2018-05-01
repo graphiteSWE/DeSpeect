@@ -15,6 +15,7 @@
 #include "QTextStream"
 #include <QFont>
 #include <QProcess>
+#include <thread>
 
 TEST(View, Graphprint){
     int argc;
@@ -40,6 +41,12 @@ TEST(View, Graphprint){
     delete sTest;
 }
 
+void foo(QApplication *a){
+    sleep(1);
+    a->quit();
+
+}
+
 TEST(View, Graphprintcomplete){
     int argc;
     char **argv=NULL;
@@ -61,6 +68,12 @@ TEST(View, Graphprintcomplete){
     mv->utteranceTypeChanged();
     sTest->getUttTypeName();
     mv->show();
+    mv->hide();
+
+    std::thread tr(foo, &app);
+    tr.detach();
+    app.exec();
+
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
     delete builder;
