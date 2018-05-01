@@ -14,7 +14,7 @@ protected:
     const int offsetFromPoint;
     //color of empty space
     //draw line is still black
-    const QColor color;
+    QColor color;
     //the start and ending point of the line
     QLineF MyPoints;
     //true if the two nodes are colliding

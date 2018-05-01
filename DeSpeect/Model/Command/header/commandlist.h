@@ -73,7 +73,7 @@ public:
     //return all the utterance type name defined in the loaded voice
     const std::list<std::string> getUttTypeNames()const;
     //return the data of the node given relation and path from head (ID of a graphic Node)
-    const std::map<std::string,std::string> getNode(const std::string& rel,const std::string& path);
+    const std::map<std::string,std::string> getNode(const std::string& path, const std::string& rel);
 
 private:
 

@@ -7,7 +7,7 @@ const QString& ID::getRelation() const
 
 bool ID::operator ==(const ID &other) const
 {
-    return id==other.id;
+    return id==other.id&&relation==other.relation;
 }
 
 ID::ID(const QString& id,const QString& rel)
@@ -15,6 +15,13 @@ ID::ID(const QString& id,const QString& rel)
     ,relation(rel)
 {
 
+}
+
+ID &ID::operator =(const ID &other)
+{
+    this->id=QString(other.id);
+    this->relation=QString(other.relation);
+    return *this;
 }
 
 const QString& ID::getID()const

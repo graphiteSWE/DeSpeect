@@ -47,7 +47,9 @@ Line::Line(const int offset, const QColor&color, bool dashed, QGraphicsItem *par
     ,colliding(true)
     ,dashed(dashed)
 {
+    this->color.setAlphaF(0.5);
 }
+
 //slot to update the line start point
 void Line::UpdateStartPoint(const QPointF& startPoint)
 {

@@ -1,5 +1,6 @@
 #include "graphmanager.h"
 
+#include <QFocusEvent>
 #include <QGraphicsItemGroup>
 #include <QGraphicsView>
 #include <arc.h>
@@ -198,6 +199,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
         tbc.push_front(new Item(next));
         Node* temp=new Node(QString(next.getId().c_str()),relation,QString(next.getName().c_str()),me->pos().x()+4*Radius,me->pos().y(),Radius,color,parentRelation);
         Printed.push_back(temp);
+        temp->clearFocus();
         Arc* a=new Arc(12,Radius,color,1,1,parentRelation,true);
         connect(temp,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
         connect(me,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateStartPoint(QPointF)));
@@ -212,6 +214,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
         Node* temp=new Node(QString(daughter.getId().c_str()),relation,QString(daughter.getName().c_str()),me->pos().x(),me->pos().y()+4*Radius,Radius,color,parentRelation);
         tbc.push_front(new Item(daughter));
         Printed.push_back(temp);
+        temp->clearFocus();
         Arc* a=new Arc(12,Radius,color,0,1,parentRelation,true);
 
         connect(temp,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
@@ -221,6 +224,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
     }
         me->notifyPositionChange(me->pos());
     }
+
 }
 
 void GraphManager::changeRelationVisibility(QStandardItem *key)
@@ -233,15 +237,27 @@ void GraphManager::changeRelationVisibility(QStandardItem *key)
 void GraphManager::notifySelection()
 {
     QList<QGraphicsItem*> selected(Graph->selectedItems());
-    if(selected.size()==1)
+    if(!selected.empty())
     {
-        Node* myNode=dynamic_cast<Node*>(selected.first());
-        if(myNode)
+    auto myNode=std::find(Printed.begin(),Printed.end(),selected.first());
+
+        if(myNode!=Printed.end())
         {
-            focusSignal(myNode->getId(),myNode->getRelation(),true);
+            focusSignal((*myNode)->getRelation(),(*myNode)->getId(),true);
         }
+
     }
     else{
-        focusSignal("","",false);
+        cleardetails();
+    }
+}
+
+void GraphManager::selectItem(const QString &relation, const QString &path)
+{
+    ID searchedItem(path,relation);
+    foreach(Node* item,Printed)
+    {
+        if((*item)==searchedItem)
+            item->setFocus();
     }
 }

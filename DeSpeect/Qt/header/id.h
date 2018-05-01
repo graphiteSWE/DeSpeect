@@ -11,15 +11,16 @@
 class ID
 {
 private:
-    const QString id;
-    const QString relation;
+    QString id;
+    QString relation;
 public:
     //check equals between two nodes (never used)
     bool operator ==(const ID& )const;
     //constructor
     ID(const QString&,const QString&);
+    //operator=
+    ID &operator =(const ID&);
     //getters
-
     const QString& getID()const;
     const QString& getRelation() const;
 };

@@ -8,6 +8,7 @@
 #include "relation.h"
 #include "QTextStream"
 #include <QFont>
+#include <QInputDialog>
 #include <QProcess>
 ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     :QMainWindow(parent)
@@ -24,16 +25,23 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     p->linkProcessorModel(ui->ProcessorsView);
     properties->linkToModel(ui->PropertyTable);
     QFileDialog *t=new QFileDialog(this);
+
     t->setNameFilter("*.json");
     QFileDialog *FileCreator=new QFileDialog(this);
     FileCreator->setAcceptMode(QFileDialog::AcceptSave);
-    colors.push_back(QColor(qRgb(172,25,248)));
-    colors.push_back(QColor(qRgb(5,210,153)));
-    colors.push_back(QColor(qRgb(71,194,52)));
-    colors.push_back(QColor(qRgb(24,241,95)));
-    colors.push_back(QColor(qRgb(199,1,7)));
-    colors.push_back(QColor(qRgb(63,230,150)));
-    colors.push_back(QColor(qRgb(151,157,0)));
+    QInputDialog *pathInput=new QInputDialog(this);
+    pathInput->setInputMode(QInputDialog::TextInput);
+    //this is the relations colors after 10 relation start from beginning
+    colors.push_back(QColor(qRgb(213,0,0)));
+    colors.push_back(QColor(qRgb(120,144,156)));
+    colors.push_back(QColor(qRgb(170,0,255)));
+    colors.push_back(QColor(qRgb(109,76,65)));
+    colors.push_back(QColor(qRgb(251,140,0)));
+    colors.push_back(QColor(qRgb(67,160,61)));
+    colors.push_back(QColor(qRgb(41,98,255)));
+    colors.push_back(QColor(qRgb(255,214,0)));
+    colors.push_back(QColor(qRgb(0,184,212)));
+    colors.push_back(QColor(qRgb(0,191,165)));
     connect(ui->LogClear,SIGNAL(clicked(bool)),ui->ErrorLog,SLOT(clear()));
     connect(ui->actionLoadVoiceJSon,SIGNAL(triggered(bool)),t,SLOT(open()));
     connect(ui->loadVoiceButton,SIGNAL(clicked()),t,SLOT(open()));
@@ -45,7 +53,10 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     connect(ui->ExecuteAll,SIGNAL(clicked()),this,SLOT(requestProcessorRun()));
     connect(ui->ExecuteSingle,SIGNAL(clicked()),this,SLOT(runSingleStep()));
     connect(g,SIGNAL(focusSignal(QString,QString,bool)),this,SLOT(findNode(QString,QString,bool)));
-
+    connect(ui->actionExit,SIGNAL(triggered(bool)),qApp,SLOT(quit()));
+    connect(ui->actionSearch_path,SIGNAL(triggered(bool)),pathInput,SLOT(open()));
+    connect(pathInput,SIGNAL(textValueSelected(QString)),this,SLOT(search(QString)));
+    connect(g,SIGNAL(cleardetails()),properties,SLOT(clear()));
 }
 
 Ui::View* ModelView::getUiView() const{
@@ -56,6 +67,8 @@ ModelView::~ModelView()
 {
     delete g;
     delete ui;
+    delete properties;
+    delete p;
 }
 
 void ModelView::printLog()
@@ -96,22 +109,45 @@ void ModelView::utteranceTypeChanged()
         }
     }
 }
-
+#include "iostream"
 void ModelView::findNode(QString rel, QString path, bool show)
 {
+    std::map<std::string,std::string> m = commands->getNode(rel.toStdString(),path.toStdString());
+
     if(show){
-        std::map<std::string,std::string> m = commands->getNode(rel.toStdString(),path.toStdString());
         properties->showNode(m);
     }
     else{
-        properties->clear();
+        auto it=m.find("DespeectItemIDPath");
+        QString path="";
+        QString relation="";
+        if(it!=m.end())
+        {
+            path=it->second.c_str();
+        }
+        it=m.find("DespeectItemIDRelation");
+        if(it!=m.end())
+        {
+            relation=it->second.c_str();
+        }
+        if(relation!="")
+        {
+        ui->graphicsView->setFocus();
+        g->selectItem(relation,path);
+        }
+        else{
+            ui->ErrorLog->setFocus();
+        }
+        printLog();
+
     }
+    commands->clearErrorState();
 }
 
 void ModelView::requestProcessorRun(bool execSteps)
 {
 
-    if(commands==NULL || !execSteps || commands->getNumberCommands()<=0)// || p->isLayoutClean())
+    if(commands==NULL || commands->getNumberCommands()<=0)// || p->isLayoutClean())
         loadSelectedProcessor();
 
     if(commands!=NULL&&commands->getNumberCommands()>0){
@@ -134,7 +170,7 @@ void ModelView::requestProcessorRun(bool execSteps)
         {
             const Relation* currentRelation = commands->getRelation(t);
             Item temp(currentRelation->getRelationHead());
-            g->printRelation(QString(t.c_str()),&temp,colors.at(i));
+            g->printRelation(QString(t.c_str()),&temp,colors.at(i%colors.size()));
             delete currentRelation;
             ++i;
         }
@@ -198,6 +234,16 @@ void ModelView::requestConfiguration(const QString &info, const Configuration::c
         {
             ui->UtteranceType->addItem(t.c_str(),QVariant(t.c_str()));
         }
+    }
+}
+void ModelView::search(const QString &search)
+{
+
+    QString path=properties->getNodeId().getID();
+    QString rel=properties->getNodeId().getRelation();
+    if(rel!=""){
+    path=path+"."+search;
+    findNode(rel,path,false);
     }
 }
 
