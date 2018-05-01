@@ -51,6 +51,19 @@ TEST(Command, setspeectconfigutterancetestFail)
     delete temp;
 }
 
+TEST(Command, setspeectconfigVoiceNullSpeect)
+{
+    SetSpeectConfigCommand* temp=new SetSpeectConfigCommand(Configuration::Voice, "./cmu_arctic_slt/voice.json");
+    EXPECT_EQ(temp->execute(NULL), "");
+    delete temp;
+}
+
+TEST(Command, setspeectconfigTextNullSpeect)
+{
+    SetSpeectConfigCommand* temp=new SetSpeectConfigCommand(Configuration::UtteranceText, "testo esempio");
+    EXPECT_EQ(temp->execute(NULL), "");
+    delete temp;
+}
 /*TEST(View, VerifyRelationTest){
     Speect* s=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(s);
