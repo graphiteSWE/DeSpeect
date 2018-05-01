@@ -210,3 +210,25 @@ add_test(
     COMMAND
        View_arcTest
     )
+
+########################################################################
+add_executable(
+    View_nodeTest
+    View_nodeTest.cpp
+    )
+
+target_link_libraries(
+    View_nodeTest
+    ${Qt5Widgets_LIBRARIES}
+    QTGraph
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+       View_nodeTest
+    COMMAND
+       View_nodeTest
+    )
