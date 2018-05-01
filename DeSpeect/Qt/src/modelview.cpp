@@ -44,7 +44,6 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     connect(ui->UtteranceType,SIGNAL(currentIndexChanged(int)),this,SLOT(utteranceTypeChanged()));
     connect(ui->ExecuteAll,SIGNAL(clicked()),this,SLOT(requestProcessorRun()));
     connect(ui->ExecuteSingle,SIGNAL(clicked()),this,SLOT(runSingleStep()));
-    connect(ui->LoadProcessor,SIGNAL(clicked()),this,SLOT(loadSelectedProcessor()));
     connect(g,SIGNAL(focusSignal(QString,QString,bool)),this,SLOT(findNode(QString,QString,bool)));
 
 }
@@ -112,25 +111,17 @@ void ModelView::findNode(QString rel, QString path, bool show)
 void ModelView::requestProcessorRun(bool execSteps)
 {
 
-    if(commands==NULL || !execSteps)// || p->isLayoutClean())
+    if(commands==NULL || !execSteps || commands->getNumberCommands()<=0)// || p->isLayoutClean())
         loadSelectedProcessor();
 
-    if(ui->UtteranceText->toPlainText()!=NULL && commands!=NULL){
+    if(commands!=NULL&&commands->getNumberCommands()>0){
 
         if(!execSteps){
             p->evidenceAllProcessor();
             unlockUpdateItem();
             commands->executeAll();
-            ui->ExecuteSingle->setEnabled(false);
         }
         else{
-            if(commands->getNumberCommands()<=1){
-                unlockUpdateItem();
-                ui->ExecuteSingle->setEnabled(false);
-            }
-            else{
-                lockUpdateItem();
-            }
             p->evidenceNextProcessor();
             commands->executeStep();
         }
@@ -148,6 +139,8 @@ void ModelView::requestProcessorRun(bool execSteps)
             ++i;
         }
     }
+    if(commands->getNumberCommands()==0)
+        unlockUpdateItem();
 }
 
 void ModelView::runSingleStep()
@@ -157,16 +150,17 @@ void ModelView::runSingleStep()
 
 void ModelView::loadSelectedProcessor(){
 
+    if(ui->UtteranceText->toPlainText()!=NULL){
     g->clear();
     commandsBuilder->LoadConfig(Configuration::UtteranceText,ui->UtteranceText->toPlainText().toStdString());
     commands=commandsBuilder->getCommandList();
     commands->executeAll();//Execute load configuration commands
     printLog();
     p->clearLayoutProcessor();
-    unlockUpdateItem();
+    lockUpdateItem();
     commandsBuilder->WithProcessors(p->getProcessorList());
     commands=commandsBuilder->getCommandList();
-
+    }
 }
 
 void ModelView::requestAudioSave(QString output)
