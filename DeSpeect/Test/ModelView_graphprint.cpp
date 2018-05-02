@@ -68,7 +68,7 @@ TEST(View, Graphprintcomplete){
     mv->utteranceTypeChanged();
     sTest->getUttTypeName();
     mv->show();
-    mv->hide();
+    //mv->hide();
 
     std::thread tr(foo, &app);
     tr.detach();
