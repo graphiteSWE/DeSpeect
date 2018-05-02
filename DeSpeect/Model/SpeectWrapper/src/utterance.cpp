@@ -30,9 +30,7 @@ const std::list<std::string> Utterance::getRelationNamesList() const
     s_erc error=S_SUCCESS;
     SList* temp=NULL;
     if(utt)
-    {
-        temp=SUtteranceRelationsKeys(utt,&error);
-    }
+    temp=SUtteranceRelationsKeys(utt,&error);
 
     std::list<std::string> l;
     if(temp!=NULL)

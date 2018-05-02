@@ -32,7 +32,6 @@ Arc::Arc(const int arrowWidth,const int offset,const QColor&color,bool prev_next
     //set zvalue so that all node have priority over arcs
     setZValue(0);
 }
-
 void Arc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     //if nodes collide don t draw
