@@ -1,10 +1,10 @@
 #ifndef ARC_H
 #define ARC_H
+#include <QGraphicsObject>
 #include "line.h"
 
-#include <QGraphicsObject>
 //Draw a line with an arrow on end point
-class Arc:public Line
+class Arc: public Line
 {
     Q_OBJECT
 private:
@@ -12,18 +12,20 @@ private:
     const int arrowWidth;
     const bool isfilled;
     const bool type;
+
     //point needed to draw the arrow
     QPointF arrowPoint1;
     QPointF arrowPoint2;
+
     //fix the end point and arrow points when nodes move
     QPointF FixEnd();
 public:
     //radius is needed to offset from the center
     Arc(const int arrowWidth, const int radius, const QColor& color,bool prev_next=1,bool filled=1, QGraphicsItem*parent=0, bool dashed=0);
+
 public:
     //redefine paint function to draw the arrow of arc
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-public slots:
-
+    
 };
 #endif // ARC_H
