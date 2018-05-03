@@ -61,7 +61,7 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   - "sonar-scanner \
     -Dsonar.projectKey=DeSpeect_Official_Build \
-    -Dsonar.sources=DeSpeect/Qt,DeSpeect/Model/** \
+    -Dsonar.sources=DeSpeect/Qt,DeSpeect/Model/SpeectWrapper,Despeect/Model/Command \
     -Dsonar.cfamily.build-wrapper-output=bw-output \
     -Dsonar.host.url=https://sonarcloud.io \
     -Dsonar.organization=graphiteswe-github \
