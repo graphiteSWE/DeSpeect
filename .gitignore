@@ -77,3 +77,5 @@ dkms.conf
 
 # Build folder
 build/
+
+*.a071787
