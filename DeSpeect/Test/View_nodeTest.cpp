@@ -64,7 +64,7 @@ TEST(Graph, VerifyNodePaintFocus){
     QWidget* temp= new QWidget();
 
     Node* n = new Node("n1","n1","n1",0,0,10,QColor(255,0,0),NULL);
-
+    n->setSelected(false);
     n->setFocus();
 
     QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem();
