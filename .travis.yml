@@ -68,5 +68,4 @@ after_success:
     -Dsonar.login=8b51b6fb3d84c5b90bd692bcdee2005f3bc81bc6 \
     -Dsonar.test=DeSpeect/Test \
     -Dsonar.cfamily.gcov.reportsPath=. \
-    -Dsonar.coverage.exclusions=DeSpeect/Test/*,DeSpeect/Model/Command/header/*,DeSpeect/Model/SpeectWrapper/header/*,DeSpeect/Qt/header/*,DeSpeect/main.cpp \
-    -Dsonar.exclusions=DeSpeect/Test/** "    
+    -Dsonar.coverage.exclusions=DeSpeect/Test/*,DeSpeect/Model/Command/header/*,DeSpeect/Model/SpeectWrapper/header/*,DeSpeect/Qt/header/*,DeSpeect/main.cpp"    
