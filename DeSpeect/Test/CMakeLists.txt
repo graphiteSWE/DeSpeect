@@ -254,3 +254,25 @@ add_test(
     COMMAND
        View_dataNodeManagerTest
     )
+
+########################################################################
+add_executable(
+    SpeectWrapper_Speect
+    SpeectWrapper_Speect.cpp
+    )
+
+target_link_libraries(
+    SpeectWrapper_Speect
+    ${Qt5Widgets_LIBRARIES}
+    QTGraph
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+       SpeectWrapper_Speect
+    COMMAND
+       SpeectWrapper_Speect
+    )
