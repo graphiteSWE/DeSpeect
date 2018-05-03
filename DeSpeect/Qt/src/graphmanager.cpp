@@ -296,6 +296,7 @@ void GraphManager::changeRelationVisibility(QStandardItem *key)
 {
     //find the item that represent the relation in the graph model and hide it
     auto it=Relations.find(key->text());
+    if(it!=Relations.end())
     (*it)->setVisible(!(*it)->isVisible());
 }
 
