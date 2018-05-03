@@ -7,8 +7,8 @@ class UttProcessorCommand:public AbstractCommand
    std::string Processor;
 public:
     //create the command
-    UttProcessorCommand(std::string);
+    explicit UttProcessorCommand(std::string);
     //execute the command
-    const std::string execute(Speect *SpeectEngine)const;
+    const std::string execute(Speect *SpeectEngine) const;
 };
 #endif // UTTPROCESSORCOMMAND_H

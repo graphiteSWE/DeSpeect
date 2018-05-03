@@ -100,15 +100,7 @@ const std::string Item::getName() const
     else
         return "";
 }
-/*
-//set the name at the given value
-bool Item::setName(const std::string &value)
-{
-    s_erc error=S_SUCCESS;
-    SItemSetName(item,value.c_str(),&error);
-    return error==S_SUCCESS;
-}
-*/
+
 //return if item isEqual to the item of the relation at given path
 int Item::IsEqual(const std::string &relation,const std::string& id)const
 {
