@@ -21,8 +21,9 @@ TEST(SpeectWrapper,FetchNodeSuccess){
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
     std::list<std::string> l;
     l.push_back("Tokenize");
+    l.push_back("Normalize");
     builder->WithProcessors(l).getCommandList()->executeAll();
-    EXPECT_TRUE(sTest->getNode(" .n","Token").size()>=2);
+    EXPECT_TRUE(sTest->getNode(" .n.p.daughter.R:Word.R:Token.parent.daughter","Token").size()>=2);
     delete builder;
     delete sTest;
 }
@@ -33,6 +34,7 @@ TEST(SpeectWrapper,FetchNodeFailPath){
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
     std::list<std::string> l;
     l.push_back("Tokenize");
+    l.push_back("Normalize");
     builder->WithProcessors(l).getCommandList()->executeAll();
     EXPECT_TRUE(sTest->getNode(" ..sad.n","Token").size()<2);
     delete builder;
@@ -45,6 +47,7 @@ TEST(SpeectWrapper,FetchNodeWrongRelation){
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
     std::list<std::string> l;
     l.push_back("Tokenize");
+    l.push_back("Normalize");
     builder->WithProcessors(l).getCommandList()->executeAll();
     EXPECT_TRUE(sTest->getNode(" .n","Tokenas").size()<2);
     delete builder;
@@ -57,6 +60,7 @@ TEST(SpeectWrapper,FetchNodeWrongRelationANDPath){
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
     std::list<std::string> l;
     l.push_back("Tokenize");
+    l.push_back("Normalize");
     builder->WithProcessors(l).getCommandList()->executeAll();
     EXPECT_TRUE(sTest->getNode(" .n.asdg.a","Tokenas").size()<=2);
     delete builder;
@@ -69,6 +73,7 @@ TEST(SpeectWrapper,FetchNodeOutOfBoundPath){
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
     std::list<std::string> l;
     l.push_back("Tokenize");
+    l.push_back("Normalize");
     builder->WithProcessors(l).getCommandList()->executeAll();
     EXPECT_TRUE(sTest->getNode(" .n.n.n.n.n.n.n","Tokenas").size()<=2);
     delete builder;
