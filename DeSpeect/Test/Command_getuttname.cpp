@@ -22,3 +22,14 @@ TEST(Command, getuttnamesuccess){
     delete builder;
 }
 
+TEST(Command, getutterancefail){
+    Speect* s=new Speect();
+    CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(s);
+    std::list<std::string> l;
+    l.push_back("Tokenize");
+    CommandList* cmdl=builder->WithProcessors(l).getCommandList();
+    cmdl->executeAll();
+    EXPECT_EQ(*(cmdl->getErrorState().begin()), "Failure: Utterance not Initialized Operation status:No error");
+    delete s;
+    delete builder;
+}
