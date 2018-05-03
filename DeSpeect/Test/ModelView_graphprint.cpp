@@ -104,3 +104,29 @@ TEST(View, ModelViewSearch){
     delete sTest;
     delete mv;
 }
+
+TEST(View, Graphprintwithmoreprocessor){
+    int argc;
+    char **argv=NULL;
+    QApplication app(argc,argv);
+    Speect* sTest=new Speect();
+    CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
+    ModelView mv(builder);
+    mv.requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
+    mv.loadSelectedProcessor();
+    builder->LoadConfig(Configuration::UtteranceText,"hi").getCommandList()->executeAll();
+    mv.runSingleStep();
+    mv.runSingleStep();
+    mv.runSingleStep();
+    mv.requestProcessorRun();
+    mv.requestAudioSave("test.wav");
+    mv.utteranceTypeChanged();
+    mv.loadSelectedProcessor();
+    mv.findNode("Token","",false);
+    mv.findNode("Token","",true);
+    sTest->getUttTypeName();
+    EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
+
+    delete builder;
+    delete sTest;
+}
