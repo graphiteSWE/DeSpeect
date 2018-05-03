@@ -9,7 +9,7 @@
 #include "item.h"
 #include "graphmanager.h"
 
-/*
+
 TEST(Graph, VerifyChangeRelationVisibility){
     int argc;
     char **argv=NULL;
@@ -40,4 +40,4 @@ TEST(Graph, VerifySelectItem){
     EXPECT_TRUE(g);
 
     delete g;
-}*/
+}

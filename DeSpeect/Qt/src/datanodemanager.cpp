@@ -23,6 +23,7 @@ void DataNodeManager::clear(){
     }
     //clear the model
     nodeInfo.clear();
+    nodeId=ID("", "");
 }
 //clear all node information
 void DataNodeManager::showNode(const std::map<std::string, std::string> &features)

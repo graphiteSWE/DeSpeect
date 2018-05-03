@@ -15,7 +15,13 @@ TEST(View, NodeManagerClear){
     n.clear();
     EXPECT_TRUE(n.getNodeId()==ID("",""));
 }
-
+/*
+TEST(View, NodeManagerClearofClear){
+    DataNodeManager n;
+    n.clear();
+    EXPECT_TRUE(n.getNodeId()==ID("",""));
+}
+*/
 TEST(View, NodeManagerNotNullTest){
     DataNodeManager n;
     std::map<std::string, std::string> m;
