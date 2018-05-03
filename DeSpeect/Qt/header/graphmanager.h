@@ -1,6 +1,5 @@
 #ifndef GRAPHMANAGER_H
 #define GRAPHMANAGER_H
-
 #include <QGraphicsItemGroup>
 #include <QGraphicsScene>
 #include <QStandardItemModel>
@@ -10,64 +9,165 @@
 #include "node.h"
 class Item;
 class Node;
-//manage graphs and relation to keep coherent the two models
+
+/*
+ * File: graphmanager.h
+ * Type: header
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: manage graphs and relations to keep the two models coherent 
+ */
+ 
 class GraphManager : public QObject
 {
+    //Macro used to enable Qt signals and slots
     Q_OBJECT
+    
 private:
-    //radius of all nodes in the manager
+    //Field: radius of all nodes in the manager
     static const int Radius=15;
-    //model of relation printed on graph
+    
+    //Field: model of the relation printed on the graph
     QStandardItemModel* RelationsModel;
-    //list of all nodes printed on graph
+    
+    //Field: list of all the nodes printed on the graph
     QVector<Node*> Printed;
-    //model of graph
+    
+    //Field: model of the graph
     QGraphicsScene* Graph;
-    //Map of all relation and the item that represent the relation on graph
-    //used to hide a relation
+    
+    //Field: map of all the relations and the items that represent the relations on the graph (used to hide a selected relation)
     QMap<QString,QGraphicsRectItem*> Relations;
-    //to avoid copy costruction of the manager
+    
+    /*
+     * Description: GraphManager copy constructor, made private to avoid copy costruction of the manager
+     * @param const GraphManager& - GraphManager to be copied
+     */
     GraphManager(const GraphManager&);
+    
 public:
 
+	// Description: GraphManager constructor 
     GraphManager();
+    
+	// Description: GraphManager destructor
     ~GraphManager();
-    //return the model to be linked with the view(could be better do the opposite)
+    
+    /*
+     * Description: returns the graph model to be linked with the view
+     * @param QGraphicsView* view - Qt graphic view as view component (see Qt docs for more info)
+     * @return void
+     */
     void linkGraphModel(QGraphicsView* view);
 
-    //return the model to be linked with the view(could be better do the opposite)
+    /*
+     * Description: returns the relation model to be linked with the view
+     * @param QListView* - Qt list view (see Qt docs for more info)
+     * @return void
+     */
     void linkRelationModel(QListView*);
 
-    //print the relations that start from the item,with the chosen name and the chosen color
+    /*
+     * Description: prints the relations which start from the given item, with the chosen name and the chosen color
+     * @param const QString& - Qt string as relation name (see Qt docs for more info)
+     * @param const Item* - initial item
+     * @param const QColor& - Qt color as chosen color (see Qt docs for more info)
+     * @return bool
+     */
     bool printRelation(const QString&, const Item*, const QColor&);
 
-    //clear both models
+    /*
+     * Description: clears both models
+     * @return void
+     */
     void clear();
+    
 private:
-    //help methods to print relation
-    //generate the relation item to use as parent of all nodes and arcs
+    
+    // Help methods to print relation 
+     
+    /*
+     * Description: generates the relation item to use as parent of all nodes and arcs 
+     * @param const QString& - Qt string as relation name (see Qt docs for more info) 
+     * @param const QColor& - Qt color as relation color (see Qt docs for more info)
+     * @return QGraphicsRectItem *
+     */
     QGraphicsRectItem *generateRelation(const QString&,const QColor&);
-    //generate the item to add into the relations model
+    
+    /*
+     * Description: generates the item to be added into the relations model
+     * @param const QString& - Qt string as relation name (see Qt docs for more info) 
+     * @param const QColor & - Qt color as relation color (see Qt docs for more info)
+     * @return QStandardItem *
+     */
     QStandardItem *generateItem(const QString&, const QColor &);
-    //position the node in the first column where it doesn t collide
+    
+    /*
+     * Description: positions the node in the first column where it doesn't collide
+     * @param Node& - node reference
+     * @return void
+     */
     void PositionNode(Node&);
-    //position the node in the first row where it doesn t collide
+    
+    /*
+     * Description: positions the node in the first row where it doesn't collide
+     * @param Node& - node reference
+     * @return void
+     */
     void FixHeadPosition(Node&);
-    //check the relation of the first item in the list,the node that graphically represent the item
-    //must be in Printed QVector, this method check the relations of the item and correctly
-    //add to the list of nodes that must be checked the next and the daughter of the item
+    
+    /*
+     * Description: check the relation of the first item in the list, the node that graphically represents the item
+     * 				must be in Printed QVector, this method check the relations of the item and correctly
+     *				add to the list of nodes that must be checked the next and the daughter of the item
+     * @param QVector<const Item*>& - items vector
+     * @param const QString &relation - Qt string as relation name (see Qt docs for more info) 
+     * @param const QColor &color - Qt color as relation color (see Qt docs for more info)
+     * @param QGraphicsItem *parentRelation - Qt graphics item as parent relation (see Qt docs for more info)
+     * @return void
+     */
     void checkRelations(QVector<const Item*>&, const QString &relation, const QColor &color, QGraphicsItem *parentRelation);
+
 public slots:
-    //change the visibility of the relations in the graph
+    
+    /*
+     * Description: changes the visibility of the relations in the graph
+     * @param QStandardItem * - Qt standard item as relation reference (see Qt docs for more info)
+     * @return void
+     */
     void changeRelationVisibility(QStandardItem *);
-    //notify the selection/deselection of a item
+    
+    /*
+     * Description: notifies the selection/deselection of a item
+     * @return void
+     */
     void notifySelection();
-    //select and focus the node given the relation and the path
+    
+    /*
+     * Description: selects and focuses the node given the relation and the path
+     * @param const QString& - Qt string as relation name (see Qt docs for more info) 
+     * @param const QString& - Qt string as path (see Qt docs for more info) 
+     * @return void
+     */
     void selectItem(const QString&,const QString&);
+    
 signals:
-    //signal launched when the there is only one item focused and it's a node
-        void focusSignal(const QString&, const QString&, bool);
-        void cleardetails();
+    
+    /*
+     * Description: signal launched when there is only one item focused and it's a node
+     * @param const QString& - Qt string as relation name (see Qt docs for more info) 
+     * @param const QString& - Qt string as relation ID (see Qt docs for more info) 
+     * @param bool - focus/unfocus
+     * @return void
+     */
+	void focusSignal(const QString&, const QString&, bool);
+	
+    /*
+     * Description: clears the map and the UI
+     * @return void
+     */
+	void cleardetails();
 };
 
 #endif // GRAPHMANAGER_H
