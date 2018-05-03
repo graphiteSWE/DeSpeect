@@ -1,17 +1,29 @@
 #include "graphmanager.h"
-
 #include <QFocusEvent>
 #include <QGraphicsItemGroup>
 #include <QGraphicsView>
 #include <arc.h>
 #include <item.h>
 #include <node.h>
-//can t be copy constructed
+
+/*
+ * File: graphmanager.cpp
+ * Type: src
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: manage graphs and relations to keep the two models coherent 
+ */
+ 
+/*
+ * Description: GraphManager copy constructor, made private to avoid copy costruction of the manager
+ * @param const GraphManager& - GraphManager to be copied
+ */
 GraphManager::GraphManager(const GraphManager &)
 {
 }
 
-
+// Description: GraphManager constructor 
 GraphManager::GraphManager()
     :Graph(new QGraphicsScene())
     ,Relations()
@@ -22,7 +34,7 @@ GraphManager::GraphManager()
     connect(Graph,SIGNAL(selectionChanged()),this,SLOT(notifySelection()));
 }
 
-//clear memory
+// Description: GraphManager destructor
 GraphManager::~GraphManager()
 {
 
@@ -32,17 +44,34 @@ GraphManager::~GraphManager()
     delete RelationsModel;
 
 }
-//accept a view and it link to the model
+
+/*
+ * Description: returns the graph model to be linked with the view
+ * @param QGraphicsView* view - Qt graphic view as view component (see Qt docs for more info)
+ * @return void
+ */
 void GraphManager::linkGraphModel(QGraphicsView* v)
 {
     v->setScene(Graph);
 }
-//same as getGraphModel with relation model
+
+/*
+ * Description: returns the relation model to be linked with the view
+ * @param QListView* - Qt list view (see Qt docs for more info)
+ * @return void
+ */
 void GraphManager::linkRelationModel(QListView* v)
 {
     v->setModel(RelationsModel);
 }
-//print the relation that start from the give item (dont go backward print from node to last all daughter and next)
+
+/*
+ * Description: prints the relations which start from the given item, with the chosen name and the chosen color
+ * @param const QString& - Qt string as relation name (see Qt docs for more info)
+ * @param const Item* - initial item
+ * @param const QColor& - Qt color as chosen color (see Qt docs for more info)
+ * @return bool
+ */
 bool GraphManager::printRelation(const QString &id, const Item *SpeectNode, const QColor &Color)
 {
     //items that must have their relations check
@@ -66,6 +95,11 @@ bool GraphManager::printRelation(const QString &id, const Item *SpeectNode, cons
         }
     }
 }
+
+/*
+ * Description: clears both models
+ * @return void
+ */
 #include "iostream"
 void GraphManager::clear()
 {
@@ -83,8 +117,13 @@ void GraphManager::clear()
     RelationsModel->clear();
 }
 
-//return a new relation if and add it to the relation model if relation not exist otherwise
-//do nothing
+
+/*
+ * Description: generates the relation item to use as parent of all nodes and arcs 
+ * @param const QString& - Qt string as relation name (see Qt docs for more info) 
+ * @param const QColor& - Qt color as relation color (see Qt docs for more info)
+ * @return QGraphicsRectItem *
+ */
 QGraphicsRectItem *GraphManager::generateRelation(const QString &id, const QColor &color)
 {
     if(!Relations.contains(id)) {
@@ -97,7 +136,12 @@ QGraphicsRectItem *GraphManager::generateRelation(const QString &id, const QColo
 
 }
 
-//generate an item to add to the relation model(checkbox and text with given background color)
+/*
+ * Description: generates the item to be added into the relations model
+ * @param const QString& - Qt string as relation name (see Qt docs for more info) 
+ * @param const QColor & - Qt color as relation color (see Qt docs for more info)
+ * @return QStandardItem *
+ */
 QStandardItem *GraphManager::generateItem(const QString &id,const QColor&color)
 {
     QStandardItem* item=new QStandardItem(id);
@@ -109,7 +153,11 @@ QStandardItem *GraphManager::generateItem(const QString &id,const QColor&color)
     return item;
 }
 
-//position a node in first position where it doesn t collide in x axis
+/*
+ * Description: positions the node in the first column where it doesn't collide
+ * @param Node& - node reference
+ * @return void
+ */
 void GraphManager::PositionNode(Node &me)
 {
     while(me.collidingItems().size()>1){
@@ -117,8 +165,11 @@ void GraphManager::PositionNode(Node &me)
     }
 }
 
-
-//position a node in first position where it doesn t collide in y axis
+/*
+ * Description: positions the node in the first row where it doesn't collide
+ * @param Node& - node reference
+ * @return void
+ */
 void GraphManager::FixHeadPosition(Node &me)
 {
     while(me.collidingItems().size()>1){
@@ -126,7 +177,16 @@ void GraphManager::FixHeadPosition(Node &me)
     }
 }
 
-//check the relation of the first item in the list
+/*
+ * Description: check the relation of the first item in the list, the node that graphically represents the item
+ * 				must be in Printed QVector, this method check the relations of the item and correctly
+ *				add to the list of nodes that must be checked the next and the daughter of the item
+ * @param QVector<const Item*>& - items vector
+ * @param const QString &relation - Qt string as relation name (see Qt docs for more info) 
+ * @param const QColor &color - Qt color as relation color (see Qt docs for more info)
+ * @param QGraphicsItem *parentRelation - Qt graphics item as parent relation (see Qt docs for more info)
+ * @return void
+ */
 void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& relation, const QColor& color, QGraphicsItem *parentRelation)
 {
     //take first item
@@ -227,6 +287,11 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
 
 }
 
+/*
+ * Description: changes the visibility of the relations in the graph
+ * @param QStandardItem * - Qt standard item as relation reference (see Qt docs for more info)
+ * @return void
+ */
 void GraphManager::changeRelationVisibility(QStandardItem *key)
 {
     //find the item that represent the relation in the graph model and hide it
@@ -234,6 +299,10 @@ void GraphManager::changeRelationVisibility(QStandardItem *key)
     (*it)->setVisible(!(*it)->isVisible());
 }
 
+/*
+ * Description: notifies the selection/deselection of a item
+ * @return void
+ */
 void GraphManager::notifySelection()
 {
     QList<QGraphicsItem*> selected(Graph->selectedItems());
@@ -252,6 +321,12 @@ void GraphManager::notifySelection()
     }
 }
 
+/*
+ * Description: selects and focuses the node given the relation and the path
+ * @param const QString& - Qt string as relation name (see Qt docs for more info) 
+ * @param const QString& - Qt string as path (see Qt docs for more info) 
+ * @return void
+ */
 void GraphManager::selectItem(const QString &relation, const QString &path)
 {
     ID searchedItem(path,relation);

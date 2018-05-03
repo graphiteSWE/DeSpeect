@@ -1,31 +1,61 @@
 #ifndef DATANODEMANAGER_H
 #define DATANODEMANAGER_H
-
 #include <QStandardItemModel>
 #include <QStringListModel>
 #include <QTableView>
 #include "id.h"
-//this class handle the map of data of the node to
-//let the view show it
+
+/*
+ * File: datanodemanager.h
+ * Type: header
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: handles the map of data of the node to let the view show it
+ */
+ 
 class DataNodeManager:public QObject
 {
+    //Macro used to enable Qt signals and slots
     Q_OBJECT
+    
 private:
-    //model the item info view
+    //Field: models the item info view
     QStandardItemModel nodeInfo;
+    
+    //Field: node identifier
     ID nodeId;
+
 public:
-    //constructor
+    //Description: DataNodeManager constructor 
     DataNodeManager();
-    //link the model to a table view
+    
+    /*
+     * Description: links the model to a table view
+     * @param QTableView * - Qt table view (see Qt docs for more info)
+     * @return void 
+     */
     void linkToModel(QTableView *);
-    //print the node info
+    
+    /*
+     * Description: print the node info
+     * @param const std::map<std::string,std::string>& - map node to properties
+     * @return void 
+     */
     void showNode(const std::map<std::string,std::string>&);
-    //return the id of the selected node
+    
+    /*
+     * Description: returns the id of the selected node
+     * @return const ID
+     */
     const ID getNodeId();
 
 public slots:
-    //clear the model
+    
+    /*
+     * Description: clears the model
+     * @return void
+     */
     void clear();
 
 };
