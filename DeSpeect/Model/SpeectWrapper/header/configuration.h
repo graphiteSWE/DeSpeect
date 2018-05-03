@@ -2,19 +2,32 @@
 #define CONFIGURATION_H
 #include "vector"
 #include "string"
-//contains all data configuration of speect
-//voicefile path, input text, and outputfile for audio
-//also know if the config could be different from last get
+
+/*
+ * File: configuration.h
+ * Type: header
+ * Date: 2018-04-20
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: contains all the Speect configuration data (voicefile path, input text, and outputfile for audio)
+ * 				and knows if the config could be different from last set
+ */
+
 class Configuration
 {
 
 private:
+	//Field: configuration type
     std::vector<std::string> config;
+    
+    //Field: boolean indicating if the configuration has changed
     std::vector<bool> changed;
 public:
-    //initialize the configuration as empty string and change as true
+
+    //Description: configuration builder, initializes the configuration as an empty string and set changed to true
     Configuration();
-    //define the names to access the configuration
+    
+    //Enum defining the names to access the configuration
     enum configName
     {
         Voice=0,
@@ -23,11 +36,28 @@ public:
         UtteranceText=3,
         MAXSIZE=4
     };
-    //set the named configuration with the string
+    
+	/*
+	 * Description: sets the named configuration with the given string
+	 * @param std::string& - config
+	 * @return bool
+	 */
     bool setConfig(configName,const std::string&);
+    
     //return if the named configuration has changed since last get
+    
+	/*
+	 * Description: returns if the named configuration has changed since last set
+	 * @param configName - config name
+	 * @return bool
+	 */
     bool hasChanged(configName);
-    //return the named configuration
+    
+	/*
+	 * Description: returns the named configuration
+	 * @param configName - config name
+	 * @return std::string &
+	 */
     const std::string &getConfig(configName);
 };
 
