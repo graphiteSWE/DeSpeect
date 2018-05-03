@@ -106,6 +106,8 @@ TEST(Graph, VerifyNotifySelection1){
         delete currentRelation;
     }
 
+    g->selectItem("Token"," ");
+    g->selectItem("Token"," .n");
     g->notifySelection();
 
     EXPECT_TRUE(g);
@@ -116,7 +118,7 @@ TEST(Graph, VerifySelectItem){
     char **argv=NULL;
     QApplication app(argc,argv);
     GraphManager* g = new GraphManager();
-    g->selectItem("Token","");
+    g->selectItem("Token"," ");
     EXPECT_TRUE(g);
 
     delete g;
