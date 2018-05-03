@@ -1,10 +1,18 @@
 #include "createaudiocommand.h"
 #include "configuration.h"
 
-
+/*
+ * File: createaudiocommand.cpp
+ * Type: src
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: command for the audio generation
+ */
+ 
 /*
  * Description: builds an audio command given the format
- * @param std::string& - audio format
+ * @param const std::string& - audio format
  */
 CreateAudioCommand::CreateAudioCommand(const std::string &format)
     :AbstractCommand()
@@ -20,7 +28,7 @@ CreateAudioCommand::CreateAudioCommand(const std::string &format)
  *				gets the saving location of the audio file from the configuration
  *				gets the audio feature from the utterance
  * @param Speect* engine - Speect reference
- * @return std::string
+ * @return const std::string
  */
  
 const std::string CreateAudioCommand::execute(Speect *SpeectEngine) const

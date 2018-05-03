@@ -39,12 +39,11 @@ public:
     
 	/*
 	 * Description: sets the named configuration with the given string
-	 * @param std::string& - config
+	 * @param configName - config
+	 * @param const std::string& - config value
 	 * @return bool
 	 */
     bool setConfig(configName,const std::string&);
-    
-    //return if the named configuration has changed since last get
     
 	/*
 	 * Description: returns if the named configuration has changed since last set
@@ -56,7 +55,7 @@ public:
 	/*
 	 * Description: returns the named configuration
 	 * @param configName - config name
-	 * @return std::string &
+	 * @return const std::string &
 	 */
     const std::string &getConfig(configName);
 };

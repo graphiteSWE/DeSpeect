@@ -1,56 +1,125 @@
 #ifndef MOC_H
 #define MOC_H
-
 #include "speect.h"
 #include <list>
 #include "string"
 #include "utterance.h"
 #include <map>
+
 class Configuration;
 class Utterance;
-//this class will manage all memory of Speect component
-//some function that should be const can t be because of how speect handle errors
+
+/*
+ * File: Speect.h
+ * Type: header
+ * Date: 2018-04-20
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: manages the memory of all Speect components, note that some functions that should be const can't be because of how Speect handles errors internally
+ */
+ 
 class Speect
 {
 private:
-    //speect error,see speect documentation for more information
+    //Field: Speect error (see speect documentation for more information)
     s_erc error;
-    //class that wrap SUtterance of Speect
+    
+    //Field: wrapper for Speect SUtterance
     Utterance* utt;
-    //speect voice,see speect documentation for more information
+    
+    //Field: Speect voice (see speect documentation for more information)
     SVoice* voice;
-    //contains speect configuration
+    
+    //Field: Speect configuration
     Configuration* config;
-    //list of plugins that are loaded into speect
+    
+    //Field: list of plugins that are loaded into speect
     std::list<SPlugin*> plugins;
-    //given an SItem return the path from the head to it
+    
+    /*
+    * Description: given an SItem, returns the path from the head to it
+    * @param const SItem* - Speect Item
+    * @return std::string
+    */
     std::string createId(const SItem*);
+    
 public:
-    //initialize speect
+    
+    //Description: Speect constructor, initializes Speect
     Speect();
-    //delete his object and all plugin loaded and then remove speect
+    
+    //Description: Speect destructor, deletes his object, all loaded plugins and then removes Speect
     ~Speect();
-    //return error as a integer, meaning is the same as speect documentation
+      
+    /*
+    * Description: returns errors as integers (the meaning is the same as described in Speect documentation)
+    * @return std::s_erc&
+    */
     s_erc& getErrorState();
-    //return the utterance modifiable
+    
+    /*
+    * Description: returns the utterance
+    * @return const Utterance*
+    */
     const Utterance* getUtterance()const;
-    //return the configuration modifiable
+    
+    /*
+    * Description: returns the current config
+    * @return Configuration*
+    */
     Configuration* getConfiguration()const;
-    //add a plugin of speect with speect function
+    
+    /*
+    * Description: adds a Speect plugin
+    * @param const std::string &PluginPath - path to the plugin
+    * @return bool
+    */
     bool addPlugin(const std::string &PluginPath);
-    //generate the utterance if the configuration of utterancetext has changed
+    
+    /*
+    * Description: generates the utterance if the configuration of utterancetext has changed
+    * @return bool
+    */
     bool createUtt();
-    //initialize the voice configuration voice must be set
+    
+    /*
+    * Description: initialize the voice, notice that configuration voice must be set
+    * @return bool
+    */
     bool init();
-    //if voice is initialized correctly return the utterance processors name
+    
+    /*
+    * Description: returns a list containing the utterance processors names
+    * @return const std::list<std::string>
+    */
     const std::list<std::string> getUttProcessorNames();
-    //if voice is initialized correctly return the named utterance processor or NULL if not exist
+    
+    /*
+    * Description: if the voice is correctly initialized, returns the named utterance processor or NULL if it doesn't exist
+    * @param const std::string& Name - name of the utterance processor to be returned
+    * @return const SUttProcessor *
+    */
     const SUttProcessor *getUttProcessor(const std::string& Name);
-    //if voice is initialized correctly return the list of utterance type defined in it
+    
+    /*
+    * Description: if the voice is correctly initialized, returns the list of utterance types defined in it
+    * @return const std::list<std::string>
+    */
     const std::list<std::string> getUttTypeName();
-    //if voice is initialized return the list of processors name of the given utterance type
+    
+    /*
+    * Description: if the voice is initialized, returns the list of processors names for the given utterance type
+    * @param const std::string& - name of the utterance type
+    * @return const std::list<std::string>
+    */
     const std::list<std::string> getUttProcessorNames(const std::string&);
-    //search and return the node given the relation and the path from the head also build the path to that item
+    
+    /*
+    * Description: searches and returns a node given the relation and the path from the head, also builds the path to that item
+    * @param const std::string &relation - relation name
+    * @param const std::string &path - path from the head
+    * @return const std::map<std::string,std::string>
+    */
     const std::map<std::string,std::string> getNode(const std::string &relation, const std::string &path);
 };
 

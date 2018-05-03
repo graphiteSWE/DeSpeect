@@ -22,14 +22,14 @@ public:
 
 	/*
 	 * Description: builds an audio command given the format
-	 * @param std::string& - audio format
+	 * @param const std::string& - audio format
 	 */
     explicit CreateAudioCommand(const std::string&);
     
 	/*
 	 * Description: executes the command on the engine
 	 * @param Speect* engine - Speect reference
-	 * @return std::string
+	 * @return const std::string
 	 */
     const std::string execute(Speect* engine) const;
 };

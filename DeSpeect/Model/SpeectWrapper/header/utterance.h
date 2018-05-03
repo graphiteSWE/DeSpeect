@@ -4,22 +4,49 @@ class Relation;
 #include "speect.h"
 #include "string"
 #include "list"
-//this class wrap SUtterance
+
+/*
+ * File: utterance.h
+ * Type: header
+ * Date: 2018-04-20
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: SUtterance wrapper
+ */
+ 
 class Utterance
 {
 private:
-    //speect utterance,see speect documentation for more information
+    //Field: Speect utterance (see Speect documentation for more information)
     SUtterance* utt;
 public:
-    //set the utterance of this object with a utterance of speect
+
+    /*
+     * Description: Utterance constructor
+     * @param SUtterance* - Speect utterance 
+     */
     explicit Utterance(SUtterance*);
-    //return the inner pointer used to run speect methods that require a SUtterance
+    
+    /*
+     * Description: returns the inner pointer used to run Speect methods that require a SUtterance
+     * @return SUtterance *
+     */
     SUtterance *getUtterance()const;
-    //delete the inner utterance
+    
+    //Description: Utterance destructor 
     ~Utterance();
-    //return the relation by name ownership of object to caller
+    
+    /*
+     * Description: returns the relation by name
+     * @param const std::string &name - name of the relation
+     * @return Relation* 
+     */
     Relation* getRelationByName(const std::string &name) const;
-    //return all the relations name as a list ownership of list to caller
+    
+    /*
+     * Description: returns all the relations names as a list
+     * @return const std::list<std::string>
+     */
     const std::list<std::string> getRelationNamesList() const;
 };
 #endif // UTTERANCE_H

@@ -1,8 +1,17 @@
 #include "loadplugincommand.h"
 
 /*
+ * File: loadplugincommand.cpp
+ * Type: src
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: command for the plugin loading
+ */
+
+/*
  * Description: builds a plugin command given the path to the plugin
- * @param std::string& - path to the plugin
+ * @param const std::string& - path to the plugin
  */
 LoadPluginCommand::LoadPluginCommand(const std::string & PluginPath)
     :AbstractCommand()
@@ -16,7 +25,7 @@ LoadPluginCommand::LoadPluginCommand(const std::string & PluginPath)
  * 				requests the engine to load the plugin, note that this is the only command executed inside Speect
  * 				since it's a memory management task and it is SpeectWrapper responsibility to handle that
  * @param Speect *SpeectEngine - Speect reference
- * @return std::string
+ * @return const std::string
  */
 const std::string LoadPluginCommand::execute(Speect *SpeectEngine) const
 {

@@ -25,15 +25,15 @@ public:
 
 	/*
 	 * Description: builds a configuration command given a config name and a config value
-	 * @param Configuration::configName& - config type
-	 * @param std::string& - config value
+	 * @param const Configuration::configName& - config type
+	 * @param const std::string& - config value
 	 */
     SetSpeectConfigCommand(const Configuration::configName&, const std::string&);
     
 	/*
 	 * Description: executes the command on the engine
 	 * @param Speect *SpeectEngine - Speect reference
-	 * @return std::string
+	 * @return const std::string
 	 */
     const std::string execute(Speect *SpeectEngine) const;
 };
