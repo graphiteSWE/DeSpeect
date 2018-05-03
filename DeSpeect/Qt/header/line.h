@@ -24,13 +24,13 @@ protected:
     //check if the nodes are colliding
     virtual void NodesColliding();
 
-    virtual ~Line();
     //fix the position of start and end to be the closest of the circle of the two nodes
     //used when drawing to not draw from center of node to center
     virtual QPointF FixStart();
     virtual QPointF FixEnd();
 public:
     Line(const int radius,const QColor& color,bool dashed=0, QGraphicsItem*parent=0);
+    virtual ~Line();
 public slots:
     //slots to update the position of the line, used to update position when the item it's
     //connected to move the QPointF given are the center of the object
