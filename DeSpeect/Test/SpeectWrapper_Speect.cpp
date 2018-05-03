@@ -1,10 +1,7 @@
 #include "gtest/gtest.h"
-#include <QApplication>
 #include <commandlist.h>
 #include <unistd.h>
-//#define GetCurrentDir getcwd
-#include "iostream"
-#include "ui_view.h"
+
 #include "modelview.h"
 #include <QFileDialog>
 #include <graphmanager.h>
