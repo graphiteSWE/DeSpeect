@@ -36,7 +36,10 @@ private:
     QPointF arrowPoint1;
     QPointF arrowPoint2;
     
-    //Field: fix the end point and arrow points when nodes move
+    /*
+     * Description: fix the end point and arrow points when nodes move
+     * @return QPointF
+     */
     QPointF FixEnd();
 
 public:

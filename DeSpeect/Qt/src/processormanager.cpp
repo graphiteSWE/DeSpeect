@@ -1,23 +1,39 @@
 #include "processormanager.h"
 
-//initialize the processor manager to point to no processor and have a clear model
+/*
+ * File: processormanager.cpp
+ * Type: src
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: handles the model that allows the printing of the processors
+ */
+
+// Description: ProcessorManager constructor
 ProcessorManager::ProcessorManager():indexProcessor(-1),ProcessorModel(new QStandardItemModel())
 {}
 
-//clear and delete all data from the manager before delete
+// Description: ProcessorManager destructor
 ProcessorManager::~ProcessorManager()
 {
     clear();
     delete ProcessorModel;
 }
 
-//accept a view and it link to the model
+/*
+ * Description: links the view to the model
+ * @param QListView* v - Qt list view (see Qt docs for more info)
+ * @return void
+ */
 void ProcessorManager::linkProcessorModel(QListView* v)
 {
     v->setModel(ProcessorModel);
 }
 
-//clear the layout
+/*
+ * Description: sets all the items to the normal font and the last executed processor to none
+ * @return void
+ */
 void ProcessorManager::clearLayoutProcessor(){
     //create a new standard font
     QFont font;
@@ -33,7 +49,10 @@ void ProcessorManager::clearLayoutProcessor(){
     indexProcessor=-1;
 }
 
-//lock the items so that they can't be modified
+/*
+ * Description: locks changes in the model, used while executing
+ * @return void
+ */
 void ProcessorManager::lockUpdateItem(){
     for(int i=0;i<ProcessorModel->rowCount();++i)
     {
@@ -42,7 +61,10 @@ void ProcessorManager::lockUpdateItem(){
     }
 }
 
-//unlock each item of the model
+/*
+ * Description: unlocks changes in the model
+ * @return void
+ */
 void ProcessorManager::unlockUpdateItem(){
     for(int i=0;i<ProcessorModel->rowCount();++i)
     {
@@ -51,8 +73,10 @@ void ProcessorManager::unlockUpdateItem(){
     }
 }
 
-
-//evidence the processor
+/*
+ * Description: changes the font color to the next processor
+ * @return void
+ */
 void ProcessorManager::evidenceNextProcessor(){
     //create a new font
     QFont font;
@@ -83,7 +107,10 @@ void ProcessorManager::evidenceNextProcessor(){
     }
 }
 
-//evidence all the processor in the model
+/*
+ * Description: changes the font color of all the processors, if index is valid set the item to bold
+ * @return void
+ */
 void ProcessorManager::evidenceAllProcessor(){
     QFont font;
     font.setBold(false);
@@ -106,8 +133,10 @@ void ProcessorManager::evidenceAllProcessor(){
     }
 }
 
-
-//return the processor list name
+/*
+ * Description: returns the list of the selected processor
+ * @return std::list<std::string>
+ */
 std::list<std::string> ProcessorManager::getProcessorList(){
     std::list<std::string> list;
     //if the processor is checked add it to the list of processor that have to be runned
@@ -119,12 +148,19 @@ std::list<std::string> ProcessorManager::getProcessorList(){
     return list;
 }
 
-//check if there is a focused processor
+/*
+ * Description: returns whether the index of the processor is valid
+ * @return bool
+ */
 bool ProcessorManager::isLayoutClean(){
     return indexProcessor==-1;
 }
 
-//add a processor to the model
+/*
+ * Description: adds a processor to the model
+ * @param std::string name - processor name
+ * @return void
+ */
 void ProcessorManager::addProcessor(std::string name){
     //set the mane to the processor name
     QStandardItem* item = new QStandardItem(name.c_str());
@@ -138,7 +174,10 @@ void ProcessorManager::addProcessor(std::string name){
     ProcessorModel->appendRow(item);
 }
 
-//clear the model
+/*
+ * Description: clears the model
+ * @return void
+ */
 void ProcessorManager::clear()
 {
 

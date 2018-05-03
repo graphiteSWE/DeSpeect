@@ -2,6 +2,19 @@
 #include <QVector2D>
 #include <qpainter.h>
 
+/*
+ * File: arc.cpp
+ * Type: src
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: draws a line with an arrow on its end point
+ */
+ 
+/*
+ * Description: fix the end point and arrow points when nodes move
+ * @return QPointF
+ */
 QPointF Arc::FixEnd()
 {
     //calculate and normalize the directionVector of the arc
@@ -18,11 +31,17 @@ QPointF Arc::FixEnd()
 }
 
 
-//arrowWidth is the widht of the base of the arrow
-//offset is the offset of draw from the end and start point
-//color is the color of the item
-//parent is the parent item
-//dashed==true if the line is dashed
+
+/*
+ * Description: Arc constructor
+ * @param const int arrowWidth - arrow width 
+ * @param const int radius - radius of the pointed nodes, it is needed to offset from the center
+ * @param const QColor& color - Qt color as the arc color (see Qt docs for more info)
+ * @param bool prev_next - indicates the kind of arc
+ * @param bool filled - indicates if the arrow head is filled
+ * @param QGraphicsItem* parent - Qt graphic item  (see Qt docs for more info)
+ * @param bool dashed - indicates if the arc is dashed
+ */
 Arc::Arc(const int arrowWidth,const int offset,const QColor&color,bool prev_next,bool filled, QGraphicsItem *parent,bool dashed)
     :Line(offset,color,dashed,parent)
     ,type(prev_next)
@@ -32,6 +51,14 @@ Arc::Arc(const int arrowWidth,const int offset,const QColor&color,bool prev_next
     //set zvalue so that all node have priority over arcs
     setZValue(0);
 }
+
+/*
+ * Description: redefines the paint function to draw the arrow of the arc
+ * @param QPainter *painter - Qt painter (see Qt docs for more info)
+ * @param const QStyleOptionGraphicsItem *option - Qt style options for the graphic item (see Qt docs for more info)
+ * @param const QWidget *widget - Qt widget (see Qt docs for more info)
+ * @return void
+ */
 void Arc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     //if nodes collide don t draw

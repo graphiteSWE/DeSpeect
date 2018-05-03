@@ -1,6 +1,15 @@
 #include "datanodemanager.h"
 
-//link the manager model to the view
+/*
+ * File: datanodemanager.cpp
+ * Type: src
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: handles the map of data of the node to let the view show it
+ */
+ 
+//Description: DataNodeManager constructor 
 DataNodeManager::DataNodeManager()
     :nodeInfo()
     ,nodeId("","")
@@ -8,12 +17,20 @@ DataNodeManager::DataNodeManager()
 
 }
 
+/*
+ * Description: links the model to a table view
+ * @param QTableView * - Qt table view (see Qt docs for more info)
+ * @return void 
+ */
 void DataNodeManager::linkToModel(QTableView *view)
 {
     view->setModel(&nodeInfo);
 }
 
-//clear all item
+/*
+ * Description: clears the model
+ * @return void
+ */
 void DataNodeManager::clear(){
     //for each item in the model
     for(int i=0;i<nodeInfo.rowCount();++i)
@@ -25,7 +42,12 @@ void DataNodeManager::clear(){
     nodeInfo.clear();
     nodeId=ID("", "");
 }
-//clear all node information
+
+/*
+ * Description: print the node info
+ * @param const std::map<std::string,std::string>& - map node to properties
+ * @return void 
+ */
 void DataNodeManager::showNode(const std::map<std::string, std::string> &features)
 {
     //clear the model
@@ -68,6 +90,10 @@ void DataNodeManager::showNode(const std::map<std::string, std::string> &feature
     nodeInfo.setColumnCount(1);
 }
 
+/*
+ * Description: returns the id of the selected node
+ * @return const ID
+ */
 const ID DataNodeManager::getNodeId()
 {
     return nodeId;
