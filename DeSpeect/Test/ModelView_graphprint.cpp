@@ -114,7 +114,7 @@ TEST(View, Graphprintwithmoreprocessor){
     ModelView mv(builder);
     mv.requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
     mv.loadSelectedProcessor();
-    builder->LoadConfig(Configuration::UtteranceText,"hi").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
     mv.runSingleStep();
     mv.runSingleStep();
     mv.runSingleStep();

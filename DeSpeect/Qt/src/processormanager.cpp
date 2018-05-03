@@ -62,9 +62,11 @@ void ProcessorManager::evidenceNextProcessor(){
         //store the index of the processor
         int oldIndex = indexProcessor;
         //find the next processor that is checked in the model and set the index to that
-        do{
+        indexProcessor++;
+        while(ProcessorModel->rowCount()>indexProcessor && ProcessorModel->item(indexProcessor)->checkState()!=Qt::Checked);
+        {
             indexProcessor++;
-        }while(ProcessorModel->rowCount()>indexProcessor && ProcessorModel->item(indexProcessor)->checkState()!=Qt::Checked);
+        }
         //if the new index of processor is in the bound of the processors model
         if(ProcessorModel->rowCount()>indexProcessor){
             if(oldIndex!=-1){
