@@ -9,7 +9,7 @@
 #include <QColor>
 #include "item.h"
 
-TEST(Graph, VerifyLine){
+TEST(Graph, VerifyLineCollidingDashed){
     int argc;
     char **argv=NULL;
     QApplication app(argc,argv);
@@ -31,8 +31,35 @@ TEST(Graph, VerifyLine){
 
 }
 
+TEST(Graph, VerifyLineNotCollidingDashed){
+    int argc;
+    char **argv=NULL;
+    QApplication app(argc,argv);
+    QPainter* p = new QPainter();
+    QWidget* temp= new QWidget();
+    QColor colore(255,255,255);
+    Line* l1;
+    l1=new Line(12,colore,1,NULL);
 
-TEST(Graph, VerifyLineParam){
+    QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem();
+    QPointF* start = new QPointF(0,0);
+    QPointF* end = new QPointF(10,10);
+
+    l1->UpdateStartPoint(*start);
+    l1->UpdateEndPoint(*end);
+    l1->paint(p,option,temp);
+
+    EXPECT_TRUE(l1);
+
+    delete l1;
+    delete p;
+    delete temp;
+    delete option;
+
+}
+
+
+TEST(Graph, VerifyLineCollidingNotDashed){
     int argc;
     char **argv=NULL;
     QApplication app(argc,argv);
@@ -159,6 +186,5 @@ TEST(Graph, ChangeVisibilityFalseTrue){
     delete temp;
 
 }
-
 
 
