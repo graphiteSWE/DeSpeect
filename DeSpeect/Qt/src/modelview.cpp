@@ -211,7 +211,7 @@ void ModelView::requestAudioSave(QString output)
 
 /*
 void ModelView::requestPluginLoad(const QList<QString>& pluginPaths)
-{/*
+{
     t9.clear();
     AbstractCommand* temp;
     foreach(auto t , pluginPaths)
