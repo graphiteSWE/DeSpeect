@@ -95,8 +95,8 @@ TEST(View, ModelViewSearch){
     ui->UtteranceText->setPlainText("hi");
     mv->loadSelectedProcessor();
     mv->requestProcessorRun(false);
-
-    mv->search("");
+    mv->findNode("Token","daughter",false);
+    mv->search("daughter");
 
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
@@ -114,7 +114,7 @@ TEST(View, Graphprintwithmoreprocessor){
     ModelView mv(builder);
     mv.requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
     mv.loadSelectedProcessor();
-    builder->LoadConfig(Configuration::UtteranceText,"hi").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
     mv.runSingleStep();
     mv.runSingleStep();
     mv.runSingleStep();
