@@ -17,7 +17,7 @@ TEST(Graph, VerifyLineCollidingDashed){
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
     Line* l1;
-    l1=new Line(12,colore,1,NULL);
+    l1=new Line(12,colore,true,NULL);
 
     QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem();
     l1->paint(p,option,temp);
@@ -39,7 +39,7 @@ TEST(Graph, VerifyLineNotCollidingDashed){
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
     Line* l1;
-    l1=new Line(12,colore,1,NULL);
+    l1=new Line(12,colore,true,NULL);
 
     QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem();
     QPointF* start = new QPointF(0,0);
@@ -67,7 +67,7 @@ TEST(Graph, VerifyLineCollidingNotDashed){
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
     Line* l1;
-    l1=new Line(12,colore,0,NULL);
+    l1=new Line(12,colore,false,NULL);
 
     QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem();
     l1->paint(p,option,temp);
@@ -90,7 +90,7 @@ TEST(Graph, ChangeVisibilityFalseParentShow){
     QColor colore(255,255,255);
     QGraphicsItem* parent= new Line(0,colore,0,NULL);
     Line* l1;
-    l1=new Line(12,colore,0,parent);
+    l1=new Line(12,colore,false,parent);
 
     l1->changeVisibility(false);
 
@@ -112,7 +112,7 @@ TEST(Graph, ChangeVisibilityFalseParentHidden){
     QGraphicsItem* parent= new Line(0,colore,0,NULL);
     parent->hide();
     Line* l1;
-    l1=new Line(12,colore,0,parent);
+    l1=new Line(12,colore,false,parent);
 
     l1->changeVisibility(false);
 
@@ -132,7 +132,7 @@ TEST(Graph, ChangeVisibilityFalse){
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
     Line* l1;
-    l1=new Line(12,colore,0,NULL);
+    l1=new Line(12,colore,false,NULL);
 
     l1->changeVisibility(false);
 
@@ -152,7 +152,7 @@ TEST(Graph, ChangeVisibilityFalseFalseTrue){
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
     Line* l1;
-    l1=new Line(12,colore,0,NULL);
+    l1=new Line(12,colore,false,NULL);
 
     l1->changeVisibility(false);
     l1->changeVisibility(false);
@@ -174,7 +174,7 @@ TEST(Graph, ChangeVisibilityFalseTrue){
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
     Line* l1;
-    l1=new Line(12,colore,0,NULL);
+    l1=new Line(12,colore,false,NULL);
 
     l1->changeVisibility(false);
     l1->changeVisibility(true);
