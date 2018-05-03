@@ -323,12 +323,14 @@ add_test(
 
 ########################################################################
 add_executable(
-    Command_commandlist
-    Command_commandlist.cpp
+    View_graphManagerTest
+    View_graphManagerTest.cpp
     )
 
 target_link_libraries(
-    Command_commandlist
+    View_graphManagerTest
+    ${Qt5Widgets_LIBRARIES}
+    QTGraph
     gtest_main
     Command
     SpeectWrapper
@@ -336,7 +338,7 @@ target_link_libraries(
     )
 add_test(
     NAME
-       Command_commandlist
+       View_graphManagerTest
     COMMAND
-       Command_commandlist
+       View_graphManagerTest
     )

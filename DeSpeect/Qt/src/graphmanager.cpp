@@ -197,10 +197,10 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
     bool hasNext=toBeChecked->hasNext();
     bool hasPrev=toBeChecked->hasPrev();
     //get the items
-    const Item father=toBeChecked->father()
-            ,daughter=toBeChecked->daughter()
-            ,next=toBeChecked->next()
-            ,prev=toBeChecked->prev();
+    const Item father=toBeChecked->father();
+    const Item daughter=toBeChecked->daughter();
+    const Item next=toBeChecked->next();
+    const Item prev=toBeChecked->prev();
 
 
     //find which node represent the items
