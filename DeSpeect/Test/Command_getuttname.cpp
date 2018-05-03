@@ -33,3 +33,15 @@ TEST(Command, getutterancefail){
     delete s;
     delete builder;
 }
+
+TEST(Command, getutterancefailurewithaudio){
+    Speect* s=new Speect();
+    CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(s);
+    std::list<std::string> l;
+    l.push_back("Tokenize");
+    CommandList* cmdl=builder->SaveAudio("nome.wav").getCommandList();
+    cmdl->executeAll();
+    EXPECT_EQ(*(++cmdl->getErrorState().begin()), "Generating audio to File:nome.wav  Failed: Utterance is not initialized");
+    delete s;
+    delete builder;
+}
