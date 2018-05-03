@@ -74,7 +74,7 @@ void Line::changeVisibility(bool vis)
     if(parentItem()==NULL){
         //vis is 1 if item changed to visible 0 otherwise
         //check if the line should be visible
-        Visibility-=(1-2*vis);
+        Visibility-=vis?-1:1;
         //if it should set it visible otherwise not visible
         if(Visibility==1)
             setVisible(true);
