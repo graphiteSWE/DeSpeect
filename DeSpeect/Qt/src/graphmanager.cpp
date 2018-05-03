@@ -219,7 +219,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
             //If item is equal and have different relation draw a dashed line
             if(toBeChecked->IsEqual(node->getRelation().toStdString(),node->getId().toStdString())==2)
             {
-                Line* a=new Line(Radius,color,1,NULL);
+                Line* a=new Line(Radius,QColor(qRgb(0,0,0)),1,NULL);
                 connect(node,SIGNAL(notifyVisibilityChange(bool)),a,SLOT(changeVisibility(bool)));
                 connect(node,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
                 connect(me,SIGNAL(notifyVisibilityChange(bool)),a,SLOT(changeVisibility(bool)));
@@ -233,7 +233,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
                 //otherwise check if it's my father in the same relation
                 if(hasFather&&father.IsEqual(node->getRelation().toStdString(),node->getId().toStdString())==1)
                 {
-                    Arc* a=new Arc(12,Radius,color,0,0,parentRelation,true);
+                    Arc* a=new Arc(12,Radius,color,0,0,parentRelation,false);
                     connect(node,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
                     connect(me,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateStartPoint(QPointF)));
                     hasFather=false;
@@ -243,7 +243,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
                 //not in exclusive else because don t know if it's impossible to happen in speect HRG
                 if(hasPrev&&prev.IsEqual(node->getRelation().toStdString(),node->getId().toStdString())==1)
                 {
-                    Arc* a=new Arc(12,Radius,color,1,0,parentRelation,true);
+                    Arc* a=new Arc(12,Radius,color,1,0,parentRelation,false);
                     connect(node,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
 
                     connect(me,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateStartPoint(QPointF)));
@@ -260,7 +260,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
         Node* temp=new Node(QString(next.getId().c_str()),relation,QString(next.getName().c_str()),me->pos().x()+4*Radius,me->pos().y(),Radius,color,parentRelation);
         Printed.push_back(temp);
         temp->clearFocus();
-        Arc* a=new Arc(12,Radius,color,1,1,parentRelation,true);
+        Arc* a=new Arc(12,Radius,color,1,1,parentRelation,false);
         connect(temp,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
         connect(me,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateStartPoint(QPointF)));
 
@@ -275,7 +275,7 @@ void GraphManager::checkRelations(QVector<const Item*> &tbc, const QString& rela
         tbc.push_front(new Item(daughter));
         Printed.push_back(temp);
         temp->clearFocus();
-        Arc* a=new Arc(12,Radius,color,0,1,parentRelation,true);
+        Arc* a=new Arc(12,Radius,color,0,1,parentRelation,false);
 
         connect(temp,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateEndPoint(QPointF)));
         connect(me,SIGNAL(notifyPositionChange(QPointF)),a,SLOT(UpdateStartPoint(QPointF)));

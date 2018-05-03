@@ -97,8 +97,13 @@ void Line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(colliding)return;
     //if line is dashed set the pen
     //to dashed
+    QPen mypen(color);
     if(dashed)
-        painter->setPen(Qt::DashLine);
+    {   
+        color.setAlphaF(1);
+        mypen.setStyle(Qt::DashLine);
+    }
+    painter->setPen(mypen);
     //draw the line
     painter->drawLine(QLineF(FixStart(),FixEnd()));
 

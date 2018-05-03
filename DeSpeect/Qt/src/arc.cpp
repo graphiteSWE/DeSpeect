@@ -63,5 +63,5 @@ void Arc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
 
     mypen.setWidth(2);
     painter->setPen(mypen);
-    painter->drawLine(QLineF(FixStart(),end));
+    Line::paint(painter,option,widget);
 }
