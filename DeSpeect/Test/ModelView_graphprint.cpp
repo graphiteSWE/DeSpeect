@@ -95,8 +95,7 @@ TEST(View, ModelViewSearch){
     ui->UtteranceText->setPlainText("hi");
     mv->loadSelectedProcessor();
     mv->requestProcessorRun(false);
-
-    mv->search("");
+    mv->findNode("Token","daughter",false);
 
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
