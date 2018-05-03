@@ -1,16 +1,22 @@
 #include "uttprocessorcommand.h"
 
-
-//create an utterance processor command
+/*
+ * Description: builds a utterance processor command given a utterance processor name
+ * @param std::string& - utterance processor name
+ */
 UttProcessorCommand::UttProcessorCommand(std::string processor)
     :AbstractCommand()
     ,Processor(processor)
 {
 
 }
-//execution of a processor command
-//check if utterance exist
-//if it exists request the processor to Speect,and run it on the utterance
+
+/*
+ * Description: executes the command on the engine:
+ * 				checks if the utterance exists and, if it does, requests the processor from Speect and runs it on the utterance	
+ * @param Speect *SpeectEngine - Speect reference
+ * @return std::string
+ */
 const std::string UttProcessorCommand::execute(Speect *SpeectEngine)const
 {
     std::string t="";

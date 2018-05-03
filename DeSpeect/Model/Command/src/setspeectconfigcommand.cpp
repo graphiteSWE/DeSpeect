@@ -1,7 +1,11 @@
 
 #include "setspeectconfigcommand.h"
 
-//create a config command
+/*
+ * Description: builds a configuration command given a config name and a config value
+ * @param Configuration::configName& - config type
+ * @param std::string& - config value
+ */
 SetSpeectConfigCommand::SetSpeectConfigCommand(
         const Configuration::configName &name
         , const std::string &value
@@ -15,6 +19,14 @@ SetSpeectConfigCommand::SetSpeectConfigCommand(
 //execution of config command
 //check what is asked to configure and check prerequisite
 //if it's voice or utterance it also ask Speect to initialize itself with the data
+
+/*
+ * Description: executes the command on the engine:
+ * 				checks what it's been asked to configure and the related prerequisite,
+ * 				if it's either voice or utterance it also asks Speect to initialize itself with the correct data
+ * @param Speect *SpeectEngine - Speect reference
+ * @return std::string
+ */
 const std::string SetSpeectConfigCommand::execute(Speect *SpeectEngine) const
 {
     std::string t="";

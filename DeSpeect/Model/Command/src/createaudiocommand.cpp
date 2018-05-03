@@ -1,19 +1,28 @@
 #include "createaudiocommand.h"
 #include "configuration.h"
 
-//create a command to save the utterance as audio
+
+/*
+ * Description: builds an audio command given the format
+ * @param std::string& - audio format
+ */
 CreateAudioCommand::CreateAudioCommand(const std::string &format)
     :AbstractCommand()
     ,AudioFormat(format)
 {}
 
 
-//save audio feature and generate the log
-//if the utterance exist check if the audio feature exist
-//if it exist use Speect function to save utterance fetched from the engine and
-//set log otherwise tell why the save failed
-//get the file audio where to save from the configuration
-//get the audio feature from the utterance
+/*
+ * Description: executes the command on the engine:
+ * 				save audio feature and generate the log
+ * 				if the utterance exists, checks if the audio feature exists
+ *				if it exists, uses Speect function to save the utterance fetched from the engine and sets the log, otherwise declares why the saving failed
+ *				gets the saving location of the audio file from the configuration
+ *				gets the audio feature from the utterance
+ * @param Speect* engine - Speect reference
+ * @return std::string
+ */
+ 
 const std::string CreateAudioCommand::execute(Speect *SpeectEngine) const
 {
     //initialize the log string

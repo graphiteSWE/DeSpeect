@@ -160,7 +160,6 @@ public:
 	 */
     const std::list<std::string> getUttTypeNames()const;
     
-    //return the data of the node given relation and path from head (ID of a graphic Node)
 	/*
 	 * Description: returns the data related to the node given a relation and the path from head (ID of a graphic Node)
 	 * @param std::string& path - path to the node

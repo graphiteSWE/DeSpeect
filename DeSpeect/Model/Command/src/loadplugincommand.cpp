@@ -1,6 +1,9 @@
 #include "loadplugincommand.h"
 
-//create a command
+/*
+ * Description: builds a plugin command given the path to the plugin
+ * @param std::string& - path to the plugin
+ */
 LoadPluginCommand::LoadPluginCommand(const std::string & PluginPath)
     :AbstractCommand()
     ,PluginPath(PluginPath)
@@ -8,9 +11,13 @@ LoadPluginCommand::LoadPluginCommand(const std::string & PluginPath)
 
 }
 
-//execution of the plugins command
-//request the engine to load the plugin this is the only command done inside speect
-//because it's a memory management and is SpeectWrapper job to handle that
+/*
+ * Description: executes the command on the engine:
+ * 				requests the engine to load the plugin, note that this is the only command executed inside Speect
+ * 				since it's a memory management task and it is SpeectWrapper responsibility to handle that
+ * @param Speect *SpeectEngine - Speect reference
+ * @return std::string
+ */
 const std::string LoadPluginCommand::execute(Speect *SpeectEngine) const
 {
     //start the string of log

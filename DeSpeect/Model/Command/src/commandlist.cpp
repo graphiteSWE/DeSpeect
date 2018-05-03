@@ -4,7 +4,11 @@
 #include <setspeectconfigcommand.h>
 #include <uttprocessorcommand.h>
 #include "regex"
-//Invokes the execute method of all commands in the list and clean the list
+
+/*
+ * Description: executes all the commands in the list invoking their execute method, empties the list and fills the log with their return data
+ * @return void
+ */
 void CommandList::executeAll(){
     while(!commands.empty()){
         CommandList::executeStep();
@@ -12,7 +16,10 @@ void CommandList::executeAll(){
 
 }
 
-//Invokes the execute method of the first command in the list and remove command
+/*
+ * Description: executes the first command of the list, fills the log and pops the command from the list
+ * @return void
+ */
 void CommandList::executeStep(){
     if(!commands.empty()){
         AbstractCommand* pHead=*(commands.begin());
@@ -23,26 +30,38 @@ void CommandList::executeStep(){
     }
 }
 
-//Return ErrorLog list
+/*
+ * Description: returns the error log of the executed command and clears all the ones returned from the log
+ * @return std::list<std::string>
+ */
 std::list<std::string> CommandList::getErrorState(){
    std::list<std::string>Error(ErrorLog);
    ErrorLog.clear();
    return Error;
 }
 
-
-//Clear ErrorLog list
+/*
+ * Description: clears the ErrorLog list
+ * @return std::void
+ */
 void CommandList::clearErrorState(){
    ErrorLog.clear();
 }
 
-//Add command to list commands
+/*
+ * Description: allows to add a command to the list
+ * @param AbstractCommand* - command to be added
+ * @return std::void
+ */
 void CommandList::addCommand(AbstractCommand* command){
     commands.push_back(command);
 }
 
-
-//Add all commands inside listOfCommands
+/*
+ * Description: allows to queue a commandlist to this command list
+ * @param CommandList& - command list to be added
+ * @return std::void
+ */
 void CommandList::addCommand(CommandList &listOfCommands){
      while(!listOfCommands.commands.empty()){
          AbstractCommand* command=*(listOfCommands.commands.begin());
@@ -51,12 +70,21 @@ void CommandList::addCommand(CommandList &listOfCommands){
      }
 
 }
-//return the numbers of commmand in the list
+
+/*
+ * Description: returns the number of commands in the list
+ * @return std::int
+ */
 int CommandList::getNumberCommands(){
     return commands.size();
 
 }
-//if utterance exists return the relation if exists otherwisse null
+
+/*
+ * Description: if exists, returns the named Relation, NULL otherwise
+ * @param const std::string & - relation name
+ * @return Relation*
+ */
 const Relation* CommandList::getRelation(const std::string& relation)const
 {
     if(Speectengine->getUtterance()!=NULL)
@@ -66,10 +94,12 @@ const Relation* CommandList::getRelation(const std::string& relation)const
     else
         return NULL;
 
-
 }
 
-//return all the relation names or an empty list
+/*
+ * Description: returns the list of the relations names
+ * @return std::list<std::string>
+ */
 const std::list<std::string> CommandList::getRelationNames() const
 {
     if(Speectengine->getUtterance()!=NULL){
@@ -77,24 +107,42 @@ const std::list<std::string> CommandList::getRelationNames() const
     }
     return std::list<std::string>();
 }
-//return all utterance processor names
+
+/*
+ * Description: returns the list of the utterance processors names
+ * @return std::list<std::string>
+ */
 const std::list<std::string> CommandList::getUttProcessorsNames() const
 {
     return Speectengine->getUttProcessorNames();
 }
-//return the utterance processor names of the given utt type
+
+/*
+ * Description: returns the list of the utterance processors names in the selected utterance type
+ * @param std::string& - utterance type name
+ * @return std::list<std::string>
+ */
 const std::list<std::string> CommandList::getUttProcessorsNames(const std::string &uttType) const
 {
     return Speectengine->getUttProcessorNames(uttType);
 }
 
-//return all the utterance type names
+
+/*
+ * Description: returns the list of the utterance type names in the loaded voice
+ * @return std::list<std::string>
+ */
 const std::list<std::string> CommandList::getUttTypeNames() const
 {
     return Speectengine->getUttTypeName();
 }
 
-//return the nodes information
+/*
+ * Description: returns the data related to the node given a relation and the path from head (ID of a graphic Node)
+ * @param std::string& path - path to the node
+ * @param const std::string& rel - relation name
+ * @return std::map<std::string,std::string>
+ */
 const std::map<std::string, std::string> CommandList::getNode(const std::string &rel, const std::string &path)
 {
     std::string t="";
@@ -115,11 +163,14 @@ CommandList::CommandList(Speect *engine)
 
 }
 
-/**
-  start of command builder method definition
-**/
 
-//create a builder for an engine
+
+//Start of command builder method definition
+
+/*
+ * Description: builder constructor
+ * @param Speect* engine - Speect reference
+ */
 CommandList::CommandBuilder::CommandBuilder(Speect *engine)
    :engine(engine)
    ,Commands(new CommandList(engine))
@@ -127,20 +178,29 @@ CommandList::CommandBuilder::CommandBuilder(Speect *engine)
 
 }
 
-//destroy the builder
+//Description: builder destructor
 CommandList::CommandBuilder::~CommandBuilder()
 {
     delete Commands;
 }
 
-//create the commandlist
+
+/*
+ * Description: returns the built CommandList
+ * @return CommandList*
+ */
 CommandList *CommandList::CommandBuilder::getCommandList()
 {
     auto tempPtr=new CommandList(engine);
     tempPtr->addCommand(*Commands);
     return tempPtr;
 }
-//add processors command to the list
+
+/*
+ * Description: adds the commands related to the utterance processors whose names are in the given list (it doesn't check if they actually exist)
+ * @param std::list<std::string>& - list of the utterance processors names
+ * @return CommandBuilder&
+ */
 CommandList::CommandBuilder &CommandList::CommandBuilder::WithProcessors(const std::list<std::string> &ProcessorsList)
 {
     for (auto ProcessorName=ProcessorsList.begin();ProcessorName!=ProcessorsList.end();++ProcessorName) {
@@ -148,7 +208,13 @@ CommandList::CommandBuilder &CommandList::CommandBuilder::WithProcessors(const s
     }
     return *this;
 }
-//add command to save audio to the list
+
+/*
+ * Description: adds the command needed to save the audio given the output file and the format (the default format is wav)
+ * @param std::string& - path to output file
+ * @param std::string& format - format to save the generated audio
+ * @return const CommandBuilder&
+ */
 CommandList::CommandBuilder &CommandList::CommandBuilder::SaveAudio(const std::string & outPutFile, const std::string& format)
 {
     Commands->commands.push_back(new SetSpeectConfigCommand(Configuration::Audio,outPutFile));
@@ -156,7 +222,13 @@ CommandList::CommandBuilder &CommandList::CommandBuilder::SaveAudio(const std::s
     return *this;
 }
 
-//add command to set a config to the list
+
+/*
+ * Description: adds the command to set the Speect engine configuration
+ * @param configName& - enum of the configuration type
+ * @param string& - configuration
+ * @return CommandBuilder&
+ */
 CommandList::CommandBuilder &CommandList::CommandBuilder::LoadConfig(const Configuration::configName &config, const std::string &value)
 {
     Commands->commands.push_back(new SetSpeectConfigCommand(config,value));
