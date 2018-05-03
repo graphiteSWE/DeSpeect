@@ -57,23 +57,23 @@ public:
         
 		/*
 		 * Description: adds the commands related to the utterance processors whose names are in the given list (it doesn't check if they actually exist)
-		 * @param std::list<std::string>& - list of the utterance processors names
+		 * @param const std::list<std::string>& - list of the utterance processors names
 		 * @return CommandBuilder&
 		 */
         CommandBuilder& WithProcessors(const std::list<std::string>&);
         
 		/*
 		 * Description: adds the command needed to save the audio given the output file and the format (the default format is wav)
-		 * @param std::string& - path to output file
-		 * @param std::string& format - format to save the generated audio
+		 * @param const std::string& - path to output file
+		 * @param const std::string& format - format to save the generated audio
 		 * @return const CommandBuilder&
 		 */
         CommandBuilder& SaveAudio(const std::string&, const std::string & format="riff");
         
 		/*
 		 * Description: adds the command to set the Speect engine configuration
-		 * @param configName& - enum of the configuration type
-		 * @param string& - configuration
+		 * @param const configName& - enum of the configuration type
+		 * @param const string& - configuration
 		 * @return CommandBuilder&
 		 */
         CommandBuilder& LoadConfig(const Configuration::configName&,const std::string&);
@@ -131,40 +131,40 @@ public:
 	/*
 	 * Description: if exists, returns the named Relation, NULL otherwise
 	 * @param const std::string & - relation name
-	 * @return Relation*
+	 * @return const Relation*
 	 */
     const Relation* getRelation(const std::string &)const;
     
 	/*
 	 * Description: returns the list of the relations names
-	 * @return std::list<std::string>
+	 * @return const std::list<std::string>
 	 */
     const std::list<std::string> getRelationNames()const ;
     
 	/*
 	 * Description: returns the list of the utterance processors names
-	 * @return std::list<std::string>
+	 * @return const std::list<std::string>
 	 */
     const std::list<std::string> getUttProcessorsNames()const;
     
 	/*
 	 * Description: returns the list of the utterance processors names in the selected utterance type
-	 * @param std::string& - utterance type name
-	 * @return std::list<std::string>
+	 * @param const std::string& - utterance type name
+	 * @return const std::list<std::string>
 	 */
     const std::list<std::string> getUttProcessorsNames(const std::string&)const;
     
 	/*
 	 * Description: returns the list of the utterance type names in the loaded voice
-	 * @return std::list<std::string>
+	 * @return const std::list<std::string>
 	 */
     const std::list<std::string> getUttTypeNames()const;
     
 	/*
 	 * Description: returns the data related to the node given a relation and the path from head (ID of a graphic Node)
-	 * @param std::string& path - path to the node
+	 * @param const std::string& path - path to the node
 	 * @param const std::string& rel - relation name
-	 * @return std::map<std::string,std::string>
+	 * @return const std::map<std::string,std::string>
 	 */
     const std::map<std::string,std::string> getNode(const std::string& path, const std::string& rel);
 

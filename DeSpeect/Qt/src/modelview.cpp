@@ -10,6 +10,7 @@
 #include <QFont>
 #include <QInputDialog>
 #include <QProcess>
+
 ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     :QMainWindow(parent)
     ,ui(new Ui::View)
@@ -111,7 +112,7 @@ void ModelView::utteranceTypeChanged()
         }
     }
 }
-#include "iostream"
+
 void ModelView::findNode(QString rel, QString path, bool show)
 {
     std::map<std::string,std::string> m = commands->getNode(rel.toStdString(),path.toStdString());
@@ -243,9 +244,10 @@ void ModelView::search(const QString &search)
 
     QString path=properties->getNodeId().getID();
     QString rel=properties->getNodeId().getRelation();
+
     if(rel!=""){
-    path=path+"."+search;
-    findNode(rel,path,false);
+        path=path+"."+search;
+        findNode(rel,path,false);
     }
 }
 

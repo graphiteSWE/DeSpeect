@@ -26,7 +26,7 @@ public:
     /*
      * Description: executes the function and returns the log of execution. Errors follow the syntax := Operation,Status speect post execution
      * @param Speect* engine - Speect reference
-     * @return std::string
+     * @return const std::string
      */
     virtual const std::string execute(Speect* engine) const =0 ;
 

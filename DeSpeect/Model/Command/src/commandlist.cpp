@@ -6,6 +6,15 @@
 #include "regex"
 
 /*
+ * File: commandlist.cpp
+ * Type: src
+ * Date: 2018-04-20
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: list of commands that allows their execution
+ */
+ 
+/*
  * Description: executes all the commands in the list invoking their execute method, empties the list and fills the log with their return data
  * @return void
  */
@@ -83,7 +92,7 @@ int CommandList::getNumberCommands(){
 /*
  * Description: if exists, returns the named Relation, NULL otherwise
  * @param const std::string & - relation name
- * @return Relation*
+ * @return const Relation*
  */
 const Relation* CommandList::getRelation(const std::string& relation)const
 {
@@ -98,7 +107,7 @@ const Relation* CommandList::getRelation(const std::string& relation)const
 
 /*
  * Description: returns the list of the relations names
- * @return std::list<std::string>
+ * @return const std::list<std::string>
  */
 const std::list<std::string> CommandList::getRelationNames() const
 {
@@ -119,7 +128,7 @@ const std::list<std::string> CommandList::getUttProcessorsNames() const
 
 /*
  * Description: returns the list of the utterance processors names in the selected utterance type
- * @param std::string& - utterance type name
+ * @param const std::string& - utterance type name
  * @return std::list<std::string>
  */
 const std::list<std::string> CommandList::getUttProcessorsNames(const std::string &uttType) const
@@ -139,9 +148,9 @@ const std::list<std::string> CommandList::getUttTypeNames() const
 
 /*
  * Description: returns the data related to the node given a relation and the path from head (ID of a graphic Node)
- * @param std::string& path - path to the node
+ * @param const std::string& path - path to the node
  * @param const std::string& rel - relation name
- * @return std::map<std::string,std::string>
+ * @return const std::map<std::string,std::string>
  */
 const std::map<std::string, std::string> CommandList::getNode(const std::string &rel, const std::string &path)
 {
@@ -198,7 +207,7 @@ CommandList *CommandList::CommandBuilder::getCommandList()
 
 /*
  * Description: adds the commands related to the utterance processors whose names are in the given list (it doesn't check if they actually exist)
- * @param std::list<std::string>& - list of the utterance processors names
+ * @param const std::list<std::string>& - list of the utterance processors names
  * @return CommandBuilder&
  */
 CommandList::CommandBuilder &CommandList::CommandBuilder::WithProcessors(const std::list<std::string> &ProcessorsList)
@@ -211,9 +220,9 @@ CommandList::CommandBuilder &CommandList::CommandBuilder::WithProcessors(const s
 
 /*
  * Description: adds the command needed to save the audio given the output file and the format (the default format is wav)
- * @param std::string& - path to output file
- * @param std::string& format - format to save the generated audio
- * @return const CommandBuilder&
+ * @param const std::string& - path to output file
+ * @param const std::string& format - format to save the generated audio
+ * @return CommandBuilder&
  */
 CommandList::CommandBuilder &CommandList::CommandBuilder::SaveAudio(const std::string & outPutFile, const std::string& format)
 {
@@ -225,8 +234,8 @@ CommandList::CommandBuilder &CommandList::CommandBuilder::SaveAudio(const std::s
 
 /*
  * Description: adds the command to set the Speect engine configuration
- * @param configName& - enum of the configuration type
- * @param string& - configuration
+ * @param const configName& - enum of the configuration type
+ * @param const string& - configuration
  * @return CommandBuilder&
  */
 CommandList::CommandBuilder &CommandList::CommandBuilder::LoadConfig(const Configuration::configName &config, const std::string &value)
