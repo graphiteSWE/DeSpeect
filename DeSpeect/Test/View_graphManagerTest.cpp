@@ -122,3 +122,41 @@ TEST(Graph, VerifySelectItem){
     delete g;
 }
 
+
+TEST(Graph, VerifyGenerateRelation){
+    int argc;
+    char **argv=NULL;
+    QApplication app(argc,argv);
+
+    GraphManager* g = new GraphManager();
+
+    Speect* s=new Speect();
+    CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(s);
+    CommandList* commands;
+    commands=builder->LoadConfig(Configuration::Voice, "./cmu_arctic_slt/voice.json").getCommandList();
+    commands->executeAll();
+    std::string text="hi everybody";
+    commands=builder->LoadConfig(Configuration::UtteranceText, text).getCommandList();
+    commands->executeAll();
+    std::list<std::string> processorList;
+    std::list<std::string> processorName= commands->getUttProcessorsNames();
+    for(std::list<std::string>::iterator it=processorName.begin(); it!=processorName.end(); it++) {
+        processorList.push_back(it->c_str());
+    }
+    builder->WithProcessors(processorList);
+    commands=builder->getCommandList();
+    commands->executeAll();
+    foreach (auto t,commands->getRelationNames())
+    {
+        const Relation* currentRelation = commands->getRelation(t);
+        Item temp(currentRelation->getRelationHead());
+        g->printRelation(QString(t.c_str()),&temp,QColor(255,255,255));
+        g->printRelation(QString(t.c_str()),&temp,QColor(255,255,255));
+        delete currentRelation;
+    }
+
+    g->notifySelection();
+
+    EXPECT_TRUE(g);
+}
+
