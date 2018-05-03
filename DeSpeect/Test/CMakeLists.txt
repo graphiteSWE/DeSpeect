@@ -232,3 +232,25 @@ add_test(
     COMMAND
        View_nodeTest
     )
+
+########################################################################
+add_executable(
+    View_dataNodeManagerTest
+    View_dataNodeManagerTest.cpp
+    )
+
+target_link_libraries(
+    View_dataNodeManagerTest
+    ${Qt5Widgets_LIBRARIES}
+    QTGraph
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+       View_dataNodeManagerTest
+    COMMAND
+       View_dataNodeManagerTest
+    )
