@@ -145,7 +145,7 @@ public slots:
     void notifySelection();
     
     /*
-     * Description: selects and focuses the node given the relation and the path
+     * Description: focuses the node given the relation and the path
      * @param const QString& - Qt string as relation name (see Qt docs for more info) 
      * @param const QString& - Qt string as path (see Qt docs for more info) 
      * @return void

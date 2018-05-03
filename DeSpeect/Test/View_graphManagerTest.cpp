@@ -9,6 +9,7 @@
 #include "item.h"
 #include "graphmanager.h"
 #include "relation.h"
+#include <QGraphicsView>
 
 #include "../Model/Command/header/setspeectconfigcommand.h"
 #include "../Model/SpeectWrapper/header/Speect.h"
@@ -82,6 +83,9 @@ TEST(Graph, VerifyNotifySelection1){
 
     GraphManager* g = new GraphManager();
 
+    QGraphicsView* gView= new QGraphicsView();
+    g->linkGraphModel(gView);
+
     Speect* s=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(s);
     CommandList* commands;
@@ -105,9 +109,13 @@ TEST(Graph, VerifyNotifySelection1){
         g->printRelation(QString(t.c_str()),&temp,QColor(255,255,255));
         delete currentRelation;
     }
+    QList<QGraphicsItem *> list = gView->items();
 
-    g->selectItem("Token"," ");
-    g->selectItem("Token"," .n");
+    foreach(auto item,list)
+    {
+        item->setSelected(true);
+    }
+
     g->notifySelection();
 
     EXPECT_TRUE(g);
