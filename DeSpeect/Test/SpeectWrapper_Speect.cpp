@@ -92,11 +92,29 @@ TEST(SpeectWrapper,FetchNodeOutOfBoundPath){
     delete builder;
     delete sTest;
 }
-TEST(SpeectWrapper,FetchNodeOutOfBoundPathReinitializedUtt){
+TEST(SpeectWrapper,ReinitializedUtt){
     Speect* sTest=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
     builder->LoadConfig(Configuration::Voice,"./cmu_arctic_slt/voice.json").getCommandList()->executeAll();
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody Jonny").getCommandList()->executeAll();
+    std::list<std::string> l;
+    l.push_back("Tokenize");
+    l.push_back("Normalize");
+    builder->WithProcessors(l).getCommandList()->executeAll();
+    EXPECT_TRUE(sTest->getNode(" .n.n.n.n.n.n.n","Tokenas").size()<=2);
+    delete builder;
+    delete sTest;
+}
+TEST(SpeectWrapper,ReinitializedVoice){
+    Speect* sTest=new Speect();
+    CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
+    builder->LoadConfig(Configuration::Voice,"./cmu_arctic_slt/voice.json").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody Jonny").getCommandList()->executeAll();
+
+    builder->LoadConfig(Configuration::Voice,"./cmu_arctic_slt/voice.json").getCommandList()->executeAll();
+    
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody Jonny").getCommandList()->executeAll();
     std::list<std::string> l;
     l.push_back("Tokenize");
