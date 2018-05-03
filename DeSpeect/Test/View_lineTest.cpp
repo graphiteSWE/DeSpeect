@@ -39,7 +39,7 @@ TEST(Graph, VerifyLineNotCollidingDashed){
     QWidget* temp= new QWidget();
     QColor colore(255,255,255);
     Line* l1;
-    l1=new Line(12,colore,true,NULL);
+    l1=new Line(5,colore,true,NULL);
 
     QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem();
     QPointF* start = new QPointF(0,0);
