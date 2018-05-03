@@ -30,19 +30,19 @@ const std::list<std::string> Utterance::getRelationNamesList() const
     s_erc error=S_SUCCESS;
     SList* temp=NULL;
     if(utt)
-    temp=SUtteranceRelationsKeys(utt,&error);
+        temp=SUtteranceRelationsKeys(utt,&error);
 
     std::list<std::string> l;
     if(temp!=NULL)
     {
-    while(!SListIsEmpty(temp,&error))
-    {
+        while(!SListIsEmpty(temp,&error))
+        {
 
-        SObject*obj=SListPop(temp,&error);
-        l.push_front(std::string(SObjectGetString(obj,&error)));
-        S_DELETE(obj,NULL,&error);
-    }
-    S_DELETE(temp,NULL,&error);
+            SObject*obj=SListPop(temp,&error);
+            l.push_front(std::string(SObjectGetString(obj,&error)));
+            S_DELETE(obj,NULL,&error);
+        }
+        S_DELETE(temp,NULL,&error);
     }
     return l;
 }

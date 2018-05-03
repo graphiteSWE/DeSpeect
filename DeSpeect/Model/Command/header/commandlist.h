@@ -30,7 +30,7 @@ public:
         CommandList* Commands;
     public:
         //constructor of the builder
-        CommandBuilder(Speect* engine);
+        explicit CommandBuilder(Speect* engine);
         //destructor of the builder
         ~CommandBuilder();
         //return the builded commandList
@@ -79,7 +79,7 @@ private:
 
     //don't allow construction outside the builder
     CommandList();
-    CommandList(Speect* engine);
+    explicit CommandList(Speect* engine);
 
 };
 #endif // COMMANDLIST_H
