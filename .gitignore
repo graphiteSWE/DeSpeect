@@ -77,5 +77,6 @@ dkms.conf
 
 # Build folder
 build/
+*.user
 
 *.a071787

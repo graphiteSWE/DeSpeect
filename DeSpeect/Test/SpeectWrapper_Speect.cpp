@@ -14,7 +14,7 @@
 #include <QProcess>
 #include <thread>
 
-TEST(SpeectWrapper,FetchNodeSuccess){
+TEST(SpeectWrapper,FetchNodeSuccessDaughter){
     Speect* sTest=new Speect();
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
     builder->LoadConfig(Configuration::Voice,"./cmu_arctic_slt/voice.json").getCommandList()->executeAll();
@@ -24,6 +24,19 @@ TEST(SpeectWrapper,FetchNodeSuccess){
     l.push_back("Normalize");
     builder->WithProcessors(l).getCommandList()->executeAll();
     EXPECT_TRUE(sTest->getNode(" .n.p.daughter.R:Word.R:Token.parent.daughter","Token").size()>=2);
+    delete builder;
+    delete sTest;
+}
+TEST(SpeectWrapper,FetchNodeSuccessNext){
+    Speect* sTest=new Speect();
+    CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
+    builder->LoadConfig(Configuration::Voice,"./cmu_arctic_slt/voice.json").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
+    std::list<std::string> l;
+    l.push_back("Tokenize");
+    l.push_back("Normalize");
+    builder->WithProcessors(l).getCommandList()->executeAll();
+    EXPECT_TRUE(sTest->getNode(" .n.p.daughter.R:Word.R:Token.parent.n.daughter","Token").size()>=2);
     delete builder;
     delete sTest;
 }
@@ -71,6 +84,20 @@ TEST(SpeectWrapper,FetchNodeOutOfBoundPath){
     CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
     builder->LoadConfig(Configuration::Voice,"./cmu_arctic_slt/voice.json").getCommandList()->executeAll();
     builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
+    std::list<std::string> l;
+    l.push_back("Tokenize");
+    l.push_back("Normalize");
+    builder->WithProcessors(l).getCommandList()->executeAll();
+    EXPECT_TRUE(sTest->getNode(" .n.n.n.n.n.n.n","Tokenas").size()<=2);
+    delete builder;
+    delete sTest;
+}
+TEST(SpeectWrapper,FetchNodeOutOfBoundPathReinitializedUtt){
+    Speect* sTest=new Speect();
+    CommandList::CommandBuilder* builder=new CommandList::CommandBuilder(sTest);
+    builder->LoadConfig(Configuration::Voice,"./cmu_arctic_slt/voice.json").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody").getCommandList()->executeAll();
+    builder->LoadConfig(Configuration::UtteranceText,"hi everybody Jonny").getCommandList()->executeAll();
     std::list<std::string> l;
     l.push_back("Tokenize");
     l.push_back("Normalize");

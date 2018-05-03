@@ -1,14 +1,18 @@
---- 
-exclude: 
+
+exclude:
   - /SpeectInstaller/.*
   - /DeSpeect/Test/.*
-  - /DeSpeect/Qt/.*
   - .*\.txt
-languages: 
-  - name: cpp
-    production: 
-      include: 
-        - /DeSpeect/Model/.*
-    test: 
-      include: 
-        - /DeSpeect/Test/.*\.cpp
+  - .*\.md
+
+component_depth: 3
+
+languages:
+    - name: cpp
+    production:
+        include:
+            - /DeSpeect/*
+            - *.cpp
+    test:
+        include:
+            - /DeSpeect/Test/.*\.cpp
