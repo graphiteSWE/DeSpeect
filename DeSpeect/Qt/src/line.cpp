@@ -2,7 +2,19 @@
 #include <QVector2D>
 #include <qpainter.h>
 
-//calculate if the two nodes are colliding
+/*
+ * File: line.h
+ * Type: header
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: graphic line connecting two nodes
+ */
+
+/*
+ * Description: checks if the nodes are colliding
+ * @return void
+ */
 void Line::NodesColliding()
 {
     qreal x=MyPoints.x1()-MyPoints.x2();
@@ -11,12 +23,16 @@ void Line::NodesColliding()
 
     }
 
-//virtual destructor
+//Description: Line destructor 
 Line::~Line()
 {
 }
 
-//fix the starting point
+/*
+ * Description: fix the position of start and end to be the closest of the circle of the two nodes,
+ * 				used when drawing not to draw from center to center of the nodes 
+ * @return void
+ */
 QPointF Line::FixStart()
 {
     //calculate direction vector and normalize it
@@ -26,7 +42,6 @@ QPointF Line::FixStart()
     return MyPoints.p1()-directionVector.toPointF()*offsetFromPoint;
 }
 
-//fix the end point
 QPointF Line::FixEnd()
 {
     //calculate direction vector and normalize it
@@ -36,10 +51,13 @@ QPointF Line::FixEnd()
     return (MyPoints.p2()+directionVector.toPointF()*offsetFromPoint);
 }
 
-//offset from the point to where draw
-//color is the color of the line
-//dashed==1 if the line is dashed
-//parent is the parent item
+/*
+ * Description: Line constructor
+ * @param const int radius - radius to offset
+ * @param const QColor& color - Qt color as line color (see Qt docs for more info)
+ * @param bool dashed - indicates if the line is dashed
+ * @param QGraphicsItem*parent - Qt graphics item as parent (see Qt docs for more info)
+ */
 Line::Line(const int offset, const QColor&color, bool dashed, QGraphicsItem *parent)
     :QGraphicsObject(parent)
     ,offsetFromPoint(offset)
@@ -50,7 +68,12 @@ Line::Line(const int offset, const QColor&color, bool dashed, QGraphicsItem *par
     this->color.setAlphaF(0.5);
 }
 
-//slot to update the line start point
+/*
+ * Description: slots to update the position of the line, used to update position when the item is
+ * 				connected to move the QPointF given at the center of the object
+ * @param const QPointF& startPoint - Qt point as starting point (see Qt docs for more info)
+ * @return void
+ */
 void Line::UpdateStartPoint(const QPointF& startPoint)
 {
     //update start point to new point
@@ -59,7 +82,6 @@ void Line::UpdateStartPoint(const QPointF& startPoint)
     NodesColliding();
 }
 
-//slot to update the line end point
 void Line::UpdateEndPoint(const QPointF &endPoint)
 {
     //update last point to new endpoint
@@ -67,7 +89,15 @@ void Line::UpdateEndPoint(const QPointF &endPoint)
     //check if the two nodes it connect collide
     NodesColliding();
 }
-//slot to change visibility
+
+/*
+ * Description: set visibility to:
+ * 				- 1  if the line must be drawn
+ * 				- 0  if one node is hidden
+ * 				- -1 if both
+ * @param bool - indicates the visibility state
+ * @return void
+ */
 void Line::changeVisibility(bool vis)
 {
     //if has parent visibility depends on parent
@@ -83,14 +113,14 @@ void Line::changeVisibility(bool vis)
     }
 }
 
-//rect used for drawing
+// QGraphicsItem interface
+
 QRectF Line::boundingRect() const
 {
 
     return QRectF(MyPoints.p1(),MyPoints.p2()).normalized();
 }
 
-//how draw the line
 void Line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     //if nodes are colliding don t draw
@@ -106,6 +136,4 @@ void Line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setPen(mypen);
     //draw the line
     painter->drawLine(QLineF(FixStart(),FixEnd()));
-
-
 }
