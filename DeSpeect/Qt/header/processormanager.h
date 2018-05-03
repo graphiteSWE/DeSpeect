@@ -1,46 +1,96 @@
 #ifndef PROCESSORMANAGER_H
 #define PROCESSORMANAGER_H
-
 #include <QStandardItemModel>
 #include <QStandardItem>
 #include <QListView>
-//this class handle the model that allow printing of the processors
 
+/*
+ * File: processormanager.h
+ * Type: header
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: handles the model that allows the printing of the processors
+ */
+ 
 class ProcessorManager : public QObject
 {
+    //Macro used to enable Qt signals and slots
     Q_OBJECT
+    
 private:
-    //model of the processors
+    //Field: model of the processors
     QStandardItemModel* ProcessorModel;
-    //index of current processor execution
+
+    //Field: index of the current processor execution
     int indexProcessor;
 
 public:
-    //build the manager
+    // Description: ProcessorManager constructor
     ProcessorManager();
-    //clear memory before destruction
+    // Description: ProcessorManager destructor
     ~ProcessorManager();
 
-    //link the view to the model
+    /*
+     * Description: links the view to the model
+     * @param QListView* v - Qt list view (see Qt docs for more info)
+     * @return void
+     */
     void linkProcessorModel(QListView* v);
-    //set all items to normal font and last executed processor to none
+    
+    /*
+     * Description: sets all the items to the normal font and the last executed processor to none
+     * @return void
+     */
     void clearLayoutProcessor();
-    //lock changes in the model
-    //used while executing
+    
+    /*
+     * Description: locks changes in the model, used while executing
+     * @return void
+     */
     void lockUpdateItem();
-    //unlock changes in the model
+    
+    /*
+     * Description: unlocks changes in the model
+     * @return void
+     */
     void unlockUpdateItem();
-    //change font color to the next processor
+    
+    /*
+     * Description: changes the font color to the next processor
+     * @return void
+     */
     void evidenceNextProcessor();
-    //change font color of all processors if index is valid set item to bold
+    
+    /*
+     * Description: changes the font color of all the processors, if index is valid set the item to bold
+     * @return void
+     */
     void evidenceAllProcessor();
-    //return if index of processor is valid
+    
+    /*
+     * Description: returns whether the index of the processor is valid
+     * @return bool
+     */
     bool isLayoutClean();
-    //return the list of selected processor
+    
+    /*
+     * Description: returns the list of the selected processor
+     * @return std::list<std::string>
+     */
     std::list<std::string> getProcessorList();
-    //add a processor to the model
+    
+    /*
+     * Description: adds a processor to the model
+     * @param std::string name - processor name
+     * @return void
+     */
     void addProcessor(std::string name);
-    //clear the  model
+    
+    /*
+     * Description: clears the model
+     * @return void
+     */
     void clear();
 };
 

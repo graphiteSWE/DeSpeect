@@ -11,65 +11,138 @@ class View;
 #include "datanodemanager.h"
 #include <processormanager.h>
 
-
 class GraphManager;
-//this class handle all connection between the models that
-//defines how the view is printed and communicate with the model
+
+/*
+ * File: modelview.h
+ * Type: header
+ * Date: 2018-04-23
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: handles all the connections among the models that define how the view is printed and communicate with the model
+ */
+ 
 class ModelView : public QMainWindow
 {
-    //derives from qobject and implement signals and slot
+    //Macro used to enable Qt signals and slots
     Q_OBJECT
-
+    
 public:
-    //allow to build the model view
+    /*
+     * Description: ModelView constructor
+     * @param CommandList::CommandBuilder* commandBuilder - builder for the command list
+     * @param QWidget *parent - Qt widget as parent (see Qt docs for more info)
+     */
     explicit ModelView(CommandList::CommandBuilder* commandBuilder,QWidget *parent = 0);
-    //destroy the modelview
+    
+    /*
+     * Description: returns the View
+     * @return Ui::View* 
+     */
     Ui::View* getUiView() const;
+    
+    //Description: ModelView destructor
     ~ModelView();
 private:
-    //pointer to the builder that will allow to build commandlist
+
+	//Field: pointer to the builder that allows to build a command list
     CommandList::CommandBuilder* commandsBuilder;
-    //allow to execute commands on the model and request specific data from it
+    
+    //Field: allows to execute commands on the model and request specific data from it
     CommandList* commands;
-    //models the speect graph,and allow the display of it
+    
+    //Field: models the speect graph and allows its display
     GraphManager* g;
-    //model the properties of a node and the display of them
+    
+    //Field: models the set of properties of a node and their display
     DataNodeManager *properties;
-    //model the processors in a given utterance and allow to display them
+    
+    //Field: models the processors in a given utterance and allows their display
     ProcessorManager* p;
-    //QML of the view
+    
+    //Field: qml of the view (see Qt docs for more info)
     Ui::View *ui;
-    //list of all colors available to print the graph
+    
+    //Field: list of all colors available to print the graph
     QVector<QColor>colors;
-    //private function of utility
-    //that tell the ui to change not model dependant graphics
-    //print the error log
+    
+    /*
+     * Description: private utility function telling the UI not to change the model dependant graphics and prints the log
+     * @return void
+     */
     void printLog();
-    //don't allow change while executing
+    
+    /*
+     * Description: doesn't allow changing while executing
+     * @return void
+     */
     void lockUpdateItem();
-    //re enable changes to execution
+    
+    /*
+     * Description: re enables changing after executing
+     * @return void
+     */
     void unlockUpdateItem();
+    
 public slots:
-    //slots to catch ui signal and act based on the request
-    //the selectbox of utterance type changed, tell processor manager to show the processors
+    
+    /*
+     * Description: slots to catch ui signals and act according to the request the selectbox of utterance type changed,
+     * 				tells THE processor manager to show the processors 
+     * @return void
+     */
     void utteranceTypeChanged();
-    //a node is selected ask the model the real node information and then tell datanodemanager to print them
+    
+    /*
+     * Description: if a node is selected, asks the model for the real node information and then tells datanodemanager to print them
+     * @param QString - Qt string as relation name (see Qt docs for more info)
+     * @param QString - Qt string as path to node (see Qt docs for more info)
+     * @param bool - showing status
+     * @return void
+     */
     void findNode(QString,QString,bool);
-    //catch the request to create and execute the selected processors, also create the utterance.
+    
+    /*
+     * Description: catches the request to create and execute the selected processors, also creates the utterance.
+     * @param execSteps - step by step execution status
+     * @return void
+     */
     void requestProcessorRun(bool execSteps=0);
-    //this call the request processor run with execStep=1 and allow single step execution
+    
+    /*
+     * Description: call the request processor run with execStep=1 and allow single step execution
+     * @return void
+     */
     void runSingleStep();
-    //called by request processors run to initialize the utterance,
-    //and by the view button to create a utterance and load the single step run
+    
+    /*
+     * Description: called by requestProcessorsRun to initialize the utterance
+     * 				and by the view button to create a utterance and load the single step run
+     * @return void
+     */
     void loadSelectedProcessor();
-    //request to save the audio to the file, it's connected to the signal of the file browser
+    
+    /*
+     * Description: requests to save the audio to the file, it's connected to the signal of the file browser
+     * @param QString - Qt string as output destination (see Qt docs for more info)
+     * @return void
+     */
     void requestAudioSave(QString);
-    //create the command to request the configuration
+    
+    /*
+     * Description: creates the command to request the configuration
+     * @param const QString& info - Qt string as configuration info (see Qt docs for more info)
+     * @param const Configuration::configName&config = Configuration::Voice - voice config 
+     * @return void
+     */
     void requestConfiguration(const QString& info,const Configuration::configName&config = Configuration::Voice);
-    //ask model to search the path from the selected node and print if found
+    
+    /*
+     * Description: asks the model to search the path from the selected node and print it if it's been found
+     * @param const QString& - Qt string as search path (see Qt docs for more info)
+     * @return void
+     */
     void search(const QString&);
-
-
 };
 
 #endif // MODELVIEW_H
