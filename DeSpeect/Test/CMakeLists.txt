@@ -320,3 +320,23 @@ add_test(
     COMMAND
        SpeectWrapper_relation
     )
+
+########################################################################
+add_executable(
+    Command_commandlist
+    Command_commandlist.cpp
+    )
+
+target_link_libraries(
+    Command_commandlist
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+       Command_commandlist
+    COMMAND
+       Command_commandlist
+    )

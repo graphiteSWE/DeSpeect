@@ -61,12 +61,12 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   - "sonar-scanner \
     -Dsonar.projectKey=DeSpeect_Official_Build \
-    -Dsonar.sources=DeSpeect/Qt,DeSpeect/Model/** \
+    -Dsonar.sources=DeSpeect/ \
     -Dsonar.cfamily.build-wrapper-output=bw-output \
     -Dsonar.host.url=https://sonarcloud.io \
     -Dsonar.organization=graphiteswe-github \
     -Dsonar.login=8b51b6fb3d84c5b90bd692bcdee2005f3bc81bc6 \
     -Dsonar.test=DeSpeect/Test \
     -Dsonar.cfamily.gcov.reportsPath=. \
-    -Dsonar.coverage.exclusions=DeSpeect/Test/*,DeSpeect/Model/Command/header/*,DeSpeect/Model/SpeectWrapper/header/*,DeSpeect/Qt/header/*,DeSpeect/main.cpp \
-    -Dsonar.exclusions=DeSpeect/Test/** "    
+    -Dsonar.exclusions=DeSpeect/Test/* \
+    -Dsonar.coverage.exclusions=DeSpeect/Model/Command/header/*,DeSpeect/Model/SpeectWrapper/header/*,DeSpeect/Qt/header/*,DeSpeect/main.cpp"

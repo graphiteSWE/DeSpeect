@@ -21,7 +21,7 @@ public:
 
 	/*
 	 * Description: builds a plugin command given the path to the plugin
-	 * @param std::string& - path to the plugin
+	 * @param const std::string& - path to the plugin
 	 */
     explicit LoadPluginCommand(const std::string&);
     

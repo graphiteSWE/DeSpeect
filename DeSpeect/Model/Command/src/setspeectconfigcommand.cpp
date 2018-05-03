@@ -2,9 +2,18 @@
 #include "setspeectconfigcommand.h"
 
 /*
+ * File: setspeectconfigcommand.cpp
+ * Type: src
+ * Date: 2018-04-20
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: command to set a Speect configuration
+ */
+ 
+/*
  * Description: builds a configuration command given a config name and a config value
- * @param Configuration::configName& - config type
- * @param std::string& - config value
+ * @param const Configuration::configName& - config type
+ * @param const std::string& - config value
  */
 SetSpeectConfigCommand::SetSpeectConfigCommand(
         const Configuration::configName &name
@@ -25,7 +34,7 @@ SetSpeectConfigCommand::SetSpeectConfigCommand(
  * 				checks what it's been asked to configure and the related prerequisite,
  * 				if it's either voice or utterance it also asks Speect to initialize itself with the correct data
  * @param Speect *SpeectEngine - Speect reference
- * @return std::string
+ * @return const std::string
  */
 const std::string SetSpeectConfigCommand::execute(Speect *SpeectEngine) const
 {

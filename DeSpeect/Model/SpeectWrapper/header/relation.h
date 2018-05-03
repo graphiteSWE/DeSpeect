@@ -2,20 +2,44 @@
 #define RELATION_H
 #include "string"
 #include "item.h"
-//model a SRelation only keeping the head of the graph and the name
+
+/*
+ * File: relation.h
+ * Type: header
+ * Date: 2018-04-20
+ * E-mail: graphite.swe@gmail.com
+ * 
+ * Description: models a SRelation by keeping the head of the graph and the its name
+ */
+ 
 class Relation
 {
 private:
-    //head of the relation
+
+    //Field: head of the relation
     Item relationHead;
-    //name of the relation
+
+    //Field: name of the relation
     std::string name;
 public:
-    //create the SRelation wrapper
+
+    /*
+    * Description: Relation constructor
+    * @param const Item &item - head of the relation
+    * @param const std::string& name - name of the relation
+    */
     Relation(const Item &item, const std::string& name);
-    //return the relation name
+ 
+    /*
+     * Description: returns the name of the relation
+     * @return const std::string& 
+     */
     const std::string& getName()const ;
-    //return the relationhead
+    
+    /*
+     * Description: returns the head of the relation
+     * @return Item 
+     */
     Item getRelationHead()const;
 };
 #endif // RELATION_H
