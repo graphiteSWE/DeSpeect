@@ -276,3 +276,26 @@ add_test(
     COMMAND
        SpeectWrapper_Speect
     )
+
+########################################################################
+add_executable(
+    View_lineTest
+    View_lineTest.cpp
+    )
+
+target_link_libraries(
+    View_lineTest
+    ${Qt5Widgets_LIBRARIES}
+    QTGraph
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+       View_lineTest
+    COMMAND
+       View_lineTest
+    )
+
