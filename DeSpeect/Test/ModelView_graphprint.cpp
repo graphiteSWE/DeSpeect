@@ -32,8 +32,8 @@ TEST(View, Graphprint){
     mv.requestAudioSave("test.wav");
     mv.utteranceTypeChanged();
     mv.loadSelectedProcessor();
-    mv.findNode("Token","",false);
-    mv.findNode("Token","",true);
+    mv.findNode("Token"," ",false);
+    mv.findNode("Token"," ",true);
     sTest->getUttTypeName();
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
@@ -90,8 +90,6 @@ TEST(View, ModelViewSearch){
 
     auto it=list.begin();
     (*it)->setSelected(true);
-
-    mv->findNode("Token"," ",false);
     mv->search(" .n");
 
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
@@ -118,8 +116,8 @@ TEST(View, Graphprintwithmoreprocessor){
     mv.requestAudioSave("test.wav");
     mv.utteranceTypeChanged();
     mv.loadSelectedProcessor();
-    mv.findNode("Token","",false);
-    mv.findNode("Token","",true);
+    mv.findNode("Token"," ",false);
+    mv.findNode("Token"," ",true);
     sTest->getUttTypeName();
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
