@@ -18,7 +18,7 @@ mkdir build/Test
 
 cp -r ./SpeectInstaller/voices/cmu_arctic_slt ./build/Test
 cd build
-cmake ../DeSpeect -DENABLE_COVERAGE=On || exit 1
+cmake ../DeSpeect -DENABLE_COVERAGE=On -DTest=TRUE || exit 1
 make || exit 2
 xvfb-run ctest --verbose || exit 4
 gcov -o ../gcov_file ../DeSpeect/main.cpp
