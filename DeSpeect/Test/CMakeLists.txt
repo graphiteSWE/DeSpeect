@@ -342,3 +342,25 @@ add_test(
     COMMAND
        View_graphManagerTest
     )
+
+########################################################################
+add_executable(
+    View_processorhManagerTest
+    View_processorhManagerTest.cpp
+    )
+
+target_link_libraries(
+    View_processorhManagerTest
+    ${Qt5Widgets_LIBRARIES}
+    QTGraph
+    gtest_main
+    Command
+    SpeectWrapper
+    ${despeect}
+    )
+add_test(
+    NAME
+       View_processorhManagerTest
+    COMMAND
+       View_processorhManagerTest
+    )
