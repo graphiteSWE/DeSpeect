@@ -9,6 +9,8 @@
 #include <QColor>
 #include "item.h"
 
+#include <QGraphicsSceneMouseEvent>
+
 //#include <QtTest/QTest>
 TEST(Graph, VerifyNodePaint){
     int argc;
@@ -103,18 +105,6 @@ TEST(Graph, VerifyNodeEqNodeID){
     EXPECT_TRUE(n1==idN1);
 
 }
-/*
-TEST(Graph, VerifyNodeMouseRelease){
-    int argc;
-    char **argv=NULL;
-    QApplication app(argc,argv);
-
-    Node* n = new Node("n1","n1","n1",0,0,10,QColor(255,0,0),NULL);
-    QTest::mouseRelease(n,Qt::LeftButton);
-
-    EXPECT_TRUE(n);
-
-}*/
 
 TEST(Graph, VerifyNodeCatchVisibility){
     int argc;
@@ -125,5 +115,20 @@ TEST(Graph, VerifyNodeCatchVisibility){
     n->catchVisibilityChange();
 
     EXPECT_TRUE(n);
+
+}
+
+
+TEST(Graph, VerifyNodeMouseRelease){
+    int argc;
+    char **argv=NULL;
+    QApplication app(argc,argv);
+    Node* n = new Node("n1","n1","n1",0,0,10,QColor(255,0,0),NULL);
+    QGraphicsSceneMouseEvent e(QEvent::GraphicsSceneMouseRelease);
+    n->mouseReleaseEvent(&e);
+
+    EXPECT_TRUE(n);
+
+    delete n;
 
 }
