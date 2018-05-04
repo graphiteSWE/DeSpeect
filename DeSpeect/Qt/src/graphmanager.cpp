@@ -301,7 +301,7 @@ void GraphManager::notifySelection()
     QList<QGraphicsItem*> selected(Graph->selectedItems());
     if(!selected.empty())
     {
-    auto myNode=std::find(Printed.begin(),Printed.end(),selected.first());
+    auto myNode=std::find(Printed.begin(),Printed.end(),Graph->focusItem());
 
         if(myNode!=Printed.end())
         {
