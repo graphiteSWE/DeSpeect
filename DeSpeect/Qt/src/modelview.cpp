@@ -273,20 +273,6 @@ void ModelView::requestAudioSave(QString output)
 }
 
 /*
-void ModelView::requestPluginLoad(const QList<QString>& pluginPaths)
-{
-    t9.clear();
-    AbstractCommand* temp;
-    foreach(auto t , pluginPaths)
-    {
-        t9.push_back(new LoadPluginCommand(t.toStdString()));
-        temp=t9.takeFirst();
-        temp->execute(s);
-        delete temp;   }
-}*/
-
-
-/*
  * Description: creates the command to request the configuration
  * @param const QString& info - Qt string as configuration info (see Qt docs for more info)
  * @param const Configuration::configName&config = Configuration::Voice - voice config 
