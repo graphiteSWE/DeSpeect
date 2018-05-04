@@ -20,6 +20,21 @@ TEST(Graph, VerifyProcessorManagerIsClear){
 
 }
 
+TEST(Graph, VerifyProcessorManagerClearLayout){
+    int argc;
+    char **argv=NULL;
+    QApplication app(argc,argv);
+
+    ProcessorManager *p=new ProcessorManager();
+
+    p->clearLayoutProcessor();
+
+    EXPECT_TRUE(p->isLayoutClean());
+
+    delete p;
+
+}
+
 TEST(Graph, VerifyProcessorManagerEvidenceNext){
     int argc;
     char **argv=NULL;
