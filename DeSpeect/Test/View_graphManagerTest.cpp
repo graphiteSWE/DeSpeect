@@ -54,6 +54,7 @@ TEST(Graph, VerifyChangeRelationVisibility2){
     {
         const Relation* currentRelation = commands->getRelation(t);
         Item temp(currentRelation->getRelationHead());
+        temp.isNull();
         g->printRelation(QString(t.c_str()),&temp,QColor(255,255,255));
         delete currentRelation;
 
