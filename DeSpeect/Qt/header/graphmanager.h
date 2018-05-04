@@ -40,12 +40,6 @@ private:
     //Field: map of all the relations and the items that represent the relations on the graph (used to hide a selected relation)
     QMap<QString,QGraphicsRectItem*> Relations;
     
-    /*
-     * Description: GraphManager copy constructor, made private to avoid copy costruction of the manager
-     * @param const GraphManager& - GraphManager to be copied
-     */
-    GraphManager(const GraphManager&);
-    
 public:
 
 	// Description: GraphManager constructor 
@@ -54,6 +48,12 @@ public:
 	// Description: GraphManager destructor
     ~GraphManager();
     
+    /*
+     * Description: GraphManager copy constructor, made private to avoid copy costruction of the manager
+     * @param const GraphManager& - GraphManager to be copied
+     */
+    GraphManager(const GraphManager&)=delete;
+
     /*
      * Description: returns the graph model to be linked with the view
      * @param QGraphicsView* view - Qt graphic view as view component (see Qt docs for more info)

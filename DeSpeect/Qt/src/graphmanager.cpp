@@ -14,14 +14,6 @@
  * 
  * Description: manage graphs and relations to keep the two models coherent 
  */
- 
-/*
- * Description: GraphManager copy constructor, made private to avoid copy costruction of the manager
- * @param const GraphManager& - GraphManager to be copied
- */
-GraphManager::GraphManager(const GraphManager &)
-{
-}
 
 // Description: GraphManager constructor 
 GraphManager::GraphManager()
