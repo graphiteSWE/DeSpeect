@@ -15,6 +15,7 @@
 #include "QTextStream"
 #include <QFont>
 #include <QProcess>
+#include <QGraphicsItem>
 
 TEST(View, Graphprint){
     int argc;
@@ -79,11 +80,12 @@ TEST(View, ModelViewSearch){
     mv= new ModelView(builder);
     mv->requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
     Ui::View* ui = mv->getUiView();
-    ui->UtteranceText->setPlainText("hi");
+    ui->UtteranceText->setPlainText("hi world");
+
     mv->loadSelectedProcessor();
     mv->requestProcessorRun(false);
     mv->findNode("Token"," ",false);
-    mv->search(" ");
+    mv->search(" .n");
 
     EXPECT_TRUE(NULL!=sTest->getUtterance()->getUtterance());
 
