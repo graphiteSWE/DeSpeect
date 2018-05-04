@@ -80,10 +80,17 @@ TEST(View, ModelViewSearch){
     mv= new ModelView(builder);
     mv->requestConfiguration("./cmu_arctic_slt/voice.json", Configuration::Voice);
     Ui::View* ui = mv->getUiView();
-    ui->UtteranceText->setPlainText("hi world");
+    ui->UtteranceText->setPlainText("hello world");
 
     mv->loadSelectedProcessor();
     mv->requestProcessorRun(false);
+
+    QGraphicsView* gView = ui->graphicsView;
+    QList<QGraphicsItem *> list =gView->items();
+
+    auto it=list.begin();
+    (*it)->setSelected(true);
+
     mv->findNode("Token"," ",false);
     mv->search(" .n");
 
