@@ -25,6 +25,9 @@ rm -rf $OUTPUTFOLDER/SpeectInstaller/install
 cd $OUTPUTFOLDER
 #build Speect
 cd SpeectInstaller
+if [ -d ./source/speect ]; then
+./install.sh download
+fi
 ./install.sh no-download
 rm -rf ./downloads
 rm -rf ./sources
