@@ -17,11 +17,13 @@ fetch_googletest(
 endif(${Test})
  
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}-no-pie")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}-no-pie")
 
 if(${Test})
-set(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS=" -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftest-coverage -fprofile-arcs")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ftest-coverage -fprofile-arcs")
 endif(${Test})
 
 ## aggiunta Speect

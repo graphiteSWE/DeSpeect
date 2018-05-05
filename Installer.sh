@@ -6,6 +6,7 @@ apt-get install libxext-dev
 
 ##prepare folder
 OUTPUTFOLDER=$(zenity --file-selection --directory)
+if [ -n "$OUTPUTFOLDER" ]; then
 rm -rf $OUTPUTFOLDER/DeSpeect_SWE
 mkdir $OUTPUTFOLDER/DeSpeect_SWE
 
@@ -48,3 +49,6 @@ cd ..
 rm -r DeSpeect
 rm -rf ./Despeect
 ln -s $OUTPUTFOLDER/DespeectInstall/main ./DeSpeect
+else
+echo failed
+fi
