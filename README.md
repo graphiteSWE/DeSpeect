@@ -1,11 +1,11 @@
 # Despeect
 
-[![Build Status](https://travis-ci.org/graphiteSWE/Despeect-ProductBaseline.svg?branch=master)](https://travis-ci.org/graphiteSWE/Despeect-ProductBaseline)
+[![Build Status](https://travis-ci.org/graphiteSWE/DeSpeect.svg?branch=master)](https://travis-ci.org/graphiteSWE/DeSpeect)
 [![BCH compliance](https://bettercodehub.com/edge/badge/graphiteSWE/DeSpeect?branch=master)](https://bettercodehub.com/)
 
 A GUI and debugging tool for the Speect TTS library.
 
-![](header.jpg)
+![](header.png)
 
 ## Introduction
 
@@ -31,26 +31,39 @@ DeSpeect is a graphical interface for Speect [Meraka Institute (2008-2013)], a l
 
 ### Installing
 
-In order to intall the application, you need to execute the following steps:
+You can run DeSpeect in two different ways, according to your needs:
 
-1. Clone or download the repository
-2. Execute the `build.sh` script in the root directory
+1. Developer build
+* Clone or download the repository
+* Execute the `build.sh` script in the root directory
 
-This will install Speect and create a build for DeSpeect in `DeSpeect/build/`
+This will install Speect, create a build for DeSpeect in `DeSpeect/build/` and run the related tests.
+
+1. User build
+* Clone or download the repository
+* Execute the `Installer.sh` script in the root directory
+* Select a destination folder for the installation
+
+This will install Speect and create a build for DeSpeect, without running any test.
 
 ## Running the tests
 
 The tests for DeSpeect are implemented through the Google Test framework and they are run at every build by Travis CI.
-Once you have installed the application, you can run the related tests by entering the build directory (`DeSpeect/build/`) and using either the `ctest` or `unit_tests` commands.
+In order to run the tests locally, you need to perform a developer build which runs the tests automatically. Once you have installed the application, you can run the related tests by entering the build directory (`DeSpeect/build/`) and using either the `ctest` or `unit_tests` commands.
 
 ## Usage
 
 ### Running the application
 
-In order to run the application, you need to execute the following steps:
+You can run DeSpeect in two different ways, depending on how decided to install it:
 
-1. Enter the bin directory through the `DeSpeect/build/bin/` path
-2. Start the application executing the `main` file
+ 1. Developer build
+* Enter the bin directory through the `DeSpeect/build/bin/` path
+* Start the application executing the `main` file
+
+2. User build
+* Enter the root install directory
+* Start the executable called `DeSpeect`
 
 ## Example - Visualizing the graph
 
@@ -58,7 +71,7 @@ In order to visualize a Speect internal graph, you just need to load a `.json` v
 
 1. Start the application
 2. Click on the `Load Voice` button
-3. Open the file corresponding the `SpeectInstaller/voices/cmu_arctic_slt/voice.json` path
+3. Open the file corresponding the `SpeectInstaller/voices/cmu_arctic_slt/voice.json` path (if you opted for a dev install) or `DeSpeectInstall/Test/cmu_arctic_slt/voice.json` (if you opted for a user install) 
 4. Select the desired utterance processors in the homonymous sidebar
 5. Click the `Run step` button in order to execute the utterance processors list step by step, or click `Run all` in order to execute the whole list
 
