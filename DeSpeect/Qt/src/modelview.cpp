@@ -10,7 +10,10 @@
 #include <QFont>
 #include <QInputDialog>
 #include <QProcess>
-
+#include <QMessageBox>
+#include <QDesktopServices>
+#include <QUrl>
+#include <iostream>
 /*
  * File: modelview.cpp
  * Type: src
@@ -39,15 +42,23 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     g->linkRelationModel(ui->relationsView);
     p->linkProcessorModel(ui->ProcessorsView);
     properties->linkToModel(ui->PropertyTable);
-    QFileDialog *t=new QFileDialog(this);
 
+    QFileDialog *t=new QFileDialog(this);
     t->setNameFilter("*.json");
+
     QFileDialog *FileCreator=new QFileDialog(this);
     FileCreator->setAcceptMode(QFileDialog::AcceptSave);
+
     QInputDialog *pathInput=new QInputDialog(this);
     pathInput->setOkButtonText("Search");
     pathInput->setWindowTitle("Search Node path");
     pathInput->setInputMode(QInputDialog::TextInput);
+
+    QMessageBox *licence = new QMessageBox(this);
+    licence->setTextFormat(Qt::RichText);
+    licence->setWindowTitle("Licence");
+    licence->setText("DeSpeect is an open source software granted under the following license:<br/><br/>MIT License<br>Copyright (c) [2018] [DeSpeect]<br/><br/>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br/><br/>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br/><br/>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br/><br/>Licence link: https://choosealicense.com/licenses/mit/");
+
     //this is the relations colors after 10 relation start from beginning
     colors.push_back(QColor(qRgb(213,0,0)));
     colors.push_back(QColor(qRgb(120,144,156)));
@@ -72,6 +83,8 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     connect(g,SIGNAL(focusSignal(QString,QString,bool)),this,SLOT(findNode(QString,QString,bool)));
     connect(ui->actionExit,SIGNAL(triggered(bool)),qApp,SLOT(quit()));
     connect(ui->actionSearch_path,SIGNAL(triggered(bool)),pathInput,SLOT(open()));
+    connect(ui->actionManual,SIGNAL(triggered(bool)),this,SLOT(manual()));
+    connect(ui->actionLicence,SIGNAL(triggered(bool)),licence,SLOT(open()));
     connect(pathInput,SIGNAL(textValueSelected(QString)),this,SLOT(search(QString)));
     connect(g,SIGNAL(cleardetails()),properties,SLOT(clear()));
 }
@@ -313,3 +326,11 @@ void ModelView::search(const QString &search)
     }
 }
 
+
+/*
+ * Description: open the user manual
+ * @return void
+ */
+void ModelView::manual(){
+    QDesktopServices::openUrl(QUrl::fromLocalFile(QDir::currentPath()+"/../Manuals/UserManual-it.pdf"));
+}

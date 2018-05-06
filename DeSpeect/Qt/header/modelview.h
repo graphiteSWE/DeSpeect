@@ -143,6 +143,12 @@ public slots:
      * @return void
      */
     void search(const QString&);
+
+    /*
+     * Description: open the user manual
+     * @return void
+     */
+    void manual();
 };
 
 #endif // MODELVIEW_H
