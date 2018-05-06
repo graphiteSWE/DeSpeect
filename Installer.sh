@@ -43,6 +43,7 @@ mkdir ../DespeectInstall/Test
 cp -r ../SpeectInstaller/voices/cmu_arctic_slt ../DespeectInstall/Test
 rm -rf ../SpeectInstaller/voices
 cd ../DespeectInstall
+cp -r $OUTPUTFOLDER/DeSpeect/Manuals ../
 cmake ../DeSpeect/ -DTest=FALSE || exit 1
 make || exit 2
 cd ..

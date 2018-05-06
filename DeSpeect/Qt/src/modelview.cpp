@@ -332,5 +332,5 @@ void ModelView::search(const QString &search)
  * @return void
  */
 void ModelView::manual(){
-    QDesktopServices::openUrl(QUrl::fromLocalFile(QDir::currentPath()+"/../Manuals/UserManual-it.pdf"));
+    QDesktopServices::openUrl(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/../Manuals/UserManual-it.pdf"));
 }
