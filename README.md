@@ -1,7 +1,7 @@
 # Despeect
 
 [![Build Status](https://travis-ci.org/graphiteSWE/DeSpeect.svg?branch=master)](https://travis-ci.org/graphiteSWE/DeSpeect)
-[![BCH compliance](https://bettercodehub.com/edge/badge/graphiteSWE/DeSpeect?branch=master)](https://bettercodehub.com/)
+[![Sonar](https://sonarcloud.io/api/project_badges/measure?project=DeSpeect_Official_Build&metric=alert_status)](https://sonarcloud.io/dashboard?id=DeSpeect_Official_Build)
 
 A GUI and debugging tool for the Speect TTS library.
 
