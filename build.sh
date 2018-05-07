@@ -16,6 +16,7 @@ mkdir build
 mkdir build/Test
 
 cp -r ../SpeectInstaller/voices/cmu_arctic_slt ./build/Test
+cp -r ./Manuals ./build/
 cd build
 cmake .. -DTest=TRUE || exit 1
 make || exit 2
