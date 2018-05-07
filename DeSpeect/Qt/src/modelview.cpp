@@ -75,7 +75,6 @@ ModelView::ModelView(CommandList::CommandBuilder *builder, QWidget *parent)
     connect(ui->loadVoiceButton,SIGNAL(clicked()),t,SLOT(open()));
     connect(ui->actionSave_wav,SIGNAL(triggered(bool)),FileCreator,SLOT(open()));
     connect(t,SIGNAL(fileSelected(QString)),this,SLOT(requestConfiguration(QString)));
-    connect(t,SIGNAL(fileSelected(QString)),ui->VoicePath,SLOT(setText(QString)));
     connect(FileCreator,SIGNAL(fileSelected(QString)),this,SLOT(requestAudioSave(QString)));
     connect(ui->UtteranceType,SIGNAL(currentIndexChanged(int)),this,SLOT(utteranceTypeChanged()));
     connect(ui->ExecuteAll,SIGNAL(clicked()),this,SLOT(requestProcessorRun()));
@@ -302,10 +301,16 @@ void ModelView::requestConfiguration(const QString &info, const Configuration::c
         utteranceTypeChanged();
         ui->UtteranceType->clear();
         ui->UtteranceType->addItem("User defined",QVariant("UserSetting"));
+        int i=0;
         foreach(auto t,commands->getUttTypeNames())
         {
+            ++i;
             ui->UtteranceType->addItem(t.c_str(),QVariant(t.c_str()));
         }
+        if(i)
+        ui->VoicePath->setText(info);
+        else
+            ui->VoicePath->setText("");
     }
 }
 
