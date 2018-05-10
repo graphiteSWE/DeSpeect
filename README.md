@@ -39,7 +39,7 @@ You can run DeSpeect in two different ways, according to your needs:
 
 This will install Speect, create a build for DeSpeect in `DeSpeect/build/` and run the related tests.
 
-1. User build
+2. User build
 * Clone or download the repository
 * Execute the `Installer.sh` script in the root directory
 * Select a destination folder for the installation
