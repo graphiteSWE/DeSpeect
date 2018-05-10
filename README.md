@@ -24,9 +24,21 @@ DeSpeect is a graphical interface for Speect [Meraka Institute (2008-2013)], a l
 
 ### Prerequisites
 
+#### Speect Prerequisites
+
+* git (minimum version 2.14.1)
+* curl ( minimum version 7.55.1)
+* ANSI C/ISO C90 GCC compiler (minimum version 5.0)
+* CMAKE (minimum version 2.8)
+* SWIG (minimum Version 3.0.10)
+* libxml2-dev (minimum version 2.9.4)
+* Python (minimum version 2.7.14)
+
+#### Despeect Prerequisites
+
 * Unix / Unix-like OS (DeSpeect has only been tested on Ubuntu 16.04 LTS)
 * CMAKE (minimum version 2.8)
-* ANSI C/ISO C90 GCC compiler (minimum version 5.0)
+* ANSI C/ISO C90 GCC compiler (minimum version 7.0)
 * Qt 5.9.0
 
 ### Installing
