@@ -32,7 +32,7 @@ DeSpeect is a graphical interface for Speect [Meraka Institute (2008-2013)], a l
 * CMAKE (minimum version 2.8)
 * SWIG (minimum Version 3.0.10)
 * libxml2-dev (minimum version 2.9.4)
-* Python (minimum version 2.7.14)
+* python-dev (minimum version 2.7.14)
 
 #### Despeect Prerequisites
 
