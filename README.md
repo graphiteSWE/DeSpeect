@@ -87,7 +87,7 @@ In order to visualize a Speect internal graph, you just need to load a `.json` v
 4. Select the desired utterance processors in the homonymous sidebar
 5. Click the `Run step` button in order to execute the utterance processors list step by step, or click `Run all` in order to execute the whole list
 
-## Build with
+## Built with
 
 * Qt 5.9 LTS
 * CMAKE 2.8
